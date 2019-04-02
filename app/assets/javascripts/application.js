@@ -12,4 +12,50 @@
 //
 //= require rails-ujs
 //= require turbolinks
+// require react
+// require react_ujs
+// require components
 //= require_tree .
+//= require jquery
+
+$(document).ready('turbolinks:load', function(){
+
+  $('.user-button').on('click', () => {
+    $('.user-menu').toggleClass('hide');
+    $('.user-button').toggleClass('button-active');
+  });
+
+  $('.club-button').on('click', () => {
+    $('.club-menu').toggleClass('hide');
+    $('.club-button').toggleClass('button-active');
+  });
+
+  /*$('.user-button').mouseenter(function() {
+    $('.user-menu').removeClass('hide');
+    $('.user-button').addClass('button-active');
+  });
+
+  $('.user-button').mouseleave(function() {
+    $('.user-menu').addClass('hide');
+    $('.user-button').removeClass('button-active');
+  });
+
+  $('.user-menu').mouseenter(function() {
+    $('.user-menu').removeClass('hide');
+  });
+
+  $('.user-menu').mouseleave(function() {
+    $('.user-menu').addClass('hide');
+  });*/
+
+  $('.menuChild').mouseenter(function() {
+    $(this).addClass('current_page_item');
+  });   
+
+  $('.menuChild').mouseleave(function() {
+    $(this).removeClass('current_page_item');
+  }); 
+}); 
+
+
+//<a href="/" accesskey="1" title="">

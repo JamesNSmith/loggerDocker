@@ -1,0 +1,428 @@
+/*
+ * This is a manifest file that'll be compiled into application.css, which will include all the files
+ * listed below.
+ *
+ * Any CSS and SCSS file within this directory, lib/assets/stylesheets, or any plugin's
+ * vendor/assets/stylesheets directory can be referenced here using a relative path.
+ *
+ * You're free to add application-wide styles to this file and they'll appear at the bottom of the
+ * compiled file so the styles you add here take precedence over styles defined in any other CSS/SCSS
+ * files in this directory. Styles in this file should be added after the last require_* statement.
+ * It is generally better to create a new file per style scope.
+ *
+ *= require_tree .
+ *= require_self
+ */
+
+//main ------------------------------------
+
+
+
+html, body {
+  background: #fff;
+  font-family: Arial, sans-serif;
+  font-weight: bold;
+  margin: 0;
+  padding: 0;
+  //text-transform: lowercase;
+  height: 100%;
+  //font-weight: 300;
+  //color: #656565;
+}
+
+body{
+	margin:0;
+	width:100%;
+	background-color:#fff;
+	//background-color:#f8f8f8;
+	//background-color:#DAD8D2;
+	//#efefed
+}
+	
+/*body
+{
+	margin: 0px;
+	padding: 0px;
+	background: #333333;
+	font-family: 'Varela', sans-serif;
+	font-size: 11pt;
+	font-weight: 300;
+	color: #656565;
+}*/
+	
+	
+h1, h2, h3
+{
+	margin: 0;
+	padding: 0;
+	font-weight: 700;
+	color: #2B3F48;
+}
+
+h1{
+	text-align:center
+}
+	
+p, ol, ul
+{
+	margin-top: 0;
+}
+	
+ol, ul
+{
+	padding: 0;
+	list-style: none;
+}
+	
+strong
+{
+}
+	
+a
+{
+	color: #0000FF;
+}
+	
+a:hover
+{
+	text-decoration: none;
+}
+
+.error{
+	border: 1px solid red;
+}
+
+//new header
+
+.containerPageHeader
+	{
+		//overflow: hidden;
+		margin: 0em auto;
+		width: 1400px;
+	}
+
+/*********************************************************************************/
+/* Header                                                                        */
+/*********************************************************************************/
+
+	#header-wrapper
+	{
+		background: #333333;
+	}
+
+	#header
+	{
+		position: relative;
+		padding: 3em 0em;
+	}
+
+/*********************************************************************************/
+/* Logo                                                                          */
+/*********************************************************************************/
+
+	#logo
+	{
+		position: absolute;
+		top: 1em;
+		left: 0;
+	}
+	
+	#logo h1
+	{
+		color: #FFF;
+	}
+	
+	#logo a
+	{
+		text-decoration: none;
+		text-transform: uppercase;
+		color: #FFF;
+	}
+
+/*********************************************************************************/
+/* Menu                                                                          */
+/*********************************************************************************/
+
+	#menu
+	{
+		position: absolute;
+		top: 2em;
+		right: 0em;
+	}
+	
+	#menu ul
+	{
+		display: inline-block;
+	}
+	
+	#menu li
+	{
+		display: block;
+		float: left;
+		text-align: center;
+	}
+	
+	#menu li a, #menu li span
+	{
+		padding: 1em 1.5em;
+		letter-spacing: 1px;
+		text-decoration: none;
+		text-transform: uppercase;
+		font-size: 0.8em;
+		color: #FFF;
+	}
+	
+	#menu li:hover a, #menu li.active a, #menu li.active span
+	{
+		color: #FFF;
+	}
+	
+	#menu .current_page_item a
+	{
+		background: #009E2D;
+		color: #FFF;
+	}
+	
+	#menu .icon
+	{
+	}
+
+	.containerUser {
+  		max-width: 450px;
+  		margin: 0 auto; 
+	}
+
+	.hide {
+  		display: none; 
+  	}
+
+  	.user-menu {
+  		background-color: #535353;
+  		color: #EFEFEF;
+  		//display: flex;
+  		//justify-content: right;
+  		width:150px;
+  		position:absolute;
+  		top:5em;
+  		right:0em;
+  	}
+  	
+  	.user-menu .containerUser {
+    	padding: 1.5em;
+    	display: flex; 
+    }
+    .user-menu .containerUser ul {
+      	list-style: none; 
+      }
+    .user-menu .containerUser ul li {
+        padding: 0.25em 0.5em; 
+    }
+    .user-menu .containerUser ul li:first-child {
+        text-transform: uppercase;
+        color: #C3FF00;
+        letter-spacing: 0.05em; 
+    }
+
+/*********************************************************************************/
+/* Flash                                                                          */
+/*********************************************************************************/
+	$flashWidth:700px;
+
+	div#flash {
+		text-align: center;
+	}
+
+	.flash {
+		text-align: center;
+		margin:0px auto;
+		width:$flashWidth;
+		height:0px;
+	}
+	
+	.alert {
+		position:absolute;
+		text-align: center;
+		//background-color: #333333;
+		margin:0px auto;
+		width:$flashWidth;
+	}
+
+/*********************************************************************************/
+/* User                                                                          */
+/*********************************************************************************/
+/*
+#user
+{
+	position: absolute;
+	top: 1em;
+	right: 0;
+}
+
+#user ul
+{
+	display: inline-block;
+}
+
+#user li
+{
+	display: block;
+	float: left;
+	text-align: center;
+
+	padding: 1em 1.5em;
+	letter-spacing: 1px;
+	text-decoration: none;
+	text-transform: uppercase;
+	font-size: 0.8em;
+	color: #FFF;
+}
+*/
+
+/*********************************************************************************/
+/* Copyright                                                                     */
+/*********************************************************************************/
+
+	#copyright
+	{
+		overflow: hidden;
+		padding: 5em 0em;
+		border-top: 1px solid rgba(255,255,255,0.08);
+		background: #333333;
+	}
+	
+	#copyright p
+	{
+		text-align: center;
+		font-size: 1em;
+		color: rgba(255,255,255,0.5);
+	}
+	
+	#copyright a
+	{
+		text-decoration: none;
+		color: rgba(255,255,255,0.8);
+	}
+
+//header-----------------
+$headColor:rgb(227,225,225);
+$headHeight:35px;
+
+header {
+	border: 1px solid $headColor;
+	height:$headHeight;
+	width:100%;
+	background-color: $headColor;
+
+	h3 {
+		text-align:center;
+		height:25px;
+		margin:0;
+	}
+
+	table {
+		height:$headHeight;
+		width:100%;
+	}
+
+	tr {
+		height:100%;
+	}
+
+	td {
+		border: 1px solid black;
+		margin:1%;
+	}
+
+	td:first-child {
+		width:20%;
+	}
+
+	td:nth-child(2) {
+		width:57%;
+	}
+
+	td:nth-last-child(2){
+		width:3%;
+	}
+
+	td:nth-last-child(2) {
+		width:3%;
+	}
+
+	td:last-child {
+		width:17%;
+	}
+}
+
+//nav------------------
+nav{
+	margin-top: 10px;
+
+	border: 1px solid black;
+	margin:12px 5%;
+	align:center;
+
+	display: flex;
+  	justify-content: space-between;
+  	align-items: center;
+  	
+  	height:60px;
+
+  	ul {
+  		margin:1%;
+  		width:98%;
+  		border: 1px solid black;
+  	}
+
+	li{
+		display:inline-block;
+		border: 1px solid black;
+
+		height:100%;
+		padding:12px;
+		
+		align-items: center;
+	}
+}
+
+/*.main {
+	margin:35px auto;
+	padding:10px;
+	width:85%;
+}
+*/
+
+/*.login, .signup {
+  margin: 0 auto;
+  width: 400px;
+}
+
+.login form input, .signup form input {
+  width: 280px;
+}
+
+.login form input.form-btn, .signup form input.form-btn {
+  margin-left: 30px;
+  width: 340px;
+  transition: background 0.5s, color 0.5s;
+}
+*/
+
+/*********************************************************************************/
+/* record table                                                                  */
+/*********************************************************************************/
+.recordPage {
+	position: relative;
+	width:1000px;
+	margin: 0 auto;
+	//height:400px;
+}
+
+.recordPage h1{
+  margin:17px
+}
+
+.recordTable {
+	margin:40px;
+}
+

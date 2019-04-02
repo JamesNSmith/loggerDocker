@@ -1,0 +1,150 @@
+// Place all the styles related to the flights controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+//<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous" />
+
+
+@import url("https://maxcdn.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css");
+
+input {
+    font:20px Times New Roman, serif;
+    text-align:center;
+    border:black 0.05px solid;
+    margin:1px 1%;
+    padding:1px;
+    vertical-align: text-top;
+    align:center;
+}
+input.alert{
+    border:red 0.05px solid;
+}
+input.alert:focus{
+    outline:red 0.05px dotted;
+}
+input.disabled{
+    pointer-events:none;
+}
+input.disabledBold{
+    background: #CCC; 
+    color: #333; 
+    border: 1px solid #666 ;
+    pointer-events:none;
+}
+p.br{
+    font-size:7px;
+}
+
+button{
+    margin:"10px";
+    padding:"20px";
+}
+
+th{
+	align:center;
+	border:black 0.05px solid;;
+}
+
+td{
+    margin:"10px";
+    padding:"20px" "20px";
+    vertical-align: text-top;
+    align:center;
+    border:black 0.05px solid;
+    //display:inline-grid;
+}
+
+table{
+    margin:auto;
+    padding:"20px";
+    align:center;
+    border:black 0.05px solid;
+    width:200px;
+}
+
+//Table{
+   // margin:20px 5%;
+    //width:90%;
+
+//}
+
+div.form{
+    width:90%;
+    margin:10px 5%;
+    align:center;
+    //border:1px solid black;
+
+    
+}
+
+.showTug {
+    transition-delay: 500ms;
+    transition: all 2s linear;
+    
+}
+
+.hideTugVisual {
+    opacity: 0;
+}
+
+.hideTug {
+    display: none; 
+}
+
+.showElement {
+    transition-delay: 500ms;
+    transition: all 2s linear;
+    
+}
+
+.hideElement {
+    display: none; 
+}
+
+.formform{
+        //position:absolute;
+        align:center;
+        border:1px solid black;
+        width:1020px;
+        margin:10px auto;
+    }
+
+.row{
+    align:center;
+    border:1px solid black;
+    width:95%;
+    margin:10px auto;
+}
+
+.group {
+    align:center;
+    border:1px solid black;
+    margin:10px auto;
+}
+
+.table{
+    width:95%;
+    margin:10px auto;
+}
+
+.td {
+    list-style: none;
+    align:left;
+    margin:0;
+    padding:0;
+}
+
+#name{
+    width:400px;
+    height:40px;
+}
+
+#name ul{
+    display: inline-block;
+}
+
+#name li{
+    width:190px;
+    display:block;
+    float: left;
+    padding: 5px;
+}
