@@ -9,16 +9,16 @@
       <ul>
           <!--<li><%= f.label "Name " %></li>-->
           <li>
-            <%= f.text_field :first_name, :placeholder => "First Name", :id => "first", :class => @status %>
-            <%= f.text_field :last_name, :placeholder => "Last Name", :id => "last", :class => @status %>  
+            <%= f.text_field :first_name, :placeholder => "First Name", :id => "first", :autocomplete => "given-name", :class => @status %>
+            <%= f.text_field :last_name, :placeholder => "Last Name", :id => "last", :autocomplete => "family-name", :class => @status %>  
           </li>
           <!--<li><%= f.label "Username " %></li>-->
-          <li><%= f.text_field :username, :placeholder => "Username", :class => @status %></li> 	
+          <li><%= f.text_field :username, :placeholder => "Username", :autocomplete => "username", :class => @status %></li> 	
       	  <!--<li><%= f.label "Email " %></li>-->
-          <li><%= f.email_field :email, :placeholder => "Email", :class => @status %></li>
+          <li><%= f.email_field :email, :placeholder => "Email", :autocomplete => "email", :class => @status %></li>
       	  <!--<li><%= f.label "Password " %></li>-->
-          <li><%= f.password_field :password, :placeholder => "Password", :class => @status%></li> 
-          <li><%= f.password_field :password_confirmation, :placeholder => "Confirm Password", :class => @status%></li> 
+          <li><%= f.password_field :password, :placeholder => "Password", :autocomplete => "password", :class => @status%></li> 
+          <li><%= f.password_field :password_confirmation, :placeholder => "Confirm Password", :autocomplete => "password", :class => @status%></li> 
        </ul>
   	 
   	<div class="actions"> 

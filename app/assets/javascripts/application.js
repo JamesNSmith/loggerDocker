@@ -17,8 +17,9 @@
 // require components
 //= require_tree .
 //= require jquery
+//= require jquery_ujs
 
-$(document).ready('turbolinks:load', function(){
+$(document).on('turbolinks:load', function() {
 
   $('.user-button').on('click', () => {
     $('.user-menu').toggleClass('hide');

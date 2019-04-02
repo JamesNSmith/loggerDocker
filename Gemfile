@@ -34,7 +34,7 @@ gem 'bcrypt', '~> 3.1.7'
 # gem 'capistrano-rails', group: :development
 
 gem 'jquery-rails', '~> 4.3', '>= 4.3.1'
-gem 'jquery-turbolinks'
+#gem 'jquery-turbolinks'
 
 #gem 'webpacker'
 #gem "react-rails"
