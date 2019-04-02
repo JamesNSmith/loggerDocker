@@ -1,0 +1,31 @@
+<div class="recordPage">
+
+  <h1><%= @club.name %> Members</h1>
+
+  <div class="recordTable">
+    <table class="table table-sm table-striped table-bordered table-hover">
+      <thead>
+        <tr>
+        <td>Name</td>
+        <td>Username</td>
+        <td>Email</td>
+        <td>User Type</td>
+        </tr>
+      </thead>
+    <tbody id="tableBody">
+    <% @users.each do |user| %> 
+      <tr>
+
+      <td><p><%= user.first_name %> <%= user.last_name %></p></td>
+      <td><p><%= user.username %></p></td>  
+      <td><p><%= user.email %></p></td>  
+      <td><p><%= user.club_users.where(club_id:@club.id).first.utype.capitalize %></p></td> 
+      
+      </tr>
+      
+    <% end %>
+    </tbody>
+  </table>
+    
+  </div>
+</div>

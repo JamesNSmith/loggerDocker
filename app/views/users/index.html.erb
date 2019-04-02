@@ -1,0 +1,22 @@
+<div class="users">
+
+  <h1>Users</h1>
+  
+  <div class="userContainer">
+  	<% @users.each do |user| %> 
+	    <div class="user"> 
+      <p><%= user.id %></p>
+  	  <p><%= user.email %></p> 
+  	  <p><%= user.first_name %></p>
+  		<p><%= user.last_name %></p> 
+  		<p><%= user.utype %></p> 
+
+      <%= form_for(:user, url: '/users') do |f| %> 
+      <%= f.hidden_field :id, value: user.id %>
+      <%= f.submit "Select", class: "btn" %>
+      <% end %>
+
+	    </div> 
+	  <% end %>
+  </div>
+</div>

@@ -1,0 +1,22 @@
+<div class="users">
+
+  <h1>Clubs</h1>
+
+  <div class="container">
+  	<% @clubs.each do |club| %> 
+	    <div class="user"> 
+      <p><%= club.id %></p> 
+  	  <p><%= club.name %></p> 
+  	  <p><%= club.initials %></p>
+  		<p><%= club.country %></p>
+      <p><%= new_club_link_url(club.link_token) %></p> 
+      
+      <%= form_for(:clubs, url: '/clubs') do |f| %> 
+      <%= f.hidden_field :id, value: club.id %>
+      <%= f.submit "Select", class: "btn" %>
+      <% end %>
+      
+	    </div> 
+    <% end %>
+  </div>
+</div>

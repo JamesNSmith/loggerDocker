@@ -1,0 +1,7 @@
+Hi <%= @user.first_name %>,
+
+Thanks for creating <%= @club.name %>. 
+
+Use the link below to connect yourself and other users to the club.
+
+<%= new_club_link_url(@club.link_token) %>
