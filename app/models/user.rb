@@ -1,6 +1,6 @@
 class User < ApplicationRecord
 	has_secure_password 
-	validates_presence_of :password, :on => :create
+	#validates_presence_of :password, :on => :create
 
 	before_create {generate_token(:auth_token)}
 	before_create {generate_token(:email_confirm_token)}

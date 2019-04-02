@@ -8,7 +8,7 @@
   	  <%= f.email_field :email, :placeholder => "Email", :class => @status %> 
   	  <%= f.password_field :password, :placeholder => "Password", :class => @status %> 
   	  <%= f.submit "Log in", class: "form-btn" %>
-      <p><%= link_to "forgotten password?", new_password_reset_path %></p>
+      <p><%= link_to "forgotten password?", user_link_path %></p>
 	  <% end %>
 		
     </div>

@@ -4,7 +4,11 @@ Rails.application.routes.draw do
   root 'pages#index' 
 
   match '/users', to: 'users#index', via: [:get, :post]
-  match '/signup', to: 'users#new', via: [:get, :post]
+  match '/users/signup', to: 'users#new', via: [:get, :post]
+
+  #match '/users/authenticate', to: 'userlink#show', via: :get
+  #match '/users/recover_password', to: 'userlink#new', via: [:get, :post]
+  #match '/users/set_password', to: 'userlink#edit', via: [:get, :post]
   
 
   match '/clubs', to: 'clubs#index', via: [:get, :post]
@@ -17,12 +21,9 @@ Rails.application.routes.draw do
   post '/login' => 'sessions#create'
   delete 'logout' => 'sessions#destroy'
 
-  mount ActionCable.server, at: '/cable'
-
   resources :users
-  #resources :password_resets
-  #resources :user_authentication
-  #resources :club_link
+  resources :user_link
+  resources :club_link
 
 end
 
