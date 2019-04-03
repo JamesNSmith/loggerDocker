@@ -1,15 +1,23 @@
-<div class="boxListContainer">
+<div class="recordPage">
 
   <h1>Clubs</h1>
 
-  <div class="boxList">
+  <div class="recordTable">
+    <table class="table table-sm table-striped table-bordered table-hover">
+      <thead>
+        <tr>
+        <td>Name</td>
+        <td>Intials</td>
+        <td></td>
+        </tr>
+      </thead>
+    <tbody id="tableBody">
   	<% @clubs.each do |club| %> 
-    <div class="boxL">
-	    <ul> 
-  	  <li><%= club.name %></li> 
-  	  <li><%= club.initials %></li>
-  		<li><%= club.country %></li>
-      <li>
+	    <tr> 
+
+  	  <td><%= club.name %></td> 
+  	  <td><%= club.initials %></td>
+      <td>
         <% if session[:club_id] != club.id %>
           <%= form_for(:clubs, url: '/clubs/user') do |f| %> 
           <%= f.hidden_field :id, value: club.id %>
@@ -18,12 +26,13 @@
         <% else %>
           Current
         <% end %>
-      </li>
-      </ul> 
+      </td>
 
-      
-
-	  </div> 
+      </tr> 
+	   
     <% end %>
+    </tbody>
+  </table>
+
   </div>
 </div>

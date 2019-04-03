@@ -196,32 +196,59 @@ a:hover
   		display: none; 
   	}
 
+  	/* drop downs buttons*/
+
+  	#navClub, #navUser {
+  		width:100px;
+  		text-align:center;
+  	}
+
+  	#navClub ul, #navUser ul {
+  		text-align:center;
+  	}
+
+  	#navClub li, #navUser li {
+  		text-align:center;
+  	}
+
+  	/* drop downs menus*/
+
+  	.club-menu {
+  		right:100px;
+  		width:120px;
+  	}
+
   	.user-menu {
+  		right:0px;
+  		width:90px;
+  	}
+
+  	.user-menu, .club-menu {
+  		top:100px;
   		background-color: #535353;
   		color: #EFEFEF;
-  		//display: flex;
-  		//justify-content: right;
-  		width:150px;
   		position:absolute;
-  		top:5em;
-  		right:0em;
+  		
   	}
   	
-  	.user-menu .containerUser {
-    	padding: 1.5em;
+  	.user-menu .containerUser, .club-menu .containerUser {
+    	padding: 10px;
     	display: flex; 
     }
-    .user-menu .containerUser ul {
+    .user-menu .containerUser ul, .club-menu .containerUser ul {
       	list-style: none; 
-      }
-    .user-menu .containerUser ul li {
-        padding: 0.25em 0.5em; 
     }
-    .user-menu .containerUser ul li:first-child {
+    .user-menu .containerUser ul li, .club-menu .containerUser ul li {
+        padding: 1px 1px;
+    }
+    .user-menu .containerUser ul li a, .club-menu .containerUser ul li a{
+    	color:#fff; 
+    }
+    /*.user-menu .containerUser ul li:first-child, .club-menu .containerUser ul li:first-child {
         text-transform: uppercase;
         color: #C3FF00;
-        letter-spacing: 0.05em; 
-    }
+        letter-spacing: 0px; 
+    }*/
 
 /*********************************************************************************/
 /* Flash                                                                          */
@@ -415,7 +442,7 @@ nav{
 	position: relative;
 	width:1000px;
 	margin: 0 auto;
-	//height:400px;
+	min-height:400px;
 }
 
 .recordPage h1{

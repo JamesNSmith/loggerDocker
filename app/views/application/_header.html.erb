@@ -1,0 +1,57 @@
+<div id="header-wrapper">
+  <div id="header" class="containerPageHeader">
+    <div id="logo">
+      <h1><a href="#">FlightLogger</a></h1>
+    </div>
+    <div id="menu">
+    <ul id="nav">
+      <li class="menuChild"><a href="/" accesskey="1" title="">Homepage</a></li>
+      <li class="menuChild"><a href="#" accesskey="2" title="">Logger</a></li>
+      <li class="menuChild"><a href="#" accesskey="3" title="">About</a></li>
+    </ul>
+    <ul id="navClub">
+
+      <% if current_club %>
+      <li class="club-button"><a accesskey="4" title=""><%= current_club.initials %></a></li>
+      <% else %>
+      <li class="menuChild"><a accesskey="4" title="">Club</a></li>
+      <% end %> 
+
+    </ul>
+    <ul id="navUser">
+
+      <% if current_user %>
+      <li class="user-button"><a accesskey="4" title=""><%= current_user.username %></a></li>
+      <% else %>
+      <li class="menuChild"><a accesskey="4" title=""><%= link_to "Log In", 'login' %></a></li>
+      <li class="menuChild"><a accesskey="5" title=""><%= link_to "Sign Up", '/users/signup' %></a></li>
+      <% end %>  
+
+    </ul>
+    </div>
+    <div class="club-menu hide">
+    <div class="containerUser">
+    <ul>
+
+      <% if current_club %>
+      <li><%= link_to "Members",'/clubs/members'%></li>
+      <li><%= link_to "Exit Club",'/clubs/del'%></li>
+      <li><%= link_to "Switch Club", '/clubs/user' %></li>
+      <% else %>
+      <li><%= link_to "Select Club", '/clubs/user' %></li>
+      <% end %>
+
+      <li><%= link_to "Add Club", '/clubs/add'%></li>
+    </ul>
+    </div>
+    </div>
+    <div class="user-menu hide">
+    <div class="containerUser">
+    <ul>
+      <li><a accesskey="8" title=""><%= link_to "Log Out", logout_path, method: "delete" %></a></li>
+    </ul>
+    </div>
+    </div>
+  </div>
+</div>
+

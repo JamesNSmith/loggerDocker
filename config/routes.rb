@@ -6,11 +6,6 @@ Rails.application.routes.draw do
   match '/users', to: 'users#index', via: [:get, :post]
   match '/users/signup', to: 'users#new', via: [:get, :post]
 
-  #match '/users/authenticate', to: 'userlink#show', via: :get
-  #match '/users/recover_password', to: 'userlink#new', via: [:get, :post]
-  #match '/users/set_password', to: 'userlink#edit', via: [:get, :post]
-  
-
   match '/clubs', to: 'clubs#index', via: [:get, :post]
   match '/clubs/add', to: 'clubs#new', via: [:get, :post]
   delete '/clubs/del' => 'clubs#destroy'
@@ -22,7 +17,8 @@ Rails.application.routes.draw do
   delete 'logout' => 'sessions#destroy'
 
   resources :users
-  resources :user_link
+  resources :password_resets
+  resources :user_authentication
   resources :club_link
 
 end
