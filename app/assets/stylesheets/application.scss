@@ -199,7 +199,7 @@ a:hover
   	/* drop downs buttons*/
 
   	#navClub, #navUser {
-  		width:100px;
+  	//	width:130px;
   		text-align:center;
   	}
 
@@ -209,6 +209,10 @@ a:hover
 
   	#navClub li, #navUser li {
   		text-align:center;
+  		//width:100px;
+  		//height:24px;
+  		//overflow: hidden;
+    	//white-space: nowrap
   	}
 
   	/* drop downs menus*/
