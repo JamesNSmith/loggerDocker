@@ -12,10 +12,11 @@
 default: &default
   adapter: mysql2
   encoding: utf8
-  pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
+  #pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
   username: root
   password: '01020102'
   host: localhost
+  port: 3306
 
 development:
   <<: *default
@@ -50,5 +51,5 @@ test:
 production:
   <<: *default
   database: FlightLoggerVTwo_production
-  username: FlightLogger
-  password: <%= ENV['FLIGHTLOGGER_DATABASE_PASSWORD'] %>
+  
+  

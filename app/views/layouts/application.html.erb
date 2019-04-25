@@ -1,6 +1,17 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <!-- Should be at the top -->
+    <%= javascript_include_tag "https://www.googletagmanager.com/gtag/js?id=UA-138142308-1" %>
+    <%= javascript_tag do %>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+
+      gtag('config', 'UA-138142308-1');
+    <% end %>
+
     <title>FlightLogger</title>
 
     <%= csrf_meta_tags %>
@@ -9,8 +20,6 @@
     <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= stylesheet_link_tag "http://fonts.googleapis.com/css?family=Varela" %>
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
-    
-
   
 <!--meta http-equiv="Content-Type" content="text/html; charset=utf-8" -->
 <!--meta name="keywords" content="" -->
