@@ -9,7 +9,9 @@
 # And be sure to use new-style password hashing:
 #   http://dev.mysql.com/doc/refman/5.7/en/old-client.html
 #
-default: &default
+#DATABASE_URL = "mysql2://myuser:mypass@localhost/somedatabase"
+
+default: &local
   adapter: mysql2
   encoding: utf8
   #pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
@@ -17,17 +19,27 @@ default: &default
   password: '01020102'
   host: localhost
   port: 3306
+  
+default: &remote
+  adapter: mysql2
+  encoding: utf8
+  #pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
+  username: root
+  password: '01020102'
+  host: first.cgd0tu1jr17x.eu-west-2.rds.amazonaws.com
+  #url: <%= ENV['DATABASE_URL'] %>
+  port: 3306
 
 development:
-  <<: *default
-  database: FlightLoggerVTwo_development
+  <<: *remote
+  database: Logger2_development
 
 # Warning: The database defined as "test" will be erased and
 # re-generated from your development database when you run "rake".
 # Do not set this db to the same as development or production.
 test:
-  <<: *default
-  database: FlightLoggerVTwo_test
+  <<: *remote
+  database: Logger2_test
 
 # As with config/secrets.yml, you never want to store sensitive information,
 # like your database password, in your source code. If your source code is
@@ -49,7 +61,7 @@ test:
 #     url: <%= ENV['DATABASE_URL'] %>
 #
 production:
-  <<: *default
-  database: FlightLoggerVTwo_production
+  <<: *remote
+  database: Logger2_production
   
   
