@@ -18,4 +18,4 @@ EXPOSE 3000 3306
 # Start the main process.
 RUN bundler -v
 RUN rails -v
-CMD ["rails", "server", "-b", "0.0.0.0"]
+CMD ["rails", "server"] # "-b", "0.0.0.0"]
