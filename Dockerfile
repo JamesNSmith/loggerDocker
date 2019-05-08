@@ -8,7 +8,7 @@ RUN gem install rails -v 5.2.3
 RUN gem install bundler -v 2.0.1
 RUN bundle install
 
-RUN curl -sL https://deb.nodesource.com/setup_10.x | -E bash -
+RUN curl -sL https://deb.nodesource.com/setup_10.x
 RUN apt install nodejs npm
 RUN rails webpacker:install       
 RUN rails webpacker:install:react 
