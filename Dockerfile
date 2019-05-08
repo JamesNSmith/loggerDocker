@@ -16,7 +16,7 @@ RUN apt-get update -qq \
 
 RUN rails webpacker:install  
 RUN apt-get install -y curl \
-	&& curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | apt-key add -
+	&& curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | apt-key add - \
 	&& apt-get install -y yarn \
 	&& rails webpacker:install:react \ 
 	&& rails generate react:install \
