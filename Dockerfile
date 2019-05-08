@@ -3,13 +3,13 @@ FROM ruby:2.3
 WORKDIR /app
 COPY . /app
 
-RUN apt update -qq && apt install -y mysql-client
+RUN apt-get update -qq && apt-get install -y mysql-client
 RUN gem install rails -v 5.2.3
 RUN gem install bundler -v 2.0.1
 RUN bundle install
 
 #RUN curl -sL https://deb.nodesource.com/setup_10.x
-RUN apt install nodejs
+RUN apt-get install nodejs
 RUN rails webpacker:install       
 RUN rails webpacker:install:react 
 RUN rails generate react:install
