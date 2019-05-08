@@ -3,11 +3,16 @@ FROM ruby:2.3
 WORKDIR /app
 COPY . /app
 
-RUN apt-get update -qq && apt-get install -y nodejs mysql-client
+RUN apt-get update -qq && apt-get install -y nodejs mysql-client yarn
 RUN gem install rails -v 5.2.3
 RUN gem install bundler -v 2.0.1
-#RUN gem install nokogiri -v 1.10.2
+
 RUN bundle install
+RUN rails webpacker:install       
+RUN rails webpacker:install:react 
+RUN rails generate react:install
+
+yarn add react-bootstrap bootstrap
 
 # Add a script to be executed every time the container starts.
 #COPY entrypoint.sh /usr/bin/

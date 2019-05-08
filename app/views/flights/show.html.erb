@@ -1,0 +1,28 @@
+<div class="users">
+
+  <h1>Flights</h1>
+
+  <div class="container">
+  	<% @date_flights.each do |flight| %> 
+	    <div class="user"> 
+      <p><%= flight.id %></p> 
+      <p><%= flight.user.first_name %></p>
+      <p><%= flight.takeoff_type %></p>
+      <p><%= flight.aircraft.tail_number %></p>  
+      <p><%= flight.aircraft.name %></p> 
+      <p><%= flight.club_user_p1.user.first_name %></p> 
+      <p><%= flight.club_user_p2.user.first_name %></p> 
+      <p><%= flight.launch_date.strftime "%d/%m/%Y" %></p> 
+      <p><%= flight.launch_time.strftime "%H:%M" %></p> 
+      <p><%= flight.land_time.strftime "%H:%M"%></p> 
+      <p><%= flight.flight_time %></p> 
+      <p><%= flight.launch_fee %></p> 
+      <p><%= flight.soaring_fee %></p> 
+      <p><%= flight.soaring_total %></p> 
+      <p><%= flight.total %></p> 
+  	  
+      </div> 
+	   
+    <% end %>
+  </div>
+</div>

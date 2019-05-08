@@ -1,0 +1,15 @@
+<div class="users">
+
+  <h1>Flights</h1>
+
+  <div class="container">
+  	<% @flight_dates.each do |flight| %> 
+	    <div class="user"> 
+      <p><%= flight.launch_date.strftime "%d-%m-%Y" %></p> 
+      <%= link_to "select", flight_path(flight.launch_date) %>
+      
+      <div class="btn"></div>
+	    </div> 
+    <% end %>
+  </div>
+</div>
