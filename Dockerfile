@@ -7,7 +7,13 @@ RUN apt-get update -qq && apt-get install -y mysql-client
 RUN gem install rails -v 5.2.3
 RUN gem install bundler -v 2.0.1
 RUN bundle install
-RUN apt-get update -qq && apt-get install -y npm #nodejs=6.14.4
+RUN apt-get update -qq \
+	&& apt-get install -y curl \
+	&& curl -sL https://deb.nodesource.com/setup_10.x | bash - \
+	&& apt-get install -y nodejs #nodejs=6.14.4 \
+	&& node -v \
+	&& npm -v \
+
 #RUN rails webpacker:install       
 #RUN rails webpacker:install:react 
 #RUN rails generate react:install
