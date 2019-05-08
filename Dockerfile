@@ -14,9 +14,11 @@ RUN apt-get update -qq \
 	&& node -v \
 	&& npm -v \
 
-RUN rails webpacker:install       
-RUN rails webpacker:install:react 
-RUN rails generate react:install
+RUN rails webpacker:install  
+RUN apt-get install -y yarn \
+	&& rails webpacker:install:react \ 
+	&& rails generate react:install \
+	
 #RUN npm install react-bootstrap bootstrap
 
 # Add a script to be executed every time the container starts.
