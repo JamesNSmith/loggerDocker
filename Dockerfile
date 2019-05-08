@@ -6,8 +6,10 @@ COPY . /app
 RUN apt-get update -qq && apt-get install -y nodejs mysql-client yarn
 RUN gem install rails -v 5.2.3
 RUN gem install bundler -v 2.0.1
-
 RUN bundle install
+
+FROM node:8.16
+
 RUN rails webpacker:install       
 RUN rails webpacker:install:react 
 RUN rails generate react:install
