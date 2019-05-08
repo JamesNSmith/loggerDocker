@@ -12,16 +12,18 @@ RUN apt-get update -qq \
 	&& curl -sL https://deb.nodesource.com/setup_10.x | bash - \
 	&& apt-get install -y nodejs #nodejs=6.14.4 \
 	&& node -v \
-	&& npm -v \
+	&& npm -v 
 
-RUN rails webpacker:install  
 RUN apt-get install -y curl \
 	&& curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | apt-key add - \
 	&& echo "deb https://dl.yarnpkg.com/debian/ stable main" | tee /etc/apt/sources.list.d/yarn.list \
 	&& apt-get update \
+	&& apt-get install -y apt-utils \
 	&& apt-get install -y yarn \
+	&& yarn install --check-files \
+	&& rails webpacker:install\  
 	&& rails webpacker:install:react \ 
-	&& rails generate react:install \
+	&& rails generate react:install 
 
 #RUN npm install react-bootstrap bootstrap
 
