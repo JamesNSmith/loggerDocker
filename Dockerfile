@@ -12,7 +12,7 @@ RUN rails webpacker:install
 RUN rails webpacker:install:react 
 RUN rails generate react:install
 
-yarn add react-bootstrap bootstrap
+RUN yarn add react-bootstrap bootstrap
 
 # Add a script to be executed every time the container starts.
 #COPY entrypoint.sh /usr/bin/
