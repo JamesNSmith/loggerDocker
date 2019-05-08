@@ -9,11 +9,11 @@ RUN gem install bundler -v 2.0.1
 RUN bundle install
 
 RUN curl -sL https://deb.nodesource.com/setup_10.x
-RUN apt install nodejs npm
+RUN apt install nodejs
 RUN rails webpacker:install       
 RUN rails webpacker:install:react 
 RUN rails generate react:install
-RUN npm install react-bootstrap bootstrap
+#RUN npm install react-bootstrap bootstrap
 
 # Add a script to be executed every time the container starts.
 #COPY entrypoint.sh /usr/bin/
