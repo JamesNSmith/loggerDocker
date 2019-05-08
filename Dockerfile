@@ -7,6 +7,7 @@ RUN apt-get update -qq && apt-get install -y mysql-client
 RUN gem install rails -v 5.2.3
 RUN gem install bundler -v 2.0.1
 RUN bundle install
+RUN apt-get update
 RUN apt-get install -y npm #nodejs=6.14.4
 #RUN rails webpacker:install       
 #RUN rails webpacker:install:react 
