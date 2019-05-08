@@ -15,10 +15,12 @@ RUN apt-get update -qq \
 	&& npm -v \
 
 RUN rails webpacker:install  
-RUN apt-get install -y yarn \
+RUN apt-get install -y curl \
+	&& curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | apt-key add -
+	&& apt-get install -y yarn \
 	&& rails webpacker:install:react \ 
 	&& rails generate react:install \
-	
+
 #RUN npm install react-bootstrap bootstrap
 
 # Add a script to be executed every time the container starts.
