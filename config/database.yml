@@ -14,7 +14,7 @@
 default: &local
   adapter: mysql2
   encoding: utf8
-  pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
+  #pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
   username: root
   password: '01020102'
   host: localhost
@@ -23,7 +23,7 @@ default: &local
 default: &remote
   adapter: mysql2
   encoding: utf8
-  pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
+  #pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
   username: root
   password: '01020102'
   host: first.cgd0tu1jr17x.eu-west-2.rds.amazonaws.com
@@ -39,7 +39,7 @@ development:
 test:
   adapter: mysql2
   encoding: utf8
-  pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
+  #pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
   username: <%= ENV['TEST_DATABASE_USERNAME'] %>
   password: <%= ENV['TEST_DATABASE_PASSWORD'] %>
   host: <%= ENV['TEST_DATABASE_HOST'] %>
