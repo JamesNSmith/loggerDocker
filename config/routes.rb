@@ -12,7 +12,7 @@ Rails.application.routes.draw do
   match '/clubs/members', to: 'clubs#show', via: :get
   match '/clubs/user', to: 'clubs#view', via: [:get, :post]
 
-  match '/logger', to: 'flights#logger', via: :get
+  match '/logger', to: 'flights#demoLogger', via: :get
 
   get '/login' => 'sessions#new'
   post '/login' => 'sessions#create'

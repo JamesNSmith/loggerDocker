@@ -44,6 +44,9 @@ import FlightController from '../utilities/flightController'
 class FlightLogger extends React.Component {
   constructor(props){
     super(props);
+    window.mode = this.props.mode
+    console.log(window.mode)
+
   //this.functions = [];
   //this.addDataRow = {};
 

@@ -10,7 +10,7 @@ class FlightsController < ApplicationController
 	#	@date_flights = Flight.where(launch_date: @date ).order(launch_time: :desc)
 	#end
 
-	def logger
+	def demoLogger
 		#@user = current_user()
 		#@club = current_club()
 		#@memberships = @club.memberships
