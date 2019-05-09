@@ -43,7 +43,7 @@ test:
   encoding: utf8
   #pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
   username: <%= ENV['TEST_DATABASE_USERNAME'] %>
-  password: '01020102' #<%= ENV['TEST_DATABASE_PASSWORD'] %>
+  password: <%= ENV['TEST_DATABASE_PASSWORD'] %>
   host: <%= ENV['TEST_DATABASE_HOST'] %>
   port: 3306
   database: Logger2_test
