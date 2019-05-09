@@ -44,7 +44,7 @@ test:
   #pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
   username: root #<%= ENV['TEST_DATABASE_USERNAME'] %>
   password: '01020102' #<%= ENV['TEST_DATABASE_PASSWORD'] %>
-  host: first.cgd0tu1jr17x.eu-west-2.rds.amazonaws.com #<%= ENV['TEST_DATABASE_HOST'] %>
+  host: <%= ENV['TEST_DATABASE_HOST'] %>
   port: 3306
   database: Logger2_test
 
