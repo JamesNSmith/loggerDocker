@@ -11,10 +11,10 @@
 #
 #DATABASE_URL = "mysql2://myuser:mypass@localhost/somedatabase"
 
-default: &local
+default: &development
   adapter: mysql2
   encoding: utf8
-  #pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
+  pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
   username: root
   password: '01020102'
   host: localhost
@@ -29,14 +29,7 @@ default: &remote
   host: first.cgd0tu1jr17x.eu-west-2.rds.amazonaws.com
   port: 3306
 
-development:
-  <<: *local
-  database: Logger2_development
-
-# Warning: The database defined as "test" will be erased and
-# re-generated from your development database when you run "rake".
-# Do not set this db to the same as development or production.
-test:
+default: &test
   adapter: mysql2
   encoding: utf8
   #pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
@@ -44,6 +37,17 @@ test:
   password: <%= ENV['TEST_DATABASE_PASSWORD'] %>
   host: <%= ENV['TEST_DATABASE_HOST'] %>
   port: 3306
+
+development:
+  <<: *development  
+  database: Logger2_development
+
+# Warning: The database defined as "test" will be erased and
+# re-generated from your development database when you run "rake".
+# Do not set this db to the same as development or production.
+
+test:
+  <<: *development
   database: Logger2_test
 
 # As with config/secrets.yml, you never want to store sensitive information,

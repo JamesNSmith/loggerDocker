@@ -207,6 +207,7 @@ class TableLog extends React.Component {
 	addDataTable(inputData){
 		//table
 		console.log('add data')
+		console.log(inputData)
 		var tableData = this.state.tableData;
 		var returnData //= tableData.concat(inputData);
 
@@ -245,8 +246,8 @@ class TableLog extends React.Component {
 
 			//inputData[count]['notes'] = '' // dodgy -------------------------
 
-			console.log('input')
-			console.log(inputData[count])
+			//console.log('input')
+			//console.log(inputData[count])
 			tableData[inputData[count]['indexNumber']] = inputData[count]
 
 			
@@ -255,19 +256,22 @@ class TableLog extends React.Component {
 		this.setState({tableData:tableData},console.log('table ready'));
 	}
 
-	updateDataRow(inputData){
+	updateDataRow(indexNumber,inputData = null){
 		var data = this.state.tableData
-		data[inputData['indexNumber']] = inputData
 		
-		if(data[inputData['indexNumber']]['launchTime']['status'] == '' || data[inputData['indexNumber']]['launchTime']['status'] == ''){
-			data[inputData['indexNumber']]['status'] = 'editTime'
+		if(inputData != null){
+			data[indexNumber] = inputData
+		}
+
+		if(data[indexNumber]['launchTime']['status'] == '' || data[indexNumber]['launchTime']['status'] == ''){
+			data[indexNumber]['status'] = 'editTime'
 		} else {
-			data[inputData['indexNumber']]['status'] = ''
+			data[indexNumber]['status'] = ''
 		}
 
 		this.setState({data:data})
 
-		var element = document.getElementById("tr"+inputData['indexNumber'])
+		var element = document.getElementById("tr"+indexNumber)
 		this.scrollFocus(element.offsetTop)
 	}
 

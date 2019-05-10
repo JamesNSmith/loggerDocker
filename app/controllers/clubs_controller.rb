@@ -34,6 +34,7 @@ class ClubsController < ApplicationController
     when :get
       @club = current_club
       @users = @club.users
+      @users = @club.users.paginate(page: params[:page],per_page: 10)
     end
   end
 

@@ -1,4 +1,4 @@
-import flights from './seeds'
+import {demoFlights} from './seeds'
 import FlightController from './flightController'
 
 /*
@@ -13,8 +13,9 @@ class Flights extends Database {
 class Database {
 //Constructors -----------------------------
   constructor(dbName){
-    this.start = this.start.bind(this);
+    this.checkDatabase = this.checkDatabase.bind(this);
 
+    this.constant_restart = true
     this.dbName = dbName;
     this.version = 1;
     this.count = 0;
@@ -26,49 +27,49 @@ class Database {
       return;
     }
 
-    var queue = new Promise((resolve,reject) => {this.deleteDatabase(resolve,reject)})
-    .then(() => {return new Promise((resolve,reject) => {this.start(resolve,reject)})})
-    .then(() => {return new Promise((resolve,reject) => {this.addData('flights',flights,resolve,reject)})})
+    var constantRestart = (resolve,reject) => {
+      if(this.constant_restart){
+        this.deleteDatabase(resolve,reject);
+      } else {
+        resolve()
+      }
+    }
+    
+    var queue = new Promise((resolve,reject) => {constantRestart(resolve,reject)})
+    .then(() => {return new Promise((resolve,reject) => {this.checkDatabase(resolve,reject)})})
+    .then((addData) => {if(addData){return new Promise((resolve,reject) => {this.addData('flights',demoFlights,resolve,reject)})}})
     .then(() => {window.flightController.ready()})
     .catch(() => {console.log('queue error')})
-    
   }
 
-  start(successHandler = this.success,failureHandler = this.failure){
-    console.log('start')
-  	
+  checkDatabase(successHandler = this.success,failureHandler = this.failure){
+    var addData = false
     var openRequest = indexedDB.open(this.dbName, this.version);
 
-    console.log('start b')
-    console.log(openRequest)
     openRequest.onupgradeneeded = function(e) { //upgrading the database version number??
       var db = e.target.result;
-      console.log('running onupgradeneeded');
 
       if (!db.objectStoreNames.contains('flights')) {
-        console.log('new flights')
+        addData = true
+
         var flightsOS = db.createObjectStore('flights', {keyPath: 'indexNumber', autoIncrement: true});
         flightsOS.createIndex("indexNumber", "indexNumber", { unique: true });
         flightsOS.createIndex("flightNumber", "flightNumber", { unique: true });
-        
       }
     };
 
     openRequest.onsuccess = function(e) {
-      console.log('running onsuccess 1');
-
       e.target.result.close();
-      successHandler()
+      successHandler(addData)
     };
 
     openRequest.onerror = function(e) {
-      console.log('onerror! start');
+      console.log('onerror! checkDatabase');
       
       e.target.result.close();
       failureHandler()
     }; 
 
-    console.log(openRequest)
   }
 //Placeholders ------------------------------
   success(data = 'yes'){
@@ -180,8 +181,6 @@ class Database {
     var openRequest = indexedDB.open(this.dbName, this.version);
 
     openRequest.onsuccess = function(e) {
-      console.log('running onsuccess 2');
-
       var db = e.target.result;
       var transaction = db.transaction([table], 'readwrite');
       var records = transaction.objectStore(table);
@@ -189,12 +188,8 @@ class Database {
       var inpCount = 0
       for(var count=0;count<data.length;count++){
       	var request = records.add(data[count]);
-
-        console.log(data[count])
-        console.log(request)
       	
       	request.onsuccess = function(ev) {
-        	console.log('Woot! Did it -add');
           data[inpCount]['indexNumber'] = ev.target.result;
 
           inpCount += 1
@@ -388,11 +383,10 @@ class Database {
     };
   }
 
-  getRecordAll(table,successHandler){
+  getRecordAll(table,successHandler = this.success,failureHandler = this.failure){
   	var openRequest = indexedDB.open(this.dbName, this.version);
 
     openRequest.onsuccess = function(e) {
-      console.log('running onsuccess 2');
 
       var db = e.target.result;
       var transaction = db.transaction([table], 'readwrite');
@@ -400,7 +394,6 @@ class Database {
 
       var request = records.getAll();
       request.onsuccess = function(ev) {
-        console.log('Woot! Did it -getAll');
         e.target.result.close();
 
         successHandler(request.result);
@@ -409,15 +402,15 @@ class Database {
         console.log('Error', ev.target.error.name);
         e.target.result.close();
 
-        //fail
+        failureHandler(ev.target.error.name)
       };   
     }
 
     openRequest.onerror = function(e) {
       console.log('onerror! get');
-      console.dir(e);
-
       e.target.result.close();
+
+      failureHandler(e.target.error.name)
     };
   }
 }

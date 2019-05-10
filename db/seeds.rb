@@ -40,6 +40,7 @@ m9 = Membership.create(name: 'Trial', mtype: false, launch_fee:6.00, soaring_fee
 
 cud1 = ClubUser.create(user:ua1,club:cd1,membership:md1,utype:'admin')
 cud2 = ClubUser.create(user:ua2,club:c1,membership:m4,utype:'admin') #userType:regular,admin,regular editor, regular financial
+cud2 = ClubUser.create(user:ua2,club:c2,membership:m7,utype:'admin') #userType:regular,admin,regular editor, regular financial
 cu1 = ClubUser.create(user:u1,club:c1,membership:m4,utype:'regular')
 cu2 = ClubUser.create(user:u2,club:c1,membership:m4,utype:'regular')
 cu3 = ClubUser.create(user:u3,club:c1,membership:m5,utype:'regular')

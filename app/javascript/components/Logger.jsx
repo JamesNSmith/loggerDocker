@@ -12,6 +12,7 @@ import ToggleButton from 'react-bootstrap/ToggleButton'
 import ToggleButtonGroup from 'react-bootstrap/ToggleButtonGroup'
 
 import FlightController from '../utilities/flightController'
+import {demoMemberships,demoClubUsers,demoAircrafts} from '../utilities/seeds'
 
 class CustomToggle extends React.Component {
   constructor(props, context) {
@@ -76,77 +77,67 @@ class Logger extends React.Component {
     window.flightControllerDependents['logger'] = this
     this.flightController = window.flightController
 
-    //this.memberships = window.memberships
-    //this.totalClubUsers = window.clubUsers
-    //this.totalAircrafts = window.aircrafts
+    if(window.mode == 'demo'){
+      this.writeUser = {username:'Demo User'}
+      this.club = {name:'Demo Club'}
+      this.memberships = demoMemberships
+      this.totalClubUsers = demoClubUsers
+      this.totalAircrafts = demoAircrafts
+
+    } else {
+      this.writeUser = window.user
+      this.club = window.club
+      this.memberships = window.memberships
+      this.totalClubUsers = window.clubUsers
+      this.totalAircrafts = window.aircrafts
+    }
 
     this.aircraftObj = {id:'',registration:'',acName:''}
     this.userObj = {userId:'',username:'',fName:'',lName:'',membershipId:'',launchFee:'',soaringFee:'',aerotowStandardFee:'',aerotowUnitFee:''}
     this.timeObj = {formatted:'',input:'',status:''}
 		
-    this.state = {
-			data:{
-        user:'',//Info
-        date:'', 
-        club:'',
+    this.data = {
+      indexNumber:'',
 
-        aircraft:'',
-				tug:'',
+      user:this.writeUser,//Info
+      date:(new Date()).toISOString(), 
+      club:this.club,
+
+      aircraft:this.aircraftObj,
+      tug:this.aircraftObj,
         
-        launchType:'',
-        releaseHeight:'',
+      launchType:'winch',
+      releaseHeight:2000,
 
-        p1:'',
-        p2:'',
+      p1:this.userObj,
+      p2:this.userObj,
 
-        payee:'',//payment
-        aerotowStandardFee:'',//aerotow
-        aerotowUnitFee:'',
-        aerotowLaunchFee:'',
-				launchFee:'', //winch
-				soaringFee:'',
-        launchTime:'',//time
-        landTime:'',
-        //notes:''
-			},
-      p1ClubUsers:'',
-      p2ClubUsers:'',
-      aircrafts:'',
-      tugAircrafts:'',
-      mode:''
-		}
-
-    this.defaultValues = [
-      ['user',window.user],
-      ['date',(new Date()).toISOString()],
-      //['club',window.club],
-      ['aircraft',JSON.parse(JSON.stringify(this.aircraftObj))],
-      ['tug',JSON.parse(JSON.stringify(this.aircraftObj))],
-      ['launchType','winch'],
-      ['releaseHeight',2000],
-      ['p1',JSON.parse(JSON.stringify(this.userObj))],
-      ['p2',JSON.parse(JSON.stringify(this.userObj))],
-      ['payee','p1'],
-      ['launchTime',JSON.parse(JSON.stringify(this.timeObj))],
-      ['landTime',JSON.parse(JSON.stringify(this.timeObj))]
-    ];
-
-    /*this.defaultObjects = [
-      ['p1ClubUsers',JSON.parse(JSON.stringify(this.totalClubUsers))],
-      ['p2ClubUsers',JSON.parse(JSON.stringify(this.totalClubUsers))],
-      ['aircrafts',JSON.parse(JSON.stringify(this.totalAircrafts))],
-      ['tugAircrafts',JSON.parse(JSON.stringify(this.totalAircrafts))],
-      ['mode','create']
-    ];*/
-
-    for(var key in this.defaultValues){
-      this.state.data[this.defaultValues[key][0]] = this.defaultValues[key][1]
+      payee:'p1',//payment
+      aerotowStandardFee:'',//aerotow
+      aerotowUnitFee:'',
+      aerotowLaunchFee:'',
+      launchFee:'', //winch
+      soaringFee:'',
+      launchTime:this.timeObj,//time
+      landTime:this.timeObj,
+      //notes:''
     }
 
-    /*for(var key in this.defaultObjects){
-      var stateObj = {};
-      this.state[this.defaultObjects[key][0]] = this.defaultObjects[key][1];
-    }*/
+    this.defaultObjects = [
+      ['data',this.data],
+      ['p1ClubUsers',this.totalClubUsers],
+      ['p2ClubUsers',this.totalClubUsers],
+      ['aircrafts',this.totalAircrafts],
+      ['tugAircrafts',this.totalAircrafts],
+      ['mode','create']
+    ];
+
+
+    var stateObj = {};
+    for(var key in this.defaultObjects){ 
+      stateObj[this.defaultObjects[key][0]] = JSON.parse(JSON.stringify(this.defaultObjects[key][1]));
+    }
+    this.state = stateObj
 	}
 //Calculations
 getAerotowFee(launchFee,unitFee,height){
@@ -168,22 +159,9 @@ getAerotowFee(launchFee,unitFee,height){
 
 // Helpers
   clear(){
-    console.log('clear')
-    const data = this.state.data
-
-    for(var line in data){
-      data[line] = ''
-    }
-
-    for(var key in this.defaultValues){
-      data[this.defaultValues[key][0]] = this.defaultValues[key][1]
-    }
-
-    this.setState({data:data});
-
     for(var key in this.defaultObjects){
       var stateObj = {};
-      stateObj[this.defaultObjects[key][0]] = this.defaultObjects[key][1];
+      stateObj[this.defaultObjects[key][0]] = JSON.parse(JSON.stringify(this.defaultObjects[key][1]));
       this.setState(stateObj);
     }
   }
@@ -252,19 +230,10 @@ getAerotowFee(launchFee,unitFee,height){
 //foreign functions -----------------------------
 
 importEditData(importData){
-  console.log('importEditData')
-  console.log(importData)
-
   var currentData = JSON.parse(JSON.stringify(this.state.data))
-  console.log(currentData)
 
   this.setState({mode:'edit'},console.log(this.state))
   this.setState({data:importData},console.log(this.state))
-
-  
-  //this.setState({data:data},)
-
-
 }
 
 //handlers -----------------------------------
@@ -446,7 +415,6 @@ importEditData(importData){
   }
 
   aircraftFilterElement(searchElement,inputElement) {
-
     if(!((searchElement.toLowerCase().startsWith(inputElement.toLowerCase()))||(inputElement == ''))){
       if(!searchElement.toLowerCase().slice(3).startsWith(inputElement.toLowerCase())){
         return true
@@ -595,36 +563,33 @@ importEditData(importData){
 
   buttons(){
     var columns = ['launchFee','aerotowLaunchFee','aerotowStandardFee','aerotowUnitFee','soaringFee']
+    
     var floatData = (data,columns) =>{
       for(var key in columns){
         data[columns[key]] = parseFloat(data[columns[key]])
-        console.log(data[columns[key]])
       }
-      console.log(data)
       return data
     }
-    var handleUpdate = (event) =>{
-      console.log('update---');
 
+    var handleUpdate = (event) =>{
       const formData = Object.assign({},this.state.data);
-      console.log(formData)
       this.flightController.updateFromLogger(floatData(formData,columns))
 
-      this.setState({mode:'create'},console.log(this.state.mode))
+      this.setState({mode:'create'})
       this.clear()
     }
-    var handleCancel = (event) =>{
-      console.log('cancel');
 
-      this.setState({mode:'create'},console.log(this.state.mode))
+    var handleCancel = (event) =>{
+      this.flightController.cancelFromLogger(this.state.data.indexNumber)
+
+      this.setState({mode:'create'})
       this.clear()
     }
+
     var handleAdd = (event) => {
-      console.log('add');
       var formData = Object.assign({},this.state.data);
-      //formData['date'] = formData['date']
-      console.log(formData)
       this.flightController.addFromLogger(floatData(formData,columns))
+      
       this.clear()
     }
 
@@ -702,7 +667,7 @@ importEditData(importData){
   }
 
   componentWillUpdate(){
-    console.log('update')
+    //console.log('update')
   }
 
   componentWillUnmount(){

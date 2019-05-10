@@ -97,9 +97,15 @@ class FlightController {
     }
 
     database.updateRecordRow('flights',updatedData) // -------------dodgy
-    table.updateDataRow(updatedData)
+    table.updateDataRow(updatedData['indexNumber'],updatedData)
 
     //cable.updateDataRow(updatedDate)
+  }
+
+  cancelFromLogger(indexNumber){
+    var table = window.flightControllerDependents['table'] 
+
+    table.updateDataRow(indexNumber)
   }
 
 //Table helpers ------------------------
