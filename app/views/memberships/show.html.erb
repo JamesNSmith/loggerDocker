@@ -10,7 +10,7 @@
         <td>mtype</td>
         <td>Winch Fee</td>
         <td>Aerotow Fee 2000ft</td>
-        <td>Aerotow Fee /1000ft >2000ft</td>
+        <td>Aerotow Fee /1000ft > 2000ft</td>
         <td>Soaring Fee</td>
         </tr>
       </thead>
@@ -25,6 +25,13 @@
       <td><p><%= number_to_currency(membership.aerotow_standard_fee,:unit => "£") %></p></td>
       <td><p><%= number_to_currency(membership.aerotow_unit_fee,:unit => "£") %></p></td>
       <td><p><%= number_to_currency(membership.soaring_fee,:unit => "£") %></p></td>
+
+      <td>
+      <%= form_for(:membership, url: '/memberships/update', method: :get) do |f| %> 
+      <%= f.hidden_field :id, value: membership.id %>
+      <%= f.submit "Update", class: "btn" %>
+      <% end %>
+      </td>
 
       <td>
       <%= form_for(:membership, url: '/memberships/delete') do |f| %> 

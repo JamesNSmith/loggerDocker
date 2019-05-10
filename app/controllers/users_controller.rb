@@ -24,14 +24,18 @@ class UsersController < ApplicationController
       @user = User.new
     when :post
       @user = User.new(user_params)
-      if @user.save
+
+      if User.find_by(email: user_params[:email])
+        flash[:danger] = "Email already in use!"
+        redirect_to '/users/signup'
+      elsif @user.save
         #session[:user_id] = @user.id??????------------------------
         UserMailer.registration_confirmation(@user).deliver
         flash[:success] = "Please confirm your email address to continue"
         redirect_to '/'
       else
-        flash[:error] = "Ooooppss, something went wrong!"
-        redirect_to '/signup'
+        flash[:danger] = "Ooooppss, something went wrong!"
+        redirect_to '/users/signup'
       end
     end
   end

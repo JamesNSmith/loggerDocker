@@ -25,7 +25,7 @@
       <% if current_user %>
       <li id="user-button" class="menuChild"><a accesskey="4" title=""><%= current_user.username %></a></li>
       <% else %>
-      <li class="menuChild"><%= link_to "Log In", 'login' %></li>
+      <li class="menuChild"><%= link_to "Log In", '/login' %></li>
       <li class="menuChild"><%= link_to "Sign Up", '/users/signup' %></li>
       <% end %>  
     </ul>

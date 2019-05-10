@@ -8,15 +8,30 @@
         <tr>
         <td>Name</td>
         <td>Intials</td>
-        <td></td>
+        <td>User Type</td>
+        <td>Membership</td>
         </tr>
       </thead>
     <tbody id="tableBody">
-  	<% @clubs.each do |club| %> 
+  	<% @clubs.each do |club| %>
+      <% @clubUser = current_user.club_users.find_by(club: club) %> 
 	    <tr> 
 
   	  <td><%= club.name %></td> 
   	  <td><%= club.initials %></td>
+      <td><%= @clubUser.utype.capitalize %></td>
+      <td><%= @clubUser.membership.name %></td>
+
+      <% if @clubUser.utype != 'admin' %>
+      <td>
+        <%= form_for(:club_user, url: '/clubusers/leave') do |f| %> 
+        <%= f.hidden_field :id, value: @clubUser.id %>
+        <%= f.hidden_field :club, value: club.name %>
+        <%= f.submit "Leave", class: "btn" %>
+        <% end %>
+      </td>
+      <% end %>
+      
       <td>
         <% if session[:club_id] != club.id %>
           <%= form_for(:clubs, url: '/clubs/user') do |f| %> 
@@ -24,7 +39,7 @@
           <%= f.submit "Select", class: "btn" %>
           <% end %>
         <% else %>
-          Current
+          Current Club
         <% end %>
       </td>
 

@@ -8,6 +8,13 @@
   //padding:100px;
 }
 
+.plusContainer {
+  width: 600px;
+  margin: 150px auto;
+  margin-bottom:250px
+  //padding:100px;
+}
+
 .users, .create {
   margin: 40px 0;
 }
@@ -43,11 +50,32 @@
   width: 480px;
 }
 
+.clubLink {
+  margin: 0 auto;
+  width: 600px;
+}
+
+//.clubLink ul {
+//  height:100
+//}
+
+//.clubLink option {
+  //text-align: center;
+//}
+
 .inputForm{
   text-align:center;
 }
 
 .inputForm form input{
+  width: 290px;
+  height: 40px;
+  padding:5px;
+  margin:5px auto;
+
+}
+
+.inputForm form select{
   width: 290px;
   height: 40px;
   padding:5px;

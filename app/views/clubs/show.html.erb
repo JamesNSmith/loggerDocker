@@ -1,6 +1,6 @@
 <div class="recordPage">
 
-  <h1><%= @club.name %> Members</h1>
+  <h1><%= @currentClub.name %> Members</h1>
 
   <div class="recordTable">
     <table class="table table-sm table-striped table-bordered table-hover">
@@ -14,21 +14,28 @@
         </tr>
       </thead>
     <tbody id="tableBody">
-    <% @users.each do |user| %> 
+    <% @users.each do |user| %>
+      <% @clubUser = user.club_users.find_by(club: @currentClub) %> 
       <tr>
 
       <td><p><%= user.first_name %> <%= user.last_name %></p></td>
       <td><p><%= user.username %></p></td>  
       <td><p><%= user.email %></p></td>  
-      <td><p><%= user.club_users.where(club_id:@club.id).first.utype.capitalize %></p></td> 
-      <td><p><%= user.club_users.find_by(club: @club).membership.name %></p></td>
+      <td><p><%= @clubUser.utype.capitalize %></p></td> 
+      <td><p><%= @clubUser.membership.name %></p></td>
 
+      <% if @currentClubUser.utype == 'admin' %>
       <td>
-      <%= form_for(:club_user, url: '/clubs/removeuser') do |f| %> 
-      <%= f.hidden_field :id, value: user.club_users.find_by(club: @club).id %>
+      <% if @clubUser.utype != 'admin' %>
+      <%= form_for(:club_user, url: '/clubusers/delete') do |f| %>
+      <%= f.hidden_field :id, value: @clubUser.id %>
+      <%= f.hidden_field :first_name, value: @clubUser.user.first_name %>
+      <%= f.hidden_field :last_name, value: @clubUser.user.last_name %>
       <%= f.submit "Remove", class: "btn" %>
       <% end %>
+      <% end %>
       </td>
+      <% end %>
 
       </tr>
       

@@ -11,12 +11,17 @@ Rails.application.routes.draw do
   delete '/clubs/del' => 'clubs#destroy'
   match '/clubs/members', to: 'clubs#show', via: :get
   match '/clubs/user', to: 'clubs#view', via: [:get, :post]
-  match '/clubs/removeuser', to: 'clubs#removeuser', via: [:get, :post]
+
+  match '/clubusers/delete', to: 'club_users#delete', via: :post
+  match '/clubusers/leave', to: 'club_users#leave', via: :post
 
   match '/memberships', to: 'memberships#index', via: :get
   match '/memberships/club', to: 'memberships#show', via: :get
   match '/memberships/add', to: 'memberships#new', via: [:get, :post]
+   match '/memberships/update', to: 'memberships#update', via: [:get, :post]
   match '/memberships/delete', to: 'memberships#delete', via: :post
+
+  match '/club_link/update', to: 'club_link#update', via: :post #????????
 
   match '/demologger', to: 'flights#demoLogger', via: :get
 

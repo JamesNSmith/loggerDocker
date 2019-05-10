@@ -1,0 +1,2 @@
+module ClubUsersHelper
+end

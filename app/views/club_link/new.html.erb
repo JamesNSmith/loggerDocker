@@ -1,2 +1,22 @@
-<h1>ClubLink#new</h1>
-<p>Find me in app/views/club_link/new.html.erb</p>
+<div class="clubLink">
+  <div class="plusContainer">
+    <div class="inputForm">
+
+    <h1><%= @club.name %> Membership</h1>
+
+    <%= form_for(:membership,url: '/club_link/update') do |f| %>
+    <div class="field"> 
+      <ul>
+          <li><%= f.select(:id, options_for_select(@membershipList)) %></li>
+          <%= f.hidden_field :club, value: @club.id %> 	
+       </ul>
+  	</div> 
+  	<div class="actions"> 
+      <%= f.submit "Join", class: "form-btn" %> 
+  	</div> 
+    <% end %>
+ 
+
+    </div>
+  </div>
+</div>
