@@ -66,16 +66,18 @@
     <nav>
       <h3>Dev</h3>
       <ul>
-        <li><%= link_to 'All Memberships', "/memberships" %></li>
-        <li><%= link_to 'Add Membership', "/memberships/add" %></li>
-        <li><%= link_to 'Memberships', "/memberships/club" %></li>
-
         <li><%= link_to 'All Aircraft', "/aircraft" %></li>
         <li><%= link_to 'Add Aircraft', "/aircraft/add" %></li>
         <li><%= link_to 'Club Aircraft', "/aircraft/club" %></li>
         <li><%= link_to 'User Aircraft', "/aircraft/user" %></li>
 
         <li><%= link_to 'Flights', "/flights" %></li>
+      </ul>
+    </nav>
+
+    <nav>
+      <h3>Ready</h3>
+      <ul>
 
       </ul>
     </nav>
@@ -83,12 +85,10 @@
   	<nav>
       <h3>Admin</h3>
   		<ul>
-        <li><%= link_to 'Clubs', "/clubs" %></li>
-        
         <li><%= link_to 'Users', "/users" %></li>
-        
-        <li><%= link_to 'Logger', "/demologger" %></li>
-        
+        <li><%= link_to 'Clubs', "/clubs" %></li>
+        <li><%= link_to 'Memberships', "/memberships" %></li>
+
   		</ul>
   	</nav>
 

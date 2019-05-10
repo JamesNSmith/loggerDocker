@@ -1,22 +1,41 @@
-<div class="users">
+<div class="recordPage">
 
-  <h1>Clubs</h1>
+  <h1>All Clubs</h1>
 
-  <div class="container">
+  <div class="recordTable">
+    <table class="table table-sm table-striped table-bordered table-hover">
+      <thead>
+        <tr>
+        <td>#</td>
+        <td>Name</td>
+        <td>Intials</td>
+        <td>Country</td>
+        <td>Join Token</td>
+        </tr>
+      </thead>
+    <tbody id="tableBody">
   	<% @clubs.each do |club| %> 
-	    <div class="user"> 
-      <p><%= club.id %></p> 
-  	  <p><%= club.name %></p> 
-  	  <p><%= club.initials %></p>
-  		<p><%= club.country %></p>
-      <p><%= new_club_link_url(club.link_token) %></p> 
+	    <tr>
+
+      <td><p><%= club.id %></p></td> 
+  	  <td><p><%= club.name %></p></td> 
+  	  <td><p><%= club.initials %></p></td>
+  		<td><p><%= club.country %></p></td>
+      <td><p><%= new_club_link_url(club.link_token) %></p></td> 
       
+      <td>
       <%= form_for(:clubs, url: '/clubs') do |f| %> 
       <%= f.hidden_field :id, value: club.id %>
       <%= f.submit "Select", class: "btn" %>
       <% end %>
+      </td>
       
-	    </div> 
+	    </tr> 
     <% end %>
+    </tbody>
+  </table>
+
+  <%= will_paginate @users %>
+
   </div>
 </div>

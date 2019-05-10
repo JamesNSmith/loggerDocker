@@ -6,6 +6,8 @@ class CreateMemberships < ActiveRecord::Migration[5.1]
       t.boolean :mtype
       t.decimal :launch_fee, precision:6, scale:2 
       t.decimal :soaring_fee, precision:6, scale:2 
+      t.decimal :aerotow_standard_fee, precision:6, scale:2
+      t.decimal :aerotow_unit_fee, precision:6, scale:2
 
       t.timestamps
     end

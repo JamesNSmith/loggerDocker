@@ -2,7 +2,7 @@ class UsersController < ApplicationController
 	def index
     case request.method_symbol
     when :get
-      @users = User.all
+      @users = User.all.paginate(page: params[:page],per_page: 10)
     when :post
       @user = User.find_by_id(params[:user][:id]) 
       if @user

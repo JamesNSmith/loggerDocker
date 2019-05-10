@@ -23,4 +23,7 @@ class ApplicationController < ActionController::Base
   def require_club 
     redirect_to '/login', :warning => 'club required' unless current_club 
   end
+
+  #Misc ---------------------------------------
+  
 end

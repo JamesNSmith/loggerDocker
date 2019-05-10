@@ -5,7 +5,7 @@ class ClubsController < ApplicationController
   def index
     case request.method_symbol
     when :get
-      @clubs = Club.all
+      @clubs = Club.all.paginate(page: params[:page],per_page: 10)
     when :post
       @club = Club.find_by_id(params[:clubs][:id]) 
       if @club 

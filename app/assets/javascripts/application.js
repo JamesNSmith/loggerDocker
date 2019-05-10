@@ -21,14 +21,14 @@
 
 $(document).on('turbolinks:load', function() {
 
-  $('.user-button').on('click', () => {
+  $('#user-button').on('click', () => {
     $('.user-menu').toggleClass('hide');
-    $('.user-button').toggleClass('button-active');
+    $('#user-button').toggleClass('button-active');
   });
 
-  $('.club-button').on('click', () => {
+  $('#club-button').on('click', () => {
     $('.club-menu').toggleClass('hide');
-    $('.club-button').toggleClass('button-active');
+    $('#club-button').toggleClass('button-active');
   });
 
   /*$('.user-button').mouseenter(function() {

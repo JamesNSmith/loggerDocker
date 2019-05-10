@@ -24,19 +24,19 @@ c1 = Club.create(name:'Logger Club', initials:'LC', country:'UK')
 c2 = Club.create(name:'Test Club', initials:'TC', country:'UK')
 
 md1 = Membership.create(name: 'Default', mtype: true)
-m1 = Membership.create(name: 'Full', mtype: true, launch_fee:7.00, soaring_fee:0.3)
-m2 = Membership.create(name: 'Junior', mtype: true, launch_fee:4.50, soaring_fee:0.15)
-m3 = Membership.create(name: 'Trial', mtype: true, launch_fee:4.50, soaring_fee:0.15)
+m1 = Membership.create(name: 'Full', mtype: true, launch_fee:7.00, soaring_fee:0.3,aerotow_standard_fee: 20, aerotow_unit_fee: 5)
+m2 = Membership.create(name: 'Junior', mtype: true, launch_fee:4.50, soaring_fee:0.15,aerotow_standard_fee: 20, aerotow_unit_fee: 5)
+m3 = Membership.create(name: 'Trial', mtype: true, launch_fee:4.50, soaring_fee:0.15,aerotow_standard_fee: 20, aerotow_unit_fee: 5)
 
 #md2 = Membership.create(name: 'Default', mtype: false)
-m4 = Membership.create(name: 'Full', mtype: false, launch_fee:7.00, soaring_fee:0.6)
-m5 = Membership.create(name: 'Junior', mtype: false, launch_fee:4.50, soaring_fee:0.3)
-m6 = Membership.create(name: 'Trial', mtype: false, launch_fee:4.50, soaring_fee:0.3)
+m4 = Membership.create(name: 'Full', mtype: false, launch_fee:7.00, soaring_fee:0.6,aerotow_standard_fee: 20, aerotow_unit_fee: 5)
+m5 = Membership.create(name: 'Junior', mtype: false, launch_fee:4.50, soaring_fee:0.3,aerotow_standard_fee: 20, aerotow_unit_fee: 5)
+m6 = Membership.create(name: 'Trial', mtype: false, launch_fee:4.50, soaring_fee:0.3,aerotow_standard_fee: 20, aerotow_unit_fee: 5)
 
 #md3 = Membership.create(name: 'Default', mtype: false)
-m7 = Membership.create(name: 'Full', mtype: false, launch_fee:8.00, soaring_fee:0.4)
-m8 = Membership.create(name: 'Junior', mtype: false, launch_fee:6.00, soaring_fee:0.25)
-m9 = Membership.create(name: 'Trial', mtype: false, launch_fee:6.00, soaring_fee:0.3)
+m7 = Membership.create(name: 'Full', mtype: false, launch_fee:8.00, soaring_fee:0.4,aerotow_standard_fee: 20, aerotow_unit_fee: 5)
+m8 = Membership.create(name: 'Junior', mtype: false, launch_fee:6.00, soaring_fee:0.25,aerotow_standard_fee: 20, aerotow_unit_fee: 5)
+m9 = Membership.create(name: 'Trial', mtype: false, launch_fee:6.00, soaring_fee:0.3,aerotow_standard_fee: 20, aerotow_unit_fee: 5)
 
 cud1 = ClubUser.create(user:ua1,club:cd1,membership:md1,utype:'admin')
 cud2 = ClubUser.create(user:ua2,club:c1,membership:m4,utype:'admin') #userType:regular,admin,regular editor, regular financial

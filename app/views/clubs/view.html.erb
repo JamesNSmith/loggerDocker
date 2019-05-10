@@ -21,7 +21,7 @@
         <% if session[:club_id] != club.id %>
           <%= form_for(:clubs, url: '/clubs/user') do |f| %> 
           <%= f.hidden_field :id, value: club.id %>
-          <%= f.submit "Select", class: "box-list-btn" %>
+          <%= f.submit "Select", class: "btn" %>
           <% end %>
         <% else %>
           Current
@@ -29,10 +29,12 @@
       </td>
 
       </tr> 
-	   
     <% end %>
     </tbody>
   </table>
+
+  <%= link_to "Add Club", '/clubs/add'%>
+  
 
   </div>
 </div>

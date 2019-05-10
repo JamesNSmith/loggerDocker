@@ -1,22 +1,42 @@
-<div class="users">
+<div class="recordPage">
 
-  <h1>Users</h1>
+  <h1>All Users</h1>
   
-  <div class="userContainer">
+  <div class="recordTable">
+    <table class="table table-sm table-striped table-bordered table-hover">
+      <thead>
+        <tr>
+        <td>#</td>
+        <td>Name</td>
+        <td>Username</td>
+        <td>Email</td>
+        
+        
+        <td>User Type</td>
+        </tr>
+      </thead>
+    <tbody id="tableBody">
   	<% @users.each do |user| %> 
-	    <div class="user"> 
-      <p><%= user.id %></p>
-  	  <p><%= user.email %></p> 
-  	  <p><%= user.first_name %></p>
-  		<p><%= user.last_name %></p> 
-  		<p><%= user.utype %></p> 
+	    <tr> 
+      <td><p><%= user.id %></p></td>
+      <td><p><%= user.first_name %> <%= user.last_name %></p></td>
+      <td><p><%= user.username %></p></td> 
+  	  <td><p><%= user.email %></p></td> 
+  		<td><p><%= user.utype %></p></td> 
 
+      <td>
       <%= form_for(:user, url: '/users') do |f| %> 
       <%= f.hidden_field :id, value: user.id %>
       <%= f.submit "Select", class: "btn" %>
       <% end %>
+      </td>
 
-	    </div> 
+	    </tr> 
 	  <% end %>
+    </tbody>
+  </table>
+
+  <%= will_paginate @users %>
+
   </div>
 </div>

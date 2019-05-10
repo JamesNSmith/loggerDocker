@@ -48,6 +48,8 @@ ActiveRecord::Schema.define(version: 20190402172432) do
     t.boolean "mtype"
     t.decimal "launch_fee", precision: 6, scale: 2
     t.decimal "soaring_fee", precision: 6, scale: 2
+    t.decimal "aerotow_standard_fee", precision: 6, scale: 2
+    t.decimal "aerotow_unit_fee", precision: 6, scale: 2
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end

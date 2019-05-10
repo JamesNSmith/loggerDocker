@@ -1,0 +1,31 @@
+<div class="membership">
+  <div class="userContainer">
+    <div class="inputForm">
+
+    <h1>Add Membership</h1>
+
+    <%= form_for(@membership,url: '/memberships/add') do |f| %>
+    <div class="field"> 
+      <ul>
+          <li><%= f.label "Name " %></li>
+          <li><%= f.text_field :name, :placeholder => "Name" %></li> 	
+            <%= f.hidden_field :mtype, value: false%>
+      	  <li><%= f.label "Launch Fee" %></li>
+          <li><%= f.text_field :launch_fee, :step => :any, :placeholder => "Launch Fee" %></li>
+          <li><%= f.label "Aerotow Fee 2000ft" %></li>
+          <li><%= f.text_field :aerotow_standard_fee, :step => :any, :placeholder => "Aerotow Fee 2000ft" %></li>
+          <li><%= f.label "Aerotow Fee /1000ft >2000ft" %></li>
+          <li><%= f.text_field :aerotow_unit_fee, :step => :any, :placeholder => "Aerotow Fee /1000ft >2000ft" %></li>
+          <li><%= f.label "Soaring Fee" %></li>
+          <li><%= f.text_field :soaring_fee, :step => :any, :placeholder => "Soaring Fee" %></li>
+       </ul>
+  	</div> 
+  	<div class="actions"> 
+      <%= f.submit "Create", class: "form-btn" %> 
+  	</div> 
+    <% end %>
+ 
+
+    </div>
+  </div>
+</div>
