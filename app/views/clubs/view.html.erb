@@ -39,7 +39,7 @@
       <% end %>
       
       <td>
-        <% if session[:club_id] != club.id %>
+        <% if current_club.id != club.id %>
           <%= form_for(:clubs, url: '/clubs/user') do |f| %> 
           <%= f.hidden_field :id, value: club.id %>
           <%= f.submit "Select", class: "btn" %>

@@ -9,11 +9,11 @@ class SessionsController < ApplicationController
     @user = User.find_by_email(params[:session][:email]) 
     if @user && @user.authenticate(params[:session][:password])
       if @user.email_confirmed
-        session[:user_id] = @user.id
-        @clubs = @user.clubs
-        if @clubs.length > 0 
-          session[:club_id] = (@clubs.first)['id'] #dodgy
-        end 
+        set_user(@user)
+        set_club(@user.clubs.first)#dodgy
+        #if @clubs.length > 0 
+        #  session[:club_auth] = @clubs.first.auth_token #dodgy
+        #end 
 
       else
         #UserMailer.registration_confirmation(@user).deliver # dodgy
@@ -30,8 +30,8 @@ class SessionsController < ApplicationController
 	end
 
 	def destroy 
-  	session[:user_id] = nil
-    session[:club_id] = nil  
+  	#end_club
+    end_user  
   	redirect_to '/', :info => "Logged out!" 
 	end
 end

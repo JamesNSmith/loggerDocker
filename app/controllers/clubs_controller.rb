@@ -9,7 +9,7 @@ class ClubsController < ApplicationController
     when :post
       @club = Club.find_by_id(params[:clubs][:id]) 
       if @club 
-        session[:club_id] = @club.id
+        set_club(@club)
         redirect_to '/clubs/members' 
       end
     end
@@ -18,12 +18,12 @@ class ClubsController < ApplicationController
   def view
     case request.method_symbol
     when :get
-      @clubs = User.find(session[:user_id]).clubs
+      @clubs = current_user.clubs
     when :post
       puts params
       @club = Club.find_by_id(params[:clubs][:id]) 
       if @club 
-        session[:club_id] = @club.id
+        set_club(@club)
         redirect_to '/clubs/members' #not sure
       end
     end
@@ -43,7 +43,7 @@ class ClubsController < ApplicationController
     when :get
   	 @club = Club.new
     when :post
-      @user = User.find(session[:user_id])
+      @user = current_user 
       @club = Club.new(club_params)
       if @club.save
         ClubMailer.confirmation(@user,@club).deliver
@@ -53,7 +53,7 @@ class ClubsController < ApplicationController
         @club.memberships << [@m1,@m2]
         @clubUser = ClubUser.create(user:@user,club:@club,membership:@m1,utype:'admin')
 
-        session[:club_id] = @club.id
+        set_club(@club)
 
         redirect_to '/', :success => "Further instructions have been sent to your email address"
 
@@ -75,8 +75,12 @@ class ClubsController < ApplicationController
     end
   end
 
+  def profile
+    @club = current_club
+  end
+
   def destroy 
-  	session[:club_id] = nil 
+  	end_club 
   	redirect_to '/' 
   end 
   

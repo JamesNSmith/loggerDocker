@@ -39,6 +39,12 @@ class UsersController < ApplicationController
       end
     end
   end
+
+  def profile
+    @user = current_user
+    puts('user')
+    puts(@user)
+  end
   
   private
   def user_params

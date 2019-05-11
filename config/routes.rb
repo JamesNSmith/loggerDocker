@@ -5,12 +5,14 @@ Rails.application.routes.draw do
 
   match '/users', to: 'users#index', via: [:get, :post]
   match '/users/signup', to: 'users#new', via: [:get, :post]
+  match '/users/profile', to: 'users#profile', via: [:get]
 
   match '/clubs', to: 'clubs#index', via: [:get, :post]
   match '/clubs/add', to: 'clubs#new', via: [:get, :post]
   delete '/clubs/del' => 'clubs#destroy'
   match '/clubs/members', to: 'clubs#show', via: :get
   match '/clubs/user', to: 'clubs#view', via: [:get, :post]
+  match '/clubs/profile', to: 'clubs#profile', via: [:get]
 
   match '/clubusers/delete', to: 'club_users#delete', via: :post
   match '/clubusers/leave', to: 'club_users#leave', via: :post

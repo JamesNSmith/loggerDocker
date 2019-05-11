@@ -14,12 +14,12 @@ class Club < ApplicationRecord
 
 	#has_many :flights
 
-  	private
+  private
 	def generate_token(column)
-    	begin
-      		self[column] = SecureRandom.urlsafe_base64
-   		end while Club.exists?(column => self[column])
-  	end
+    begin
+      self[column] = SecureRandom.urlsafe_base64
+   	end while Club.exists?(column => self[column])
+  end
 
   	#def default_membership
   	#	@membership = Membership.create(name: 'Default', mtype: true)

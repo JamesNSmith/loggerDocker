@@ -30,8 +30,8 @@ class ClubLinkController < ApplicationController
       else
         @clubUser = ClubUser.new(user:@user,club:@club,membership:@membership,utype:@utype) ##,utype:'admin'
 
-        if @clubUser.save 
-          session[:club_id] = @club.id
+        if @clubUser.save
+          set_club(@club) 
           redirect_to '/', :success => "You have joined " + @club.name
         else
           redirect_to '/', :danger => "Sorry. Club does not exist!"
