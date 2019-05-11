@@ -6,22 +6,34 @@ class ApplicationController < ActionController::Base
 
   helper_method :current_user, :current_club  
 
+  rescue_from ActiveRecord::RecordNotFound, :with => :record_not_found
+
   #User ------------------------------------
   def current_user 
   	@current_user ||= User.find(session[:user_id]) if session[:user_id] 
   end
   
   def require_user 
-  	redirect_to '/login', :warning => 'user required' unless current_user 
+  	redirect_to '/login', :warning => 'User Required' unless current_user 
   end
 
   #Club ------------------------------------
-  def current_club 
-  	@current_club ||= Club.find(session[:club_id]) if session[:club_id] 
+  def current_club
+    begin 
+  	  @current_club ||= Club.find(session[:club_id]) if session[:club_id]
+    rescue ActiveRecord::RecordNotFound => e
+      false
+    end  
   end
 
   def require_club 
-    redirect_to '/login', :warning => 'club required' unless current_club 
+    redirect_to '/clubs/user', :warning => 'Club Required' unless current_club 
+  end
+
+  def record_not_found
+    session[:user_id] = nil
+    session[:club_id] = nil
+    redirect_to '/login', :danger => 'RECORD NOT FOUND'# Assuming you have a template named 'record_not_found'
   end
 
   #Misc ---------------------------------------

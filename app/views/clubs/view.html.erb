@@ -20,7 +20,13 @@
   	  <td><%= club.name %></td> 
   	  <td><%= club.initials %></td>
       <td><%= @clubUser.utype.capitalize %></td>
-      <td><%= @clubUser.membership.name %></td>
+      <td><%= 
+        begin
+          @clubUser.membership.name
+        rescue NoMethodError => e
+          'None'
+        end 
+      %></td>
 
       <% if @clubUser.utype != 'admin' %>
       <td>

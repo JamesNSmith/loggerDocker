@@ -25,16 +25,18 @@
       <td><p><%= @clubUser.membership.name %></p></td>
 
       <% if @currentClubUser.utype == 'admin' %>
-      <td>
       <% if @clubUser.utype != 'admin' %>
+      <td>
+      
       <%= form_for(:club_user, url: '/clubusers/delete') do |f| %>
       <%= f.hidden_field :id, value: @clubUser.id %>
       <%= f.hidden_field :first_name, value: @clubUser.user.first_name %>
       <%= f.hidden_field :last_name, value: @clubUser.user.last_name %>
       <%= f.submit "Remove", class: "btn" %>
       <% end %>
-      <% end %>
+      
       </td>
+      <% end %>
       <% end %>
 
       </tr>

@@ -1,6 +1,7 @@
 class Club < ApplicationRecord
 	before_create {generate_token(:auth_token)}
 	before_create {generate_token(:link_token)}
+	#after_create {default_membership}
 
 	has_many :club_users
 	has_many :users, through: :club_users
@@ -19,6 +20,11 @@ class Club < ApplicationRecord
       		self[column] = SecureRandom.urlsafe_base64
    		end while Club.exists?(column => self[column])
   	end
+
+  	#def default_membership
+  	#	@membership = Membership.create(name: 'Default', mtype: true)
+  	#	self.memberships << @membership
+  	#end
 end
 
 

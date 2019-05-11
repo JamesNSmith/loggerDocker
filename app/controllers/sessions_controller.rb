@@ -11,10 +11,7 @@ class SessionsController < ApplicationController
       if @user.email_confirmed
         session[:user_id] = @user.id
         @clubs = @user.clubs
-        puts 'Club:'
-        puts @clubs
         if @clubs.length > 0 
-          puts @club
           session[:club_id] = (@clubs.first)['id'] #dodgy
         end 
 

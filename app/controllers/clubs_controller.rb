@@ -46,13 +46,16 @@ class ClubsController < ApplicationController
       @user = User.find(session[:user_id])
       @club = Club.new(club_params)
       if @club.save
-        ##< not sure dodgy
-        #session[:club_id] = @club.id
         ClubMailer.confirmation(@user,@club).deliver
-        flash[:success] = "Further instructions have been sent to your email address"
-        ##>
 
-        redirect_to '/'
+        @m1 = Membership.create(name: 'Full', mtype: false, launch_fee:7.00, soaring_fee:0.3,aerotow_standard_fee: 20, aerotow_unit_fee: 5)
+        @m2 = Membership.create(name: 'Junior', mtype: false, launch_fee:4.50, soaring_fee:0.15,aerotow_standard_fee: 20, aerotow_unit_fee: 5)
+        @club.memberships << [@m1,@m2]
+        @clubUser = ClubUser.create(user:@user,club:@club,membership:@m1,utype:'admin')
+
+        session[:club_id] = @club.id
+
+        redirect_to '/', :success => "Further instructions have been sent to your email address"
 
         #@membership = Membership.find(1)
         #puts @clubMembership
@@ -67,9 +70,7 @@ class ClubsController < ApplicationController
         #  puts "error clubuser"
         #end
       else
-        flash[:error] = "Ooooppss, something went wrong!"
-        redirect_to '/clubs/add'
-        puts "error club"
+        redirect_to '/clubs/add', :danger => "Ooooppss, something went wrong!"
       end
     end
   end
