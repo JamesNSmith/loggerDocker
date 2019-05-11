@@ -1,6 +1,6 @@
 class ClubsController < ApplicationController
   before_action :require_user
-  before_action :require_club, only: :show
+  before_action :require_club, only: [:show, :profile]
 
   def index
     case request.method_symbol

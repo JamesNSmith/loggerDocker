@@ -10,8 +10,7 @@
         <td>Name</td>
         <td>Username</td>
         <td>Email</td>
-        
-        
+        <td>Email Confirmed</td>
         <td>User Type</td>
         </tr>
       </thead>
@@ -21,8 +20,20 @@
       <td><p><%= user.id %></p></td>
       <td><p><%= user.first_name %> <%= user.last_name %></p></td>
       <td><p><%= user.username %></p></td> 
-  	  <td><p><%= user.email %></p></td> 
-  		<td><p><%= user.utype %></p></td> 
+  	  <td><p><%= user.email %></p></td>
+
+      <td>
+        <% if user.email_confirmed %>
+          <p><%= user.email_confirmed.to_s.capitalize %></p>
+        <% else %>
+          <%= form_for(:user, url: '/users/send_registration_confirmation') do |f| %> 
+          <%= f.hidden_field :id, value: user.id %>
+          <%= f.submit "Send", class: "btn" %>
+        <% end %>
+        <% end %>
+      </td>  
+  		
+      <td><p><%= user.utype %></p></td> 
 
       <td>
       <%= form_for(:user, url: '/users') do |f| %> 

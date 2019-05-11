@@ -1,4 +1,7 @@
 class UsersController < ApplicationController
+  before_action :require_user, only: :profile
+  #before_action :require_admin, only: :index
+
 	def index
     case request.method_symbol
     when :get
@@ -6,12 +9,12 @@ class UsersController < ApplicationController
     when :post
       @user = User.find_by_id(params[:user][:id]) 
       if @user
-        session[:user_id] = @user.id
+        set_user(@user)
         @clubs = @user.clubs
         if @clubs[0]
-          session[:club_id] = @clubs[0].id   #----------dodgy---------------
+          set_club(@clubs[0])   #----------dodgy---------------
         else
-          session[:club_id] = nil
+          end_club
         end
         redirect_to '/' 
       end
@@ -40,10 +43,14 @@ class UsersController < ApplicationController
     end
   end
 
+  def send_registration_confirmation
+    @user = User.find(params[:user][:id])
+    UserMailer.registration_confirmation(@user).deliver
+    redirect_to '/users', :info => 'Email Sent'
+  end
+
   def profile
     @user = current_user
-    puts('user')
-    puts(@user)
   end
   
   private

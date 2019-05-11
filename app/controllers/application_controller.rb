@@ -14,11 +14,25 @@ class ApplicationController < ActionController::Base
   end 
 
   def current_user 
-  	@current_user ||= User.find_by(auth_token: session[:user_auth]) if session[:user_auth] 
+    begin 
+      @current_user ||= User.find_by(auth_token: session[:user_auth]) if session[:user_auth]
+    rescue ActiveRecord::RecordNotFound => e
+      false
+    end 
   end
   
   def require_user 
-  	redirect_to '/login', :warning => 'User Required' unless current_user 
+  	redirect_to '/login?url=' + request.original_url, :warning => 'User Required'  unless current_user 
+  end
+
+  def require_admin
+    begin 
+      if current_user.utype != 'webadmin'
+        redirect_to '/', :warning => 'Website Admin Required' 
+      end
+    rescue NoMethodError => e
+      require_user
+    end
   end
 
   def end_user
@@ -52,7 +66,7 @@ class ApplicationController < ActionController::Base
   def record_not_found
     session[:user_auth] = nil
     session[:club_auth] = nil
-    redirect_to '/login', :danger => 'RECORD NOT FOUND'# Assuming you have a template named 'record_not_found'
+    redirect_to '/', :danger => 'RECORD NOT FOUND'
   end
 
   

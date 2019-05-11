@@ -6,6 +6,7 @@ Rails.application.routes.draw do
   match '/users', to: 'users#index', via: [:get, :post]
   match '/users/signup', to: 'users#new', via: [:get, :post]
   match '/users/profile', to: 'users#profile', via: [:get]
+  match '/users/send_registration_confirmation', to: 'users#send_registration_confirmation', via: [:post]
 
   match '/clubs', to: 'clubs#index', via: [:get, :post]
   match '/clubs/add', to: 'clubs#new', via: [:get, :post]
@@ -25,7 +26,7 @@ Rails.application.routes.draw do
 
   match '/club_link/update', to: 'club_link#update', via: :post #????????
 
-  match '/demologger', to: 'flights#demoLogger', via: :get
+  match '/demologger', to: 'logger#demoLogger', via: :get
 
   get '/login' => 'sessions#new'
   post '/login' => 'sessions#create'
