@@ -69,31 +69,36 @@ class DropdownGroup extends React.Component {
   constructor(props){
     super(props)
 
+    this.addProps = this.addProps.bind(this);
+    this.update = this.update.bind(this);
+
     this.menuName = this.props.menuName
     this.menuData = JSON.parse(JSON.stringify(this.props.menuData))
 
-    this.addColumn = this.addColumn.bind(this);
-    this.addValue = this.addValue.bind(this);
-    this.addFilter = this.addFilter.bind(this);
-    this.update = this.update.bind(this);
+    this.children = []
+    this.filters = []
+    this.change = []
 
     this.state = {
       menuData:this.props.menuData,
-      columns:[],
-      values:[],
-      filters:[]
+      columns:[]
     }
   }
 
-  //Utils -------------------------------------
-  updateMenuData(){
-    console.log('updateMenuData')
+  //Foreign Functions 
+  update(valueColumnNum,value){
     var menuData = []
     
     for(var menuNum in this.menuData){
       var count = 0
       for(var columnNum in this.state.columns){
-        if(this.state.filters[columnNum](this.menuData[menuNum][this.state.columns[columnNum]],this.state.values[columnNum])){
+        if(columnNum == valueColumnNum){
+          var filterValue = value
+        } else {
+          var filterValue = this.children[columnNum].props.value
+        }
+        
+        if(this.filters[columnNum](this.menuData[menuNum][this.state.columns[columnNum]],filterValue)){
           count++
         } 
       }
@@ -101,46 +106,37 @@ class DropdownGroup extends React.Component {
       if(count == this.state.columns.length){menuData.push(this.menuData[menuNum])}
     }
 
+    if(menuData.length == 1){
+      console.log('Match')
+    } else if(menuData.length == 0){
+      console.log('No Match')
+    } else {
+      console.log('Multiple Match')
+    }
+
     this.setState({menuData:menuData});
   }
 
-  //Foreign Functions
-  update(columnNum,value){
-    console.log('update')
-    var values = this.state.values
-    values[columnNum] = value
-    this.setState({values:values},this.updateMenuData())
-    
-  }
-
-  addColumn(column){
+  addProps(column,filter,change,child){
     const columns = this.state.columns
     columns.push(column)
     this.setState({columns:columns})
+
+    this.filters.push(filter)
+    this.change.push(change)
+    this.children.push(child)
+
     return (columns.length - 1)
-  }
-
-  addValue(value){
-    const values = this.state.values
-    values.push(value)
-    this.setState({values:values})
-  }
-
-  addFilter(filter){
-    const filters = this.state.filters
-    filters.push(filter)
-    this.setState({filters:filters})
   }
 
   //Handlers
   menuHandler(menuNum) {
-    var values = this.state.values
-
     for(var columnNum in this.state.columns){
-      values[columnNum] = this.menuData[menuNum][this.state.columns[columnNum]]
+      this.change[columnNum]({value:JSON.parse(JSON.stringify(this.menuData[menuNum][this.state.columns[columnNum]]))})
     }
 
-    this.setState({values:values},this.updateMenuData(),this.props.onMenuUpdate(menuNum)) 
+    this.update()
+    this.props.onMenuUpdate(menuNum)
   }
 
   //Builders
@@ -169,11 +165,9 @@ class DropdownGroup extends React.Component {
 
     const children = React.Children.map(this.props.children, child => {
       return React.cloneElement(child, {
-          values:this.state.values,
-          setColumn: this.addColumn,
-          setValue: this.addValue,
-          setFilter: this.addFilter,
+          setProps: this.addProps,
           update: this.update
+          
         });
     });
     
@@ -200,22 +194,18 @@ class DropdownBox extends React.Component {
     this.column = this.props.column
     this.placehold = this.props.placeholder
 
-    this.filter = this.props.filter
     this.update = this.props.update
 
     this.changeHandler = this.changeHandler.bind(this);
 
-    this.columnNum = this.props.setColumn(this.column)
-    this.props.setValue(this.props.value)
-    this.props.setFilter(this.filter)
+    this.columnNum = this.props.setProps(this.column,this.props.filter,this.props.onChange,this)
 
   }
 
   changeHandler(event){
-    console.log('change')
     const {name,value} = event.target
-    this.update(this.columnNum,value)
     this.props.onChange({name:name,value:value})
+    this.update(this.columnNum,value)
   }
 
   render(){
@@ -223,7 +213,7 @@ class DropdownBox extends React.Component {
     return (
         <li>
           <Dropdown.Toggle as={CustomToggle} id="dropdown-custom-components">
-            <Form.Control autoComplete="new-password" placeholder={this.placehold} name={this.column} onChange={this.changeHandler}  value={this.props.values[this.columnNum]}/>
+            <Form.Control autoComplete="new-password" placeholder={this.props.placeholder} name={this.props.column} onChange={this.changeHandler}  value={this.props.value}/>
           </Dropdown.Toggle>
         </li>
       );
@@ -243,8 +233,8 @@ class Logger extends React.Component {
     this.flightController = window.flightController
 
     if(window.mode == 'demo'){
-      this.writeUser = {username:'Demo User'}
-      this.club = {name:'Demo Club'}
+      this.writeUser = {id:0,username:'Demo User'}
+      this.club = {id:0,name:'Demo Club'}
       this.memberships = demoMemberships
       this.totalClubUsers = demoClubUsers
       this.totalAircrafts = demoAircrafts
@@ -285,6 +275,8 @@ class Logger extends React.Component {
       soaringFee:'',
       launchTime:this.timeObj,//time
       landTime:this.timeObj,
+      soaringTotal:'',
+      total:''
       //notes:''
     }
 

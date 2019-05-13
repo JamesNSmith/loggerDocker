@@ -253,6 +253,9 @@ class TableLog extends React.Component {
 			
 		}
 
+		console.log('tableData')
+		console.log(tableData)
+
 		this.setState({tableData:tableData},console.log('table ready'));
 	}
 
@@ -586,8 +589,8 @@ class TableLog extends React.Component {
 				<li>{this.currencyFormat(data['soaringTotal'])}</li>
 				</ul></td>
 			<td><ul className = "td">
-				<li>{this.currencyFormat(data['total'])}</li>
 				<li>{this.capitaliseFormat(data['payee'])}</li>
+				<li>{this.currencyFormat(data['total'])}</li>
 				</ul></td>
 			<td>
 				{buttons()}
@@ -601,11 +604,14 @@ class TableLog extends React.Component {
 		var keys = Object.keys(tableData)
 		keys.sort((a, b) => b - a)
 
+		
 		for(var key in keys){
 			var row = this.row(tableData[keys[key]])
 			rows.push(row)
 		}
+		
 		rows.push(this.row())
+
 
 		return (
 			<tbody key="t1"id="tableBody">
