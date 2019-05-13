@@ -10,6 +10,348 @@ import InputGroup from 'react-bootstrap/InputGroup'
 import Database from '../utilities/indexedDB'
 import FlightController from '../utilities/flightController'
 
+class Buttons extends React.Component {
+	constructor(props){
+		super(props);
+
+		//this.data
+		this.indexNumber = this.props.indexNumber
+		//this.editTimeHandler
+		///this.editAllHandler
+		//this.deleteHandler
+		
+	}
+
+	scrollLogger(){
+  		window.scroll({
+  			top: 150,
+  			left: 0,
+  			behavior: 'smooth'
+		});
+  	}
+
+	editTimeHandler(e){
+		console.log('editTimeHandler')
+		console.log(e)
+
+		this.props.editTimeHandler(this.indexNumber,[['status','editTime']])
+		//[['launchTime',[['status','']]],['landTime',[['status','']]]]
+	}
+
+	editAllHandler(e){
+		console.log('editAllHandler')
+		console.log(e)
+		this.scrollLogger()
+		
+		this.props.editAllHandler(this.indexNumber,[['status','editAll']],data)
+		//this.deleteRecord(data['indexNumber'])
+	}
+
+	render(){
+		const returnElements = []
+			
+		var editTimes = false
+		var deleteBu = false
+		var editAll = false
+		var goLogger = false
+
+		switch(data['status']){
+			case 'editTime':
+				deleteBu = true
+				editAll = true
+				break;
+			case 'editAll':
+				editTimes = false
+				deleteBu = false
+				editAll = false
+				goLogger = true
+				break;
+			case '':
+				editTimes = true
+				deleteBu = true
+				editAll = true
+				break;
+		}
+
+		var totalEditAll = this.checkForStatus('editAll') //Move to body function ??
+
+		if(editTimes){
+			returnElements.push(<Button key="editTimes" variant="outline-info" onClick={this.editTimeHandler}>Edit Times</Button>)
+		}
+		if(deleteBu){
+			returnElements.push(<Button key="delete" variant="outline-danger" onClick={(e) => {this.props.deleteHandler(indexNumber)}} >Delete</Button>)
+		}
+		if(editAll && !totalEditAll){
+			returnElements.push(<Button key="editAll" variant="outline-info" onClick={this.editAllHandler}>Edit All</Button>)
+		}
+		if(goLogger){
+			returnElements.push(<Button key="goLogger" variant="outline-info" onClick={this.scrollLogger}>Data in logger</Button>)
+		}
+
+		return (
+			<ButtonGroup vertical>
+				{returnElements}
+			</ButtonGroup>
+		);
+	}
+}
+
+//timeInput(index,name,mesg,time,type,btnImagePath){
+
+//this.timeInput(data['indexNumber'],'launchTime','Launch Time',data['launchTime']['formatted'],'r',launchClock)
+
+class TimeForm extends React.Component { 
+	constructor(props){
+		super(props);
+	}
+
+	render(){
+		if(this.props.type == 'left'){
+			var placeholder = this.props.placeholder + ' - 24(hh:mm)          '
+		} else if(this.type == 'right'){
+			var placeholder = '          ' + this.props.placeholder + ' - 24(hh:mm)'
+		} else {
+			var placeholder = this.props.placeholder + ' - 24(hh:mm)'
+		}
+		return(
+			<FormControl
+				key={'time' + this.props.type + this.props.index}
+     			placeholder={placeholder} 
+      			aria-label={this.props.name}
+      			aria-describedby={this.props.name}
+      			autoComplete="new-password"
+      			maxLength={5}
+      			onChange={this.props.timeTextHandler}
+      			name={this.props.name}
+      			id={this.props.index}
+      			value={this.props.time['input']}
+    		/>
+    	);
+    }
+}
+
+class TimeButton extends React.Component { 
+	constructor(props){
+		super(props);
+	}
+
+	render(){	
+		return(
+      		<Button 
+      			key={'btn' + this.props.type + this.props.index}
+      			variant="outline-secondary" 
+      			onClick={(e) => {this.props.onButtonClick(this.props.index,this.props.name)}}
+      			>
+      			<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24"><path d={this.props.btnImagePath}/></svg>
+      		</Button>
+    	);
+	}
+}
+
+class TimeInput extends React.Component {
+	constructor(props){
+		super(props);
+
+		this.index = this.props.index
+		this.name = this.props.name
+		this.placeholder = this.props.placeholder
+		this.time = this.props.time
+		this.type = this.props.type
+		this.status = this.props.status
+		//this.btnImagePath
+
+		//this.onFormChange //????
+		//this.onButtonClick
+
+
+		//this.data??
+		console.log('this.status')
+		console.log(this.props.status)
+
+		console.log(this.time)
+
+		const launchClock = 'M13 12l-.688-4h-.609l-.703 4c-.596.347-1 .984-1 1.723 0 1.104.896 2 2 2s2-.896 2-2c0-.739-.404-1.376-1-1.723zm-1-8c-5.522 0-10 4.477-10 10s4.478 10 10 10 10-4.477 10-10-4.478-10-10-10zm0 18c-4.411 0-8-3.589-8-8s3.589-8 8-8 8 3.589 8 8-3.589 8-8 8zm-2-19.819v-2.181h4v2.181c-1.438-.243-2.592-.238-4 0zm9.179 2.226l1.407-1.407 1.414 1.414-1.321 1.321c-.462-.484-.964-.926-1.5-1.328z'
+		const landClock = 'M22 14c0 5.523-4.478 10-10 10s-10-4.477-10-10 4.478-10 10-10 10 4.477 10 10zm-2 0c0-4.411-3.589-8-8-8s-8 3.589-8 8 3.589 8 8 8 8-3.589 8-8zm-6-11.819v-2.181h-4v2.181c1.408-.238 2.562-.243 4 0zm6.679 3.554l1.321-1.321-1.414-1.414-1.407 1.407c.536.402 1.038.844 1.5 1.328zm-8.679 2.265v6h6c0-3.309-2.691-6-6-6z'
+
+		if(this.name == 'launchTime'){
+			this.btnImagePath = launchClock
+		} else {
+			this.btnImagePath = landClock
+		}
+	
+	}
+
+	timeFormat(time, separator = ':'){
+		if(time == ''){
+			return ''
+		}
+
+		const timeDate = new Date(time);
+		var hours = timeDate.getHours()
+		var minutes = timeDate.getMinutes()
+
+		if(minutes < 10){
+			minutes = "0" + minutes;
+		}
+
+		return (hours + separator + minutes);
+	}
+	
+	render(){
+		
+		var returnHTML = []
+
+		if(this.type == 'left'){
+			returnHTML.push(<InputGroup.Prepend key={'btninp' + this.type + this.index}>{this.button}</InputGroup.Prepend>)
+			returnHTML.push(this.form)
+		} else { 
+			returnHTML.push(<TimeForm index={this.props.index} name={this.props.name} type={this.props.type} placeholder={this.props.placeholder} time={this.props.time} timeTextHandler={this.props.timeTextHandler}/>)
+			returnHTML.push(<InputGroup.Append key={'btninp' + this.type + this.index}>{<TimeButton index={this.props.index} name={this.props.name} type={this.props.type} btnImagePath={this.btnImagePath} onButtonClick={this.props.onButtonClick}/>}</InputGroup.Append>) 
+		}
+
+		if(this.props.status == 'editTime'){ //this.state.tableData[index]['launchTime']['status'] == 'indexed' && this.state.tableData[index]['landTime']['status'] == 'indexed' &&
+			return(	
+				<InputGroup className="mb-3">
+					{returnHTML}
+				</InputGroup>	
+  			);
+
+			return(
+  				<ul className = "td"><li>{this.timeFormat(this.time['formatted'],' : ')}</li></ul>
+  			);
+
+		} else {
+  			return(
+  				<ul className = "td"><li>{this.timeFormat(this.time['formatted'],' : ')}</li></ul>
+  			);
+		}
+		
+	}
+}
+
+class Row extends React.Component {
+	constructor(props){
+		super(props);
+
+		console.log('row')
+		
+		
+	}
+
+	//formatters -------------------------------
+	currencyFormat(value){
+		if(value.length == 0){
+			return value
+		}
+
+		value = value.toString()
+		var figure = '£'
+	
+		var dpCount = 0
+		for(var char in value){
+			figure = figure + value[char]
+
+			if(value[char] == '.' || dpCount > 0){
+				dpCount++
+			}
+
+			if(dpCount > 2){
+				break
+			}
+		}
+
+		if(dpCount == 0){
+			figure = figure + '.00'
+		} else if(dpCount == 2){
+			figure = figure + '0'
+		}
+
+		return figure
+	}
+
+	capitaliseFormat(word){
+		return word.charAt(0).toUpperCase() + word.slice(1)
+	}
+
+	render(){
+		var editHide = () => {
+			if(this.props.data['status'] == 'editTime'){
+	 			return " hideElement ";
+	 		} else {
+	 			return " showElement ";
+	 		}
+		}
+
+		console.log('renders')
+		console.log(this.props.data)
+
+		if(!this.props.data){
+  			return (<tr key = "last"><td colSpan="100%" height="60"></td></tr>)
+  			this.rowId = "table_row_end"
+		} else {
+			this.rowId = "table_row" + this.props.data['indexNumber']
+			return (
+				<tr key = {this.props.data['indexNumber']} id={"tr" + this.props.data['indexNumber']}>
+					<td><ul className = "td">
+						<li>{this.props.data['indexNumber']}</li>
+						<li>{this.props.data['flightNumber']}</li>
+						</ul></td>
+					<td><ul className = "td">
+						<li>{this.props.data['aircraft']['registration']}</li>
+						<li>{this.props.data['aircraft']['acName']}</li>
+						</ul></td>
+					<td><ul className = "td">
+						<li>{this.props.data['p1']['username']}</li>
+						<li>{this.props.data['p1']['fName']}</li>
+						<li>{this.props.data['p1']['lName']}</li>
+						</ul></td>
+					<td><ul className = "td">
+						<li>{this.props.data['p2']['username']}</li>
+						<li>{this.props.data['p2']['fName']}</li>
+						<li>{this.props.data['p2']['lName']}</li>
+						</ul></td>
+					<td style={{width:"300px"}}>
+						{this.props.timeOne}
+						{this.props.timeOne}
+						<ul className = "td"><li className = {editHide()}>{this.props.data['flightTime']}</li>
+						</ul></td>
+					<td><ul className = "td">
+						<li>{this.currencyFormat(this.props.data['launchFee'])}</li>
+						<li>{this.currencyFormat(this.props.data['soaringFee'])}</li>
+						<li>{this.currencyFormat(this.props.data['soaringTotal'])}</li>
+						</ul></td>
+					<td><ul className = "td">
+						<li>{this.capitaliseFormat(this.props.data['payee'])}</li>
+						<li>{this.currencyFormat(this.props.data['total'])}</li>
+						</ul></td>
+				</tr>
+			);
+		}
+
+
+		
+		
+		
+
+		//
+		/*
+			
+			
+			this.props.timeOne
+			this.props.timeTwo
+			
+	
+
+			/*
+			
+			<td>
+				{/*this.props.buttons}
+				</td>
+			</tr>
+		);*/
+	}
+}
+
 
 
 class TableLog extends React.Component {
@@ -156,13 +498,7 @@ class TableLog extends React.Component {
 		});
   	}
 
-  	scrollLogger(){
-  		window.scroll({
-  			top: 150,
-  			left: 0,
-  			behavior: 'smooth'
-		});
-  	}
+  	
 
   	checkForStatus(status){
   		var statusFound = false
@@ -399,65 +735,6 @@ class TableLog extends React.Component {
 	}
 
 //constructors ------------------------------
-	timeInput(index,name,mesg,time,type,btnImagePath){
-		var returnHTML = []
-		var buttonHandler = (event) =>{
-			this.timeButtonHandler(index,name)
-		}
-
-		if(type == 'left'){
-			var placeholder = mesg + ' - 24(hh:mm)          '
-		} else if(type == 'right'){
-			var placeholder = '          ' + mesg + ' - 24(hh:mm)'
-		} else {
-			var placeholder = mesg + ' - 24(hh:mm)'
-		}
-
-		var form = (<FormControl
-						key={'time' + type + index}
-     			  		placeholder={placeholder} 
-      			  		aria-label={name}
-      			  		aria-describedby={name}
-      			  		autoComplete="new-password"
-      			  		maxLength={5}
-      			  		onChange={this.timeTextHandler}
-      			  		name={name}
-      			  		id={index}
-      			  		value={this.state.tableData[index][name]['input']}
-    			/>);
-		var button = (
-      			  	<Button 
-      			  		key={'btn' + type + index}
-      			  		variant="outline-secondary" 
-      			  		onClick={buttonHandler}
-      			  	>
-      			  	<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24"><path d={btnImagePath}/></svg>
-      			  	</Button>
-    				);
-
-		if(type == 'left'){
-			returnHTML.push(<InputGroup.Prepend key={'btninp' + type + index}>{button}</InputGroup.Prepend>)
-			returnHTML.push(form)
-		} else { 
-			returnHTML.push(form)
-			returnHTML.push(<InputGroup.Append key={'btninp' + type + index}>{button}</InputGroup.Append>) 
-		}
-
-		if(this.state.tableData[index]['status'] == 'editTime'){ //this.state.tableData[index]['launchTime']['status'] == 'indexed' && this.state.tableData[index]['landTime']['status'] == 'indexed' &&
-			return(	
-				<InputGroup className="mb-3">
-					{returnHTML}
-				</InputGroup>	
-  			);
-
-		} else {
-  			return(
-  				<ul className = "td"><li>{this.timeFormat(time,' : ')}</li></ul>
-  			);
-		}
-		
-	}
-
 	/*
 	hideOn(condition){ // hmmmmmmmmmmmmmm
 	 	if(condition()){
@@ -467,137 +744,7 @@ class TableLog extends React.Component {
 	 	}
 
 	} */
-
-	row(data){
-		if(!data){
-  			return (<tr key = "last"><td colSpan="100%" height="60"></td></tr>)
-  			var rowId = "table_row_end"
-		} else {
-			var rowId = "table_row" + data['indexNumber']
-		}
-
-		//handlers ----------------------------
-		var  editTimeHandler = (e) => {
-			console.log('editTimeHandler')
-			console.log(e)
-			console.log(data)
-			this.setData(data['indexNumber'],[['status','editTime']])//[['launchTime',[['status','']]],['landTime',[['status','']]]]
-		}
-
-		var editAllHandler = (e) => {
-			console.log('editAllHandler')
-			console.log(e)
-			console.log(data)
-			this.setData(data['indexNumber'],[['status','editAll']])
-			this.scrollLogger()
-			window.flightController.tableEditRecord(data)
-			//this.deleteRecord(data['indexNumber'])
-		}
-
-		//helpers ----------------------------------
-		var editHide = () => {
-			if(data['status'] == 'editTime'){
-	 			return " hideElement ";
-	 		} else {
-	 			return " showElement ";
-	 		}
-		}
-
-		//constructors -----------------------------
-		var buttons = () => {
-			const returnElements = []
-			
-			var editTimes = false
-			var deleteBu = false
-			var editAll = false
-			var goLogger = false
-
-			switch(data['status']){
-				case 'editTime':
-					deleteBu = true
-					editAll = true
-					break;
-				case 'editAll':
-					editTimes = false
-					deleteBu = false
-					editAll = false
-					goLogger = true
-					break;
-				case '':
-					editTimes = true
-					deleteBu = true
-					editAll = true
-					break;
-
-			}
-
-			var totalEditAll = this.checkForStatus('editAll') //Move to body function ??
-
-			if(editTimes){
-				returnElements.push(<Button key="editTimes" variant="outline-info" onClick={editTimeHandler}>Edit Times</Button>)
-			}
-			if(deleteBu){
-				returnElements.push(<Button key="delete" variant="outline-danger" onClick={() => this.deleteRecord(data['indexNumber'])} >Delete</Button>)
-			}
-			if(editAll && !totalEditAll){
-				returnElements.push(<Button key="editAll" variant="outline-info" onClick={editAllHandler}>Edit All</Button>)
-			}
-			if(goLogger){
-				returnElements.push(<Button key="goLogger" variant="outline-info" onClick={this.scrollLogger}>Data in logger</Button>)
-			}
-
-			return (
-				<ButtonGroup vertical>
-					{returnElements}
-				</ButtonGroup>
-			);
-		}
-
-		
-
-		const launchClock = 'M13 12l-.688-4h-.609l-.703 4c-.596.347-1 .984-1 1.723 0 1.104.896 2 2 2s2-.896 2-2c0-.739-.404-1.376-1-1.723zm-1-8c-5.522 0-10 4.477-10 10s4.478 10 10 10 10-4.477 10-10-4.478-10-10-10zm0 18c-4.411 0-8-3.589-8-8s3.589-8 8-8 8 3.589 8 8-3.589 8-8 8zm-2-19.819v-2.181h4v2.181c-1.438-.243-2.592-.238-4 0zm9.179 2.226l1.407-1.407 1.414 1.414-1.321 1.321c-.462-.484-.964-.926-1.5-1.328z'
-		const landClock = 'M22 14c0 5.523-4.478 10-10 10s-10-4.477-10-10 4.478-10 10-10 10 4.477 10 10zm-2 0c0-4.411-3.589-8-8-8s-8 3.589-8 8 3.589 8 8 8 8-3.589 8-8zm-6-11.819v-2.181h-4v2.181c1.408-.238 2.562-.243 4 0zm6.679 3.554l1.321-1.321-1.414-1.414-1.407 1.407c.536.402 1.038.844 1.5 1.328zm-8.679 2.265v6h6c0-3.309-2.691-6-6-6z'
-
-		return(
-			<tr key = {data['indexNumber']} id={"tr" + data['indexNumber']}>
-			<td><ul className = "td">
-				<li>{data['indexNumber']}</li>
-				<li>{data['flightNumber']}</li>
-				</ul></td>
-			<td><ul className = "td">
-				<li>{data['aircraft']['registration']}</li>
-				<li>{data['aircraft']['acName']}</li>
-				</ul></td>
-			<td><ul className = "td">
-				<li>{data['p1']['username']}</li>
-				<li>{data['p1']['fName']}</li>
-				<li>{data['p1']['lName']}</li>
-				</ul></td>
-			<td><ul className = "td">
-				<li>{data['p2']['username']}</li>
-				<li>{data['p2']['fName']}</li>
-				<li>{data['p2']['lName']}</li>
-				</ul></td>
-			<td style={{width:"300px"}}>
-				{this.timeInput(data['indexNumber'],'launchTime','Launch Time',data['launchTime']['formatted'],'r',launchClock)}
-				{this.timeInput(data['indexNumber'],'landTime','Land Time',data['landTime']['formatted'],'r',landClock)}
-				<ul className = "td"><li className = {editHide()}>{data['flightTime']}</li>
-				</ul></td>
-			<td><ul className = "td">
-				<li>{this.currencyFormat(data['launchFee'])}</li>
-				<li>{this.currencyFormat(data['soaringFee'])}</li>
-				<li>{this.currencyFormat(data['soaringTotal'])}</li>
-				</ul></td>
-			<td><ul className = "td">
-				<li>{this.capitaliseFormat(data['payee'])}</li>
-				<li>{this.currencyFormat(data['total'])}</li>
-				</ul></td>
-			<td>
-				{buttons()}
-				</td>
-			</tr>
-		);
-	}
+	//onFormChange={this.timeTextHandler} onButtonClick={(index,name) => {this.timeButtonHandler(index,name)}}		
 
 	body(tableData){
 		const rows = [];
@@ -606,16 +753,60 @@ class TableLog extends React.Component {
 
 		
 		for(var key in keys){
-			var row = this.row(tableData[keys[key]])
-			rows.push(row)
-		}
-		
-		rows.push(this.row())
+			console.log(key)
+			var data = tableData[keys[key]]
+			var row = <Row
+				key={'row' + keys[key]} 
+				data={data} 
+				timeOne={<TimeInput 
+					index={data['indexNumber']} 
+					name='launchTime' 
+					placeholder='Launch Time' 
+					time={data['launchTime']} 
+					type = 'r'
+					status = {data['status']} 
+					/>} 
 
+				timeTwo={<TimeInput 
+					index={data['indexNumber']} 
+					name='landTime' 
+					placeholder='Land Time' 
+					time={data['landTime']} 
+					type = 'r' 
+					status = {data['status']}
+					/>} 
+				/*	
+				buttons={<Buttons 
+					indexNumber={data['indexNumber']} 
+					editTimeHandler={(index,statusData) => {this.setData(index,statusData)}} 
+					editAllHandler={(index,statusData) => {this.setData(index,statusData,window.flightController.tableEditRecord(data))}} 
+					deleteHandler={(index) => {this.deleteRecord(index)}} 
+					/>}*/
+				/>
+			console.log(data['status'])
+			rows.push(row);
+			/*var time = <TimeInput 
+					index={data['indexNumber']} 
+					name='launchTime' 
+					placeholder='Launch Time' 
+					time={data['launchTime']} 
+					type = 'r' 
+					
+					/>
+			rows.push(time);*/
+		}
+		//<Row key='row1' data={tableData[1]}/>
+
+
+		var data = tableData[1]
+		
+		
+		console.log('tableData')
+		console.log(tableData)
 
 		return (
 			<tbody key="t1"id="tableBody">
-			{rows}
+				{rows}
 			</tbody>
 		);
 	}
