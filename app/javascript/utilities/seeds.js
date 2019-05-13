@@ -183,8 +183,8 @@ export const demoFlights = [{
       }]
 
 export const demoMemberships = {
-      0:{name:'Full', launchFee:7.00, soaringFee:0.3,aerotowStandardFee: 20, aerotowUnitFee: 5},
-      1:{name:'Junior', launchFee:4.50, soaringFee:0.15,aerotowStandardFee: 20, aerotowUnitFee: 5}
+      0:{membershipId:0,name:'Full', launchFee:7.00, soaringFee:0.3,aerotowStandardFee: 20, aerotowUnitFee: 5},
+      1:{membershipId:1,name:'Junior', launchFee:4.50, soaringFee:0.15,aerotowStandardFee: 20, aerotowUnitFee: 5}
 }
 
 export const demoClubUsers = {

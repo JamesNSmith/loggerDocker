@@ -85,124 +85,83 @@ class DropdownGroup extends React.Component {
     }
   }
 
-  defaultMenuElement(items){
-    var lst = []
-    for(var key in items){
-      lst.push([key,items[key]])
-    }
-    return lst
-  }
-
-//dropdownInput(row,column,placeHolder,menuName,totalDropdownRows,columnNames,filterElement,menuElement = this.defaultMenuElement){
-    //Utils -------------------------------------
-
-  update(){
-    var data = []
-    //var columns = {}
-
-    //for(var key in columnNames){
-      //columns[columnNames[key]] = this.state.data[row][columnNames[key]]
-    //}
-    console.log('update')
-    console.log(this.menuData)
-    console.log(this.state.columns)
-
+  //Utils -------------------------------------
+  updateMenuData(){
+    console.log('updateMenuData')
+    var menuData = []
+    
     for(var menuNum in this.menuData){
       var count = 0
       for(var columnNum in this.state.columns){
-        console.log(this.menuData[menuNum][this.state.columns[columnNum]])
-        if(this.state.filters[columnNum](this.menuData[menuNum][this.state.columns[columnNum]],this.state.values[columnNum])){count++}
+        if(this.state.filters[columnNum](this.menuData[menuNum][this.state.columns[columnNum]],this.state.values[columnNum])){
+          count++
+        } 
       }
 
-      if(count == 0){data.push(this.menuData[menuNum])}
+      if(count == this.state.columns.length){menuData.push(this.menuData[menuNum])}
     }
 
-    console.log('Data: ',data)
-    this.setState({menuData:data});
+    this.setState({menuData:menuData});
   }
 
-  menuUpdate(text,row,column){
-    var recordList = this.state[menuName]
-
-    console.log('menuUpdate')
-    console.log(menuName)
-    console.log(recordList)
-
-    if(recordList.length == 1){
-
-      var record = recordList[0]
-      var lst = menuElement(record)
-
-      this.setDataRow(row,lst)
-
-    } else {
-      this.setDataRow(row,[[column,text]])
-    }
+  //Foreign Functions
+  update(columnNum,value){
+    console.log('update')
+    var values = this.state.values
+    values[columnNum] = value
+    this.setState({values:values},this.updateMenuData())
     
   }
 
-    //Handlers ------------------------------
-
-  
-
-  menuHandler(event,row,column) {
-    var text = event.target.innerHTML
-
-    console.log('menuHandler')
-
-    var menuQueue = new Promise((resolve,reject) => {this.setDataRow(row,[[column,text]],resolve)})
-    .then(()=>{return new Promise((resolve,reject) => {filter(resolve,reject)})})
-    .then(()=>{menuUpdate(text,row,column)})
-    .catch((error) => {console.log('menuQueue failed:');console.log(error)})  
-  }
-
   addColumn(column){
-    console.log('column')
-    console.log(column)
     const columns = this.state.columns
     columns.push(column)
     this.setState({columns:columns})
+    return (columns.length - 1)
   }
 
   addValue(value){
-    console.log('value')
-    console.log(value)
     const values = this.state.values
     values.push(value)
     this.setState({values:values})
   }
 
   addFilter(filter){
-    console.log('filter')
-    console.log(filter)
     const filters = this.state.filters
     filters.push(filter)
     this.setState({filters:filters})
   }
 
-  //Constructors
+  //Handlers
+  menuHandler(menuNum) {
+    var values = this.state.values
+
+    for(var columnNum in this.state.columns){
+      values[columnNum] = this.menuData[menuNum][this.state.columns[columnNum]]
+    }
+
+    this.setState({values:values},this.updateMenuData(),this.props.onMenuUpdate(menuNum)) 
+  }
+
+  //Builders
   rows(){
-    //var dropdownRows = this.state[menuName]
+    const dropRow = (menuNum) => {
+      return <Dropdown.Item key={"DI" + menuNum} eventKey={menuNum} onClick={e => this.menuHandler(menuNum)} >{columnLst}</Dropdown.Item>
+    }
+    
     var columns = this.state.columns
     var menuData = this.state.menuData
 
     var menuLst = []
-   
-    console.log('Drop Rows Start')
-    console.log(this.state.columns)
-    console.log(this.state.menuData)
 
     for(var menuNum in menuData){
       var columnLst = []
       for(var columnNum in columns){
         columnLst.push(menuData[menuNum][columns[columnNum]])
-      }
-      console.log(columnLst)
-      // onClick={e => menuHandler(e,row,column)}
-      menuLst.push(<Dropdown.Item key={"DI" + menuNum} eventKey={menuNum}>{columnLst}</Dropdown.Item>);
+      }  
+      menuLst.push(dropRow(menuNum));
     }
-    console.log('menuLst')
-    console.log(menuLst)
+    
     return menuLst
   }
 
@@ -210,7 +169,7 @@ class DropdownGroup extends React.Component {
 
     const children = React.Children.map(this.props.children, child => {
       return React.cloneElement(child, {
-          //onChange: (e) => this.formHandler(e),
+          values:this.state.values,
           setColumn: this.addColumn,
           setValue: this.addValue,
           setFilter: this.addFilter,
@@ -225,7 +184,7 @@ class DropdownGroup extends React.Component {
         {children}
         </ul>
       </div>
-      <Dropdown.Menu key={"DM"} as={CustomMenu} value={this.menuData}>
+      <Dropdown.Menu key={"DM "+this.menuName} as={CustomMenu} value={this.menuData}>
         {this.rows()}
       </Dropdown.Menu>
       </Dropdown>
@@ -239,33 +198,24 @@ class DropdownBox extends React.Component {
     super(props)
 
     this.column = this.props.column
-    this.placeholder = this.props.placeholder
+    this.placehold = this.props.placeholder
 
     this.filter = this.props.filter
-
     this.update = this.props.update
 
-    this.formHandler = this.formHandler.bind(this);
+    this.changeHandler = this.changeHandler.bind(this);
 
-    this.state = {
-      value:this.props.value
-    }
-
-    this.props.setColumn(this.column)
-    this.props.setValue(this.state.value)
+    this.columnNum = this.props.setColumn(this.column)
+    this.props.setValue(this.props.value)
     this.props.setFilter(this.filter)
-
-    //this.filterElement
 
   }
 
-  formHandler(event){
+  changeHandler(event){
+    console.log('change')
     const {name,value} = event.target
-    console.log(value)
-    var formQueue = new Promise((resolve,reject) => {this.setState({value:value})})
-    .then(this.update())
-    .catch((error) => {console.log('formQueue failed: ');console.log(error)})
-
+    this.update(this.columnNum,value)
+    this.props.onChange({name:name,value:value})
   }
 
   render(){
@@ -273,7 +223,7 @@ class DropdownBox extends React.Component {
     return (
         <li>
           <Dropdown.Toggle as={CustomToggle} id="dropdown-custom-components">
-            <Form.Control autoComplete="new-password" placeholder={this.placeHolder} name={this.column} onChange={this.formHandler}  value={this.state.value}/>
+            <Form.Control autoComplete="new-password" placeholder={this.placehold} name={this.column} onChange={this.changeHandler}  value={this.props.values[this.columnNum]}/>
           </Dropdown.Toggle>
         </li>
       );
@@ -355,7 +305,7 @@ class Logger extends React.Component {
     this.state = stateObj
 	}
 //Calculations
-getAerotowFee(launchFee,unitFee,height){
+  getAerotowFee(launchFee,unitFee,height){
     var figure = parseInt(launchFee) + parseInt(unitFee)*parseInt(height - 2000)/1000
     console.log(figure)
     return figure 
@@ -399,8 +349,10 @@ getAerotowFee(launchFee,unitFee,height){
     this.setState({data:data},successHandler);
   }
 
-  setMembership(membership,user,start=false){
+  setMembership(membership,user,updateGlobal=false){
     console.log('setMembership')
+    console.log('User: ' + user)
+    console.log(membership)
     var data = [
       ['membershipId', membership['membershipId']],
       ['launchFee', membership['launchFee']],
@@ -411,8 +363,8 @@ getAerotowFee(launchFee,unitFee,height){
 
     this.setDataRow(user,data)
 
-    if(!start){
-      console.log('start')
+    if(updateGlobal){
+      console.log('updateGlobal')
       var fees = [
         ['payee', user],
         ['launchFee', membership['launchFee']],
@@ -424,6 +376,30 @@ getAerotowFee(launchFee,unitFee,height){
       this.setData(fees)
 
     }
+  }
+
+  setUser(userId,user) {
+    console.log('setUser')
+    var userObj = this.totalClubUsers[userId]
+    var data = this.state.data
+
+    for(var item in userObj){
+      data[user][item] = userObj[item]
+    }
+
+    this.setState({data:data},this.setMembership(this.memberships[userObj['membershipId']],user,true))
+  }
+
+  setAircraft(id,type) {
+    console.log('setAircraft')
+    var userObj = this.totalAircrafts[id]
+    var data = this.state.data
+
+    for(var item in userObj){
+      data[type][item] = userObj[item]
+    }
+
+    this.setState({data:data})
   }
 
   setPayee(payee){
@@ -444,15 +420,15 @@ getAerotowFee(launchFee,unitFee,height){
 
 //foreign functions -----------------------------
 
-importEditData(importData){
-  var currentData = JSON.parse(JSON.stringify(this.state.data))
+  importEditData(importData){
+    var currentData = JSON.parse(JSON.stringify(this.state.data))
 
-  this.setState({mode:'edit'},console.log(this.state))
-  this.setState({data:importData},console.log(this.state))
-}
+    this.setState({mode:'edit'},console.log(this.state))
+    this.setState({data:importData},console.log(this.state))
+  }
 
 //handlers -----------------------------------
-	handleChange(event){
+	handleChange(event){ //?????
 		const data = this.state.data
 		const {name,value} = event.target
 		data[name] = value
@@ -482,138 +458,31 @@ importEditData(importData){
     );
   }
 
-  defaultMenuElement(items){
-    var lst = []
-    for(var key in items){
-      lst.push([key,items[key]])
-    }
-    return lst
-  }
+  
 
-  dropdownInput(row,column,placeHolder,menuName,totalDropdownRows,columnNames,filterElement,menuElement = this.defaultMenuElement){
-    //Utils -------------------------------------
+  user(user){
 
-    var filter = (success,failure) => {
-      var lst = []
-      var columns = {}
-
-      for(var key in columnNames){
-        columns[columnNames[key]] = this.state.data[row][columnNames[key]]
-      }
-      
-      for(var userKey in totalDropdownRows){
-        var count = 0
-        for(var columnKey in columns){
-          if(filterElement(totalDropdownRows[userKey][columnKey],columns[columnKey])){count++}
-        }
-        if(count == 0){lst.push(totalDropdownRows[userKey])}
-      }
-
-      var data = {}
-      data[menuName] = lst
-      this.setState(data,success);
-    }
-
-    var menuUpdate = (text,row,column) => {
-      var recordList = this.state[menuName]
-
-      console.log('menuUpdate')
-      console.log(menuName)
-      console.log(recordList)
-
-      if(recordList.length == 1){
-
-        var record = recordList[0]
-        var lst = menuElement(record)
-
-        this.setDataRow(row,lst)
-
-      } else {
-        this.setDataRow(row,[[column,text]])
-      }
-    
-    }
-
-    //Handlers ------------------------------
-
-    var formHandler = (event) => {
-      const {name,value} = event.target
-      var queue = new Promise((resolve,reject) => {this.setDataRow(row,[[name,value]],resolve)})
-      .then(() => {return new Promise((resolve,reject) => {filter(resolve,reject)})})
-    }
-
-    var menuHandler = (event,row,column) => {
-      var text = event.target.innerHTML
-
-      console.log('menuHandler')
-
-      var menuQueue = new Promise((resolve,reject) => {this.setDataRow(row,[[column,text]],resolve)})
-      .then(()=>{return new Promise((resolve,reject) => {filter(resolve,reject)})})
-      .then(()=>{menuUpdate(text,row,column)})
-      .catch((error) => {console.log('menuQueue failed:');console.log(error)})
-      
-    }
-
-    //Constructors
-    var dropRows = (row,column) => {
-      var dropdownRows = this.state[menuName]
-      var lst = []
-
-      for(var key in dropdownRows){
-        lst.push(<Dropdown.Item key={"DI" + key} eventKey={key} onClick={e => menuHandler(e,row,column)}>{dropdownRows[key][column]}</Dropdown.Item>);
-      }
-      return lst
-    }
-
-    return (
-      <Dropdown dropupauto="false">
-        <Dropdown.Toggle as={CustomToggle} id="dropdown-custom-components">
-          <Form.Control autoComplete="new-password" placeholder={placeHolder} name={column} onChange={e => formHandler(e)}  value={this.state.data[row][column]}/>
-        </Dropdown.Toggle>
-
-        <Dropdown.Menu key={"DM" + row+column} as={CustomMenu} value={this.state.data[row][column]}>
-          {dropRows(row,column)}
-        </Dropdown.Menu>
-      </Dropdown>
-      );
-  }
-
-  user(title,user){
-    //var columnNames = ['fName','lName']
-    //var menuName = user+'ClubUsers'
-
-    //var filterElement = (searchElement,inputElement) => {
-    //  return !((searchElement.toLowerCase().startsWith(inputElement.toLowerCase()))||(inputElement == ''))
-    //}
-
-    var menuElement = (items) =>{
-      var lst = []
-      for(var key in items){
-        if(key == 'membershipId'){
-          this.setMembership(this.memberships[items['membershipId']],user)
-        } else {
-          lst.push([key,items[key]])
-        }
-      }
-      return lst
+    var boxChange = (event,row,column) => {
+      console.log('boxChange')
+      var data = this.state.data
+      data[row][column] = event.value
+      this.setState({data:data})
     }
 
     return(
 
-
     <Form.Row className="row">
-      <Form.Label><h3>{title}</h3></Form.Label>
+      <Form.Label><h3>{user.charAt(0).toUpperCase() + user.slice(1)}</h3></Form.Label>
 
       <Form.Group className="group" controlId="formGridName" >
-        {/*dropdownInput(row,column,placeHolder,menuName,totalDropdownRows,columnNames,filterElement,menuElement = this.defaultMenuElement)*/}
         <Form.Label>Name</Form.Label>
 
-        <DropdownGroup menuName='p1ClubUsers' menuData={this.totalClubUsers}>
-          <DropdownBox column='fName' placeholder='First Name' value={this.state.data[user]['fName']} 
-            filter={(textOriginal,search) => {return !((textOriginal.toLowerCase().startsWith(search.toLowerCase()))||(search == ''))}}
+        <DropdownGroup menuName={user+'ClubUsers'} menuData={this.totalClubUsers} onMenuUpdate={(menuNum) => {this.setUser(this.totalClubUsers[menuNum]['userId'],user)}}>
+          <DropdownBox column='fName' placeholder='First Name' onChange={(event) => {boxChange(event,user,'fName')}} value={this.state.data[user]['fName']} 
+            filter={(textOriginal,search) => {return ((textOriginal.toLowerCase().startsWith(search.toLowerCase()))||(search == ''))}}
           />
-          <DropdownBox column='lName' placeholder='Last Name' value={this.state.data[user]['lName']}
-            filter={(textOriginal,search) => {return !((textOriginal.toLowerCase().startsWith(search.toLowerCase()))||(search == ''))}}
+          <DropdownBox column='lName' placeholder='Last Name' onChange={(event) => {boxChange(event,user,'lName')}} value={this.state.data[user]['lName']}
+            filter={(textOriginal,search) => {return ((textOriginal.toLowerCase().startsWith(search.toLowerCase()))||(search == ''))}}
           />
         </DropdownGroup>
         
@@ -630,93 +499,84 @@ importEditData(importData){
     );
   }
 
-  aircraftFilterElement(searchElement,inputElement) {
-    if(!((searchElement.toLowerCase().startsWith(inputElement.toLowerCase()))||(inputElement == ''))){
-      if(!searchElement.toLowerCase().slice(3).startsWith(inputElement.toLowerCase())){
-        return true
+  aircraft(type){
+
+    var auxGroup = () =>{
+      if(type == 'aircraft'){
+        return (
+          <Form.Group className="group" controlId="formGridacName">
+            <Form.Label>Launch</Form.Label>
+            <ToggleButtonGroup vertical name="launchType" type="radio" onChange={(event) => this.setData([['launchType',event]])} value={this.state.data['launchType']}>
+              <ToggleButton variant="outline-primary" value={'winch'}>Winch</ToggleButton>
+              <ToggleButton variant="outline-primary" value={'aerotow'}>Aerotow</ToggleButton>
+            </ToggleButtonGroup>
+          </Form.Group>
+        );
+      } else {
+        return (
+          <Form.Group className="group" controlId="formGridacName">
+            <Form.Label>Release Height</Form.Label>
+            <InputGroup className="mb-3">
+              <InputGroup.Prepend>
+                <Button variant="outline-primary" onClick={(e) => handleClick(e,+1000)}>+</Button>
+                <Button variant="outline-primary" onClick={(e) => handleClick(e,-1000)}>-</Button>
+                <Button variant="outline-primary" onClick={(e) => handleClick(e,+1000)}>{this.state.data['releaseHeight']}</Button>
+              </InputGroup.Prepend>
+            </InputGroup>
+          </Form.Group>
+        );
       }
     }
-    return false
-  }
 
-  aircraft(){
-    var columnNames = ['registration','acName']; //
-    var menuName = 'aircrafts';
-    var row = 'aircraft'
+    var boxChange = (event,row,column) => {
+      console.log('boxChange')
+      var data = this.state.data
+      data[row][column] = event.value
+      //data[row]['id'] = ''
+      this.setState({data:data})
+    }
 
-    return (
-      <Form.Row className="row">
-      <Form.Label><h3>Aircraft</h3></Form.Label>
-
-      <Form.Group className="group" controlId="formGridRegistration" >
-        <Form.Label>Registration</Form.Label>
-        {this.dropdownInput(row,'registration',"Registration",menuName,this.totalAircrafts,columnNames,this.aircraftFilterElement)}
-      </Form.Group>
-
-      <Form.Group className="group" controlId="formGridacName">
-        <Form.Label>Name</Form.Label>
-        {this.dropdownInput(row,'acName',"Name",menuName,this.totalAircrafts,columnNames,this.aircraftFilterElement)}
-      </Form.Group>
-
-      <Form.Group className="group" controlId="formGridacName">
-        <Form.Label>Launch</Form.Label>
-        <ToggleButtonGroup vertical name="launchType" type="radio" onChange={(event) => this.setData([['launchType',event]])} value={this.state.data['launchType']}>
-        <ToggleButton variant="outline-primary" value={'winch'}>Winch</ToggleButton>
-        <ToggleButton variant="outline-primary" value={'aerotow'}>Aerotow</ToggleButton>
-        </ToggleButtonGroup>
-      </Form.Group>
-
-      </Form.Row>
-
-    );
-  }
-  
-  tug(){
-    var columnNames = ['registration','acName']; //
-    var menuName = 'tugAircrafts';
-    var row = 'tug'
-
-    var handleClick = (event,figure) => {
-      var height = this.state.data['releaseHeight']
-      var returnHeight = (height + figure)
-      var returnLst = [['releaseHeight',returnHeight]]
-
-      if(returnHeight >= 2000){
-        if(this.state.data['aerotowLaunchFee'] != ''){
-          returnLst[1] = ['aerotowLaunchFee',this.getAerotowFee(this.state.data['aerotowStandardFee'],this.state.data['aerotowUnitFee'],returnHeight)]
+    var status = () => {
+      if(type == 'tug'){
+        if(this.state.data['launchType'] == 'winch'){
+          return "row hideTug"
+        } else { 
+          return "row showTug"
         }
-
-        this.setData(returnLst);
+      } else {
+        return "row"
       }
     }
-    //<FormControl disabled aria-describedby="basic-addon1" value={this.state.data['releaseHeight']}/>
-    return (
-      <Form.Row className={(this.state.data['launchType'] == 'winch') ? "row hideTug" : "row showTug"}>
-      <Form.Label><h3>Tug</h3></Form.Label>
 
-      <Form.Group className="group" controlId="formGridRegistration" >
+    return(
+
+    <Form.Row className={(type == 'tug')?(this.state.data['launchType'] == 'winch') ? "row hideTug" : "row showTug" : "row"}>
+      <Form.Label><h3>{type.charAt(0).toUpperCase() + type.slice(1)}</h3></Form.Label>
+
+      <Form.Group className="group" controlId="formGridName" >
         <Form.Label>Registration</Form.Label>
-        {this.dropdownInput(row,'registration',"Registration",menuName,this.totalAircrafts,columnNames,this.aircraftFilterElement)}
+
+        <DropdownGroup menuName={type} menuData={this.totalAircrafts} onMenuUpdate={(menuNum) => {this.setAircraft(this.totalAircrafts[menuNum]['id'],type)}}>
+          <DropdownBox column='registration' placeholder='Registration' onChange={(event) => {boxChange(event,type,'registration')}} value={this.state.data[type]['registration']} 
+            filter={(textOriginal,search) => {
+              if((textOriginal.toLowerCase().startsWith(search.toLowerCase()))||(search == '')){
+                return true
+              } else if(textOriginal.toLowerCase().slice(3).startsWith(search.toLowerCase())){
+                return true
+              } else {
+                return false
+              }
+            }}/>
+          <DropdownBox column='acName' placeholder='Name' onChange={(event) => {boxChange(event,type,'acName')}} value={this.state.data[type]['acName']} 
+            filter={(textOriginal,search) => {return ((textOriginal.toLowerCase().startsWith(search.toLowerCase()))||(search == ''))}}      
+          />
+        </DropdownGroup>
+        
       </Form.Group>
 
-      <Form.Group className="group" controlId="formGridacName">
-        <Form.Label>Name</Form.Label>
-        {this.dropdownInput(row,'acName',"Name",menuName,this.totalAircrafts,columnNames,this.aircraftFilterElement)}
-      </Form.Group>
+      {auxGroup()}
 
-      <Form.Group className="group" controlId="formGridacName">
-        <Form.Label>Release Height</Form.Label>
-        <InputGroup className="mb-3">
-          <InputGroup.Prepend>
-            <Button variant="outline-primary" onClick={(e) => handleClick(e,+1000)}>+</Button>
-            <Button variant="outline-primary" onClick={(e) => handleClick(e,-1000)}>-</Button>
-            <Button variant="outline-primary" onClick={(e) => handleClick(e,+1000)}>{this.state.data['releaseHeight']}</Button>
-          </InputGroup.Prepend>
-        </InputGroup>
-      </Form.Group>
-
-      </Form.Row>
-
+    </Form.Row>
     );
   }
 
@@ -856,15 +716,15 @@ importEditData(importData){
 
             </Form.Row>
 
-            {/*this.aircraft()*/}
+            {this.aircraft('aircraft')}
 
-            {/*this.tug()*/}
+            {this.aircraft('tug')}
 
-            {this.user('P1','p1')}
+            {this.user('p1')}
 
-            {/*this.user('P2','p2')*/}
+            {this.user('p2')}
 
-            {/*this.fees()*/}
+            {this.fees()}
   
             {this.buttons()}
 
@@ -883,7 +743,8 @@ importEditData(importData){
   }
 
   componentWillUpdate(){
-    //console.log('update')
+    console.log('logger will update')
+    console.log(this.state)
   }
 
   componentWillUnmount(){
