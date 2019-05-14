@@ -15,7 +15,7 @@ class Database {
   constructor(dbName){
     this.checkDatabase = this.checkDatabase.bind(this);
 
-    this.constant_restart = true
+    this.constant_restart = false
     this.dbName = dbName;
     this.version = 1;
     this.count = 0;
