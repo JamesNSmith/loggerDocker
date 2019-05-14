@@ -656,6 +656,7 @@ class Logger extends React.Component {
 
     var handleAdd = (event) => {
       var formData = Object.assign({},this.state.data);
+      formData['date'] = (new Date()).toISOString()
       this.flightController.addFromLogger(floatData(formData,columns))
       
       this.clear()

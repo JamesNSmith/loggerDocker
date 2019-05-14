@@ -6,20 +6,57 @@ import FormControl from 'react-bootstrap/FormControl'
 import Button from 'react-bootstrap/Button'
 import ButtonGroup from 'react-bootstrap/ButtonGroup'
 import InputGroup from 'react-bootstrap/InputGroup'
+import Pagination from 'react-bootstrap/Pagination'
 
 import Database from '../utilities/indexedDB'
 import FlightController from '../utilities/flightController'
 
+class PaginationGroup extends React.Component {
+	constructor(props){
+		super(props)
+
+		this.onClick = this.onClick.bind(this);
+	}
+
+	onClick(e){
+		if((e.target.innerHTML).charCodeAt(0) == 8249|| e.target.name == 'prev'){
+			if(this.props.page > 1){
+				this.props.changePage(this.props.page-1)
+			}
+			
+		} else if((e.target.innerHTML).charCodeAt(0) == 8250|| e.target.name == 'next'){
+			if(this.props.page < this.props.numPages){
+				this.props.changePage(this.props.page+1)
+			}
+		}
+	}
+
+	render(){
+		var items = []
+		var number = 1
+
+		while(number <= this.props.numPages){
+			items.push(
+				<Pagination.Item key={number} active={number == this.props.page} onClick={(e) => {this.props.changePage(e.target.innerHTML[0])}}>
+      				{number}
+    			</Pagination.Item>,
+			);
+			number += 1
+		}
+
+		return(
+			<Pagination>
+				<Pagination.Prev name={'prev'} onClick={this.onClick} />
+				{items}
+				<Pagination.Next name={'next'} onClick={this.onClick} />
+			</Pagination>
+		);
+	}
+}
+
 class Buttons extends React.Component {
 	constructor(props){
 		super(props);
-
-		//this.data
-		this.indexNumber = this.props.indexNumber
-		//this.editTimeHandler
-		///this.editAllHandler
-		//this.deleteHandler
-		
 	}
 
 	scrollLogger(){
@@ -30,23 +67,6 @@ class Buttons extends React.Component {
 		});
   	}
 
-	editTimeHandler(e){
-		console.log('editTimeHandler')
-		console.log(e)
-
-		this.props.editTimeHandler(this.indexNumber,[['status','editTime']])
-		//[['launchTime',[['status','']]],['landTime',[['status','']]]]
-	}
-
-	editAllHandler(e){
-		console.log('editAllHandler')
-		console.log(e)
-		this.scrollLogger()
-		
-		this.props.editAllHandler(this.indexNumber,[['status','editAll']],data)
-		//this.deleteRecord(data['indexNumber'])
-	}
-
 	render(){
 		const returnElements = []
 			
@@ -55,7 +75,7 @@ class Buttons extends React.Component {
 		var editAll = false
 		var goLogger = false
 
-		switch(data['status']){
+		switch(this.props.status){
 			case 'editTime':
 				deleteBu = true
 				editAll = true
@@ -73,16 +93,16 @@ class Buttons extends React.Component {
 				break;
 		}
 
-		var totalEditAll = this.checkForStatus('editAll') //Move to body function ??
+		var totalEditAll = this.props.checkForStatus('editAll') //Move to body function ??
 
 		if(editTimes){
-			returnElements.push(<Button key="editTimes" variant="outline-info" onClick={this.editTimeHandler}>Edit Times</Button>)
+			returnElements.push(<Button key="editTimes" variant="outline-info" onClick={(e) => {this.props.editTimeHandler(this.props.indexNumber,[['status','editTime']])}}>Edit Times</Button>)
 		}
 		if(deleteBu){
-			returnElements.push(<Button key="delete" variant="outline-danger" onClick={(e) => {this.props.deleteHandler(indexNumber)}} >Delete</Button>)
+			returnElements.push(<Button key="delete" variant="outline-danger" onClick={(e) => {this.props.deleteHandler(this.props.indexNumber)}} >Delete</Button>)
 		}
 		if(editAll && !totalEditAll){
-			returnElements.push(<Button key="editAll" variant="outline-info" onClick={this.editAllHandler}>Edit All</Button>)
+			returnElements.push(<Button key="editAll" variant="outline-info" onClick={(e) => {this.scrollLogger();this.props.editAllHandler(this.props.indexNumber,[['status','editAll']],this.props.data)}}>Edit All</Button>)
 		}
 		if(goLogger){
 			returnElements.push(<Button key="goLogger" variant="outline-info" onClick={this.scrollLogger}>Data in logger</Button>)
@@ -95,10 +115,6 @@ class Buttons extends React.Component {
 		);
 	}
 }
-
-//timeInput(index,name,mesg,time,type,btnImagePath){
-
-//this.timeInput(data['indexNumber'],'launchTime','Launch Time',data['launchTime']['formatted'],'r',launchClock)
 
 class TimeForm extends React.Component { 
 	constructor(props){
@@ -140,7 +156,7 @@ class TimeButton extends React.Component {
       		<Button 
       			key={'btn' + this.props.type + this.props.index}
       			variant="outline-secondary" 
-      			onClick={(e) => {this.props.onButtonClick(this.props.index,this.props.name)}}
+      			onClick={(e) => {this.props.timeButtonHandler(this.props.index,this.props.name)}}
       			>
       			<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24"><path d={this.props.btnImagePath}/></svg>
       		</Button>
@@ -151,29 +167,10 @@ class TimeButton extends React.Component {
 class TimeInput extends React.Component {
 	constructor(props){
 		super(props);
-
-		this.index = this.props.index
-		this.name = this.props.name
-		this.placeholder = this.props.placeholder
-		this.time = this.props.time
-		this.type = this.props.type
-		this.status = this.props.status
-		//this.btnImagePath
-
-		//this.onFormChange //????
-		//this.onButtonClick
-
-
-		//this.data??
-		console.log('this.status')
-		console.log(this.props.status)
-
-		console.log(this.time)
-
 		const launchClock = 'M13 12l-.688-4h-.609l-.703 4c-.596.347-1 .984-1 1.723 0 1.104.896 2 2 2s2-.896 2-2c0-.739-.404-1.376-1-1.723zm-1-8c-5.522 0-10 4.477-10 10s4.478 10 10 10 10-4.477 10-10-4.478-10-10-10zm0 18c-4.411 0-8-3.589-8-8s3.589-8 8-8 8 3.589 8 8-3.589 8-8 8zm-2-19.819v-2.181h4v2.181c-1.438-.243-2.592-.238-4 0zm9.179 2.226l1.407-1.407 1.414 1.414-1.321 1.321c-.462-.484-.964-.926-1.5-1.328z'
 		const landClock = 'M22 14c0 5.523-4.478 10-10 10s-10-4.477-10-10 4.478-10 10-10 10 4.477 10 10zm-2 0c0-4.411-3.589-8-8-8s-8 3.589-8 8 3.589 8 8 8 8-3.589 8-8zm-6-11.819v-2.181h-4v2.181c1.408-.238 2.562-.243 4 0zm6.679 3.554l1.321-1.321-1.414-1.414-1.407 1.407c.536.402 1.038.844 1.5 1.328zm-8.679 2.265v6h6c0-3.309-2.691-6-6-6z'
 
-		if(this.name == 'launchTime'){
+		if(this.props.name == 'launchTime'){
 			this.btnImagePath = launchClock
 		} else {
 			this.btnImagePath = landClock
@@ -198,15 +195,14 @@ class TimeInput extends React.Component {
 	}
 	
 	render(){
-		
 		var returnHTML = []
 
 		if(this.type == 'left'){
-			returnHTML.push(<InputGroup.Prepend key={'btninp' + this.type + this.index}>{this.button}</InputGroup.Prepend>)
-			returnHTML.push(this.form)
+			returnHTML.push(<InputGroup.Prepend key={'btninp' + this.props.type + this.props.index}>{<TimeButton key={'TimeForm' + this.props.type + this.props.index} index={this.props.index} name={this.props.name} type={this.props.type} btnImagePath={this.btnImagePath} timeButtonHandler={this.props.timeButtonHandler}/>}</InputGroup.Prepend>)
+			returnHTML.push(<TimeForm key={'TimeForm' + this.props.type + this.props.index} index={this.props.index} name={this.props.name} type={this.props.type} placeholder={this.props.placeholder} time={this.props.time} timeTextHandler={this.props.timeTextHandler}/>)
 		} else { 
-			returnHTML.push(<TimeForm index={this.props.index} name={this.props.name} type={this.props.type} placeholder={this.props.placeholder} time={this.props.time} timeTextHandler={this.props.timeTextHandler}/>)
-			returnHTML.push(<InputGroup.Append key={'btninp' + this.type + this.index}>{<TimeButton index={this.props.index} name={this.props.name} type={this.props.type} btnImagePath={this.btnImagePath} onButtonClick={this.props.onButtonClick}/>}</InputGroup.Append>) 
+			returnHTML.push(<TimeForm key={'TimeForm' + this.props.type + this.props.index} index={this.props.index} name={this.props.name} type={this.props.type} placeholder={this.props.placeholder} time={this.props.time} timeTextHandler={this.props.timeTextHandler}/>)
+			returnHTML.push(<InputGroup.Append key={'btninp' + this.props.type + this.props.index}>{<TimeButton key={'TimeForm' + this.props.type + this.props.index} index={this.props.index} name={this.props.name} type={this.props.type} btnImagePath={this.btnImagePath} timeButtonHandler={this.props.timeButtonHandler}/>}</InputGroup.Append>) 
 		}
 
 		if(this.props.status == 'editTime'){ //this.state.tableData[index]['launchTime']['status'] == 'indexed' && this.state.tableData[index]['landTime']['status'] == 'indexed' &&
@@ -217,12 +213,12 @@ class TimeInput extends React.Component {
   			);
 
 			return(
-  				<ul className = "td"><li>{this.timeFormat(this.time['formatted'],' : ')}</li></ul>
+  				<ul className = "td"><li>{this.timeFormat(this.props.time['formatted'],' : ')}</li></ul>
   			);
 
 		} else {
   			return(
-  				<ul className = "td"><li>{this.timeFormat(this.time['formatted'],' : ')}</li></ul>
+  				<ul className = "td"><li>{this.timeFormat(this.props.time['formatted'],' : ')}</li></ul>
   			);
 		}
 		
@@ -232,13 +228,8 @@ class TimeInput extends React.Component {
 class Row extends React.Component {
 	constructor(props){
 		super(props);
-
-		console.log('row')
-		
-		
 	}
 
-	//formatters -------------------------------
 	currencyFormat(value){
 		if(value.length == 0){
 			return value
@@ -282,9 +273,6 @@ class Row extends React.Component {
 	 		}
 		}
 
-		console.log('renders')
-		console.log(this.props.data)
-
 		if(!this.props.data){
   			return (<tr key = "last"><td colSpan="100%" height="60"></td></tr>)
   			this.rowId = "table_row_end"
@@ -312,7 +300,7 @@ class Row extends React.Component {
 						</ul></td>
 					<td style={{width:"300px"}}>
 						{this.props.timeOne}
-						{this.props.timeOne}
+						{this.props.timeTwo}
 						<ul className = "td"><li className = {editHide()}>{this.props.data['flightTime']}</li>
 						</ul></td>
 					<td><ul className = "td">
@@ -324,31 +312,12 @@ class Row extends React.Component {
 						<li>{this.capitaliseFormat(this.props.data['payee'])}</li>
 						<li>{this.currencyFormat(this.props.data['total'])}</li>
 						</ul></td>
+					<td>
+						{this.props.buttons}
+						</td>
 				</tr>
 			);
 		}
-
-
-		
-		
-		
-
-		//
-		/*
-			
-			
-			this.props.timeOne
-			this.props.timeTwo
-			
-	
-
-			/*
-			
-			<td>
-				{/*this.props.buttons}
-				</td>
-			</tr>
-		);*/
 	}
 }
 
@@ -365,8 +334,11 @@ class TableLog extends React.Component {
 		this.addDataTable = this.addDataTable.bind(this);
 		this.clearData = this.clearData.bind(this);
 
+		this.deleteRecord = this.deleteRecord.bind(this);
+
 		this.timeTextHandler = this.timeTextHandler.bind(this);
 		this.timeButtonHandler = this.timeButtonHandler.bind(this);
+		this.checkForStatus = this.checkForStatus.bind(this);
 
 		//this.props.getFunctions.push(this.addData);
 
@@ -376,6 +348,8 @@ class TableLog extends React.Component {
     	this.input = {}
 		this.state = {
 			tableData:{},
+			indexCount:1,
+			page:1
 			//inputData:{}
 		}
 		
@@ -398,42 +372,12 @@ class TableLog extends React.Component {
 		return (hours + separator + minutes);
 	}
 
-	currencyFormat(value){
-		if(value.length == 0){
-			return value
-		}
-
-		value = value.toString()
-		var figure = '£'
-	
-		var dpCount = 0
-		for(var char in value){
-			figure = figure + value[char]
-
-			if(value[char] == '.' || dpCount > 0){
-				dpCount++
-			}
-
-			if(dpCount > 2){
-				break
-			}
-		}
-
-		if(dpCount == 0){
-			figure = figure + '.00'
-		} else if(dpCount == 2){
-			figure = figure + '0'
-		}
-
-		return figure
-	}
-
-	capitaliseFormat(word){
+	/*capitaliseFormat(word){
 		return word.charAt(0).toUpperCase() + word.slice(1)
-	}
+	}*/
 
 //helpers ---------------------------------
-	defaultData(){ // not sure -----------------------------
+	/*defaultData(){ // not sure -----------------------------
 		var aircraftObj = {id:'',registration:'',acName:''}
     	var userObj = {userId:'',username:'',fName:'',lName:'',membershipId:'',launchFee:'',soaringFee:'',aerotowStandardFee:'',aerotowUnitFee:''}
 		
@@ -461,7 +405,7 @@ class TableLog extends React.Component {
         landTime:'',
         //notes:''
 		}
-	}
+	}*/
 
 	setData(row,columnValue,successHandler = () => {console.log(this.state.tableData)}){
 		console.log(row)
@@ -496,19 +440,6 @@ class TableLog extends React.Component {
   			left: 0,
   			behavior: 'smooth'
 		});
-  	}
-
-  	
-
-  	checkForStatus(status){
-  		var statusFound = false
-  		for(var key in this.state.tableData){
-  			if(this.state.tableData[key]['status'] == status){
-  				statusFound = true;
-  				break;
-  			}
-  		}
-  		return statusFound
   	}
 
 //Utils -------------------------------------
@@ -546,9 +477,11 @@ class TableLog extends React.Component {
 		console.log(inputData)
 		var tableData = this.state.tableData;
 		var returnData //= tableData.concat(inputData);
+		var indexCount = this.state.indexCount
+		var count = 0
 
 		//var inpData = this.state.inputData
-		for(var count in inputData){
+		for(count in inputData){
 
 			if(typeof inputData[count]['launchTime'] != 'object'){//sloppy
 				var formattedLaunchTime = inputData[count]['launchTime']
@@ -584,10 +517,17 @@ class TableLog extends React.Component {
 
 			//console.log('input')
 			//console.log(inputData[count])
+
+
+
+			inputData[count]['indexNumber'] = parseInt(indexCount) + parseInt(count)
+
 			tableData[inputData[count]['indexNumber']] = inputData[count]
 
 			
 		}
+
+		this.setState({indexCount:(parseInt(indexCount)+parseInt(count)+1)},console.log('indexEndCount: ',this.state.indexCount))
 
 		console.log('tableData')
 		console.log(tableData)
@@ -664,6 +604,7 @@ class TableLog extends React.Component {
 		this.clearData();
 	}*/
 
+//Time Functions
 	timeTextHandler(event) {
 		const {id,name,value} = event.target
 
@@ -734,83 +675,37 @@ class TableLog extends React.Component {
 		this.updateData(id,name,time)
 	}
 
-//constructors ------------------------------
-	/*
-	hideOn(condition){ // hmmmmmmmmmmmmmm
-	 	if(condition()){
-	 		return " hideElement ";
-	 	} else {
-	 		return " showElement ";
-	 	}
+//Button Functions
+	checkForStatus(status){
+  		var statusFound = false
+  		for(var key in this.state.tableData){
+  			if(this.state.tableData[key]['status'] == status){
+  				statusFound = true;
+  				break;
+  			}
+  		}
+  		return statusFound
+  	}
 
-	} */
-	//onFormChange={this.timeTextHandler} onButtonClick={(index,name) => {this.timeButtonHandler(index,name)}}		
+//Pagination Function
+	pagination(rowIndexes,rowsPerPage,page){
+		rowIndexes.sort((a, b) => b - a)
 
-	body(tableData){
-		const rows = [];
-		var keys = Object.keys(tableData)
-		keys.sort((a, b) => b - a)
+		var rowsLength = rowIndexes.length
+		var pages = parseInt(rowsLength/rowsPerPage)
+		var lastPageLength = rowsLength%rowsPerPage
 
-		
-		for(var key in keys){
-			console.log(key)
-			var data = tableData[keys[key]]
-			var row = <Row
-				key={'row' + keys[key]} 
-				data={data} 
-				timeOne={<TimeInput 
-					index={data['indexNumber']} 
-					name='launchTime' 
-					placeholder='Launch Time' 
-					time={data['launchTime']} 
-					type = 'r'
-					status = {data['status']} 
-					/>} 
+		if(lastPageLength > 0){
+			pages += 1 
+		} 
 
-				timeTwo={<TimeInput 
-					index={data['indexNumber']} 
-					name='landTime' 
-					placeholder='Land Time' 
-					time={data['landTime']} 
-					type = 'r' 
-					status = {data['status']}
-					/>} 
-				/*	
-				buttons={<Buttons 
-					indexNumber={data['indexNumber']} 
-					editTimeHandler={(index,statusData) => {this.setData(index,statusData)}} 
-					editAllHandler={(index,statusData) => {this.setData(index,statusData,window.flightController.tableEditRecord(data))}} 
-					deleteHandler={(index) => {this.deleteRecord(index)}} 
-					/>}*/
-				/>
-			console.log(data['status'])
-			rows.push(row);
-			/*var time = <TimeInput 
-					index={data['indexNumber']} 
-					name='launchTime' 
-					placeholder='Launch Time' 
-					time={data['launchTime']} 
-					type = 'r' 
-					
-					/>
-			rows.push(time);*/
-		}
-		//<Row key='row1' data={tableData[1]}/>
+		var startIndex = rowsPerPage*(page-1)
+		var endIndex = rowsPerPage*(page)-1
 
+		var returnIndexes = rowIndexes.slice(startIndex,endIndex+1)
 
-		var data = tableData[1]
-		
-		
-		console.log('tableData')
-		console.log(tableData)
-
-		return (
-			<tbody key="t1"id="tableBody">
-				{rows}
-			</tbody>
-		);
-	}
-
+		return {returnIndexes,pages}
+	}		
 
 	componentWillUpdate(){
 		console.log('will update')
@@ -818,8 +713,62 @@ class TableLog extends React.Component {
 
 	render(){
 		console.log('uio')
+
+		const rows = [];
+
+		var pageLength = 4
+
+		const {returnIndexes,pages} = this.pagination(Object.keys(this.state.tableData),pageLength,this.state.page)
+
+		var keys = returnIndexes
+		var numPages = pages
+
+		console.log('render')
+		console.log(keys)
+
+		for(var key in keys){
+			var data = this.state.tableData[keys[key]]
+			rows.push(<Row
+				key={'row' + keys[key]} 
+				data={data} 
+				timeOne={<TimeInput
+					key={'time1-'+key} 
+					index={data['indexNumber']} 
+					name='launchTime' 
+					placeholder='Launch Time' 
+					time={data['launchTime']} 
+					type = 'r'
+					status = {data['status']}
+					timeTextHandler={this.timeTextHandler}
+					timeButtonHandler={this.timeButtonHandler} 
+					/>} 
+
+				timeTwo={<TimeInput
+					key={'time2-'+key}  
+					index={data['indexNumber']} 
+					name='landTime' 
+					placeholder='Land Time' 
+					time={data['landTime']} 
+					type = 'r' 
+					status = {data['status']}
+					timeTextHandler={this.timeTextHandler}
+					timeButtonHandler={this.timeButtonHandler} 
+					/>} 	
+				buttons={<Buttons 
+					indexNumber={data['indexNumber']}
+					status={data['status']}
+					data={data}
+					checkForStatus={this.checkForStatus} 
+					editTimeHandler={this.setData} 
+					editAllHandler={(index,statusData,data) => {this.setData(index,statusData,window.flightController.tableEditRecord(data))}} 
+					deleteHandler={this.deleteRecord} 
+					/>}
+				/>);
+		}
+
 		return(
 		<div className="table">
+		<PaginationGroup numPages={numPages} page={this.state.page} changePage={(page) => {this.setState({page:page})}} />
 		<Table striped bordered hover size="sm">
 			<thead>
 				<tr>
@@ -832,8 +781,11 @@ class TableLog extends React.Component {
 					<th></th>
 				</tr>
 			</thead>
-			{this.body(this.state.tableData)}
+			<tbody key="t1"id="tableBody">
+				{rows}
+			</tbody>
 		</Table>
+		<PaginationGroup numPages={numPages} page={this.state.page} changePage={(page) => {this.setState({page:page})}} />
 		</div>
 		);
 	}
