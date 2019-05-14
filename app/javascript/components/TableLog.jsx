@@ -550,8 +550,12 @@ class TableLog extends React.Component {
 
 		this.setState({data:data})
 
-		var element = document.getElementById("tr"+indexNumber)
-		this.scrollFocus(element.offsetTop)
+		try{
+			var element = document.getElementById("tr"+indexNumber)
+			this.scrollFocus(element.offsetTop)
+		} catch (error) {
+			console.log(error)
+		}
 	}
 
 	updateCheckStatus(id,name,success,failure){
