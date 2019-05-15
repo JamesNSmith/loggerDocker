@@ -221,11 +221,74 @@ class DropdownBox extends React.Component {
   }
 }
 
+class Membership extends React.Component {
+  constructor(props){
+    super(props);
+
+  }
+
+  render(){
+    var options = () => {
+      var lst = [];
+      for(var key in this.props.memberships){
+        lst.push(<option key = {'opt' + key} value={key}>{this.props.memberships[key]['name']}</option>);
+      }
+      return lst
+    }
+
+    return(
+      <Form.Control as="select" onChange={(e) => {this.props.setMembership(this.props.memberships[e.target.value],this.props.user)}} value={this.props.value}>
+        {options()}
+      </Form.Control>
+    );
+  }
+}
+
+class User extends React.Component {
+  constructor(props){
+    super(props);
+
+  }
+
+  render(){
+    return(
+
+    <Form.Row className="row">
+      <Form.Label><h3>{this.props.user.charAt(0).toUpperCase() + this.props.user.slice(1)}</h3></Form.Label>
+
+      <Form.Group className="group" controlId="formGridName" >
+        <Form.Label>Name</Form.Label>
+
+        <DropdownGroup menuName={this.props.user+'ClubUsers'} menuData={this.props.totalClubUsers} onMenuUpdate={(menuNum) => {this.props.setUser(this.props.totalClubUsers[menuNum]['userId'],this.props.user)}}>
+          <DropdownBox column='fName' placeholder='First Name' onChange={(event) => {this.props.textboxChange(event,this.props.user,'fName')}} value={this.props.userData['fName']} 
+            filter={(textOriginal,search) => {return ((textOriginal.toLowerCase().startsWith(search.toLowerCase()))||(search == ''))}}
+          />
+          <DropdownBox column='lName' placeholder='Last Name' onChange={(event) => {this.props.textboxChange(event,this.props.user,'lName')}} value={this.props.userData['lName']}
+            filter={(textOriginal,search) => {return ((textOriginal.toLowerCase().startsWith(search.toLowerCase()))||(search == ''))}}
+          />
+        </DropdownGroup>
+        
+      </Form.Group>
+
+      <Form.Group className="group" controlId="formGridState">
+        <Form.Label>Membership</Form.Label>
+
+        {this.props.membership}
+
+      </Form.Group>
+
+    </Form.Row>
+    );
+  }
+}
+
 class Logger extends React.Component {
 	constructor(props){
 		super(props);
 
 		//this.handleAdd = this.handleAdd.bind(this);
+    this.setUser = this.setUser.bind(this);
+    this.setMembership = this.setMembership.bind(this);
     this.setPayee = this.setPayee.bind(this);
     this.importEditData = this.importEditData.bind(this);
 
@@ -427,71 +490,16 @@ class Logger extends React.Component {
   }
 
 //handlers -----------------------------------
-	handleChange(event){ //?????
+	/*handleChange(event){ //?????
 		const data = this.state.data
 		const {name,value} = event.target
 		data[name] = value
 		this.setState({data:data},console.log(this.state.data));
-	}
+	}*/
 
 
 //constructors ---------------------------------
-  membership(memberships,user){
-    var options = () => {
-      var lst = [];
-      for(var key in memberships){
-        lst.push(<option key = {'opt' + key} value={key}>{memberships[key]['name']}</option>);
-      }
-      return lst
-    }
-
-    return(
-      <Form.Control as="select" onChange={(e) => {this.setMembership(memberships[e.target.value],user)}} value={this.state.data[user]['membershipId']}>
-        {options()}
-      </Form.Control>
-    );
-  }
-
   
-
-  user(user){
-
-    var boxChange = (event,row,column) => {
-      console.log('boxChange')
-      var data = this.state.data
-      data[row][column] = event.value
-      this.setState({data:data})
-    }
-
-    return(
-
-    <Form.Row className="row">
-      <Form.Label><h3>{user.charAt(0).toUpperCase() + user.slice(1)}</h3></Form.Label>
-
-      <Form.Group className="group" controlId="formGridName" >
-        <Form.Label>Name</Form.Label>
-
-        <DropdownGroup menuName={user+'ClubUsers'} menuData={this.totalClubUsers} onMenuUpdate={(menuNum) => {this.setUser(this.totalClubUsers[menuNum]['userId'],user)}}>
-          <DropdownBox column='fName' placeholder='First Name' onChange={(event) => {boxChange(event,user,'fName')}} value={this.state.data[user]['fName']} 
-            filter={(textOriginal,search) => {return ((textOriginal.toLowerCase().startsWith(search.toLowerCase()))||(search == ''))}}
-          />
-          <DropdownBox column='lName' placeholder='Last Name' onChange={(event) => {boxChange(event,user,'lName')}} value={this.state.data[user]['lName']}
-            filter={(textOriginal,search) => {return ((textOriginal.toLowerCase().startsWith(search.toLowerCase()))||(search == ''))}}
-          />
-        </DropdownGroup>
-        
-      </Form.Group>
-
-      <Form.Group className="group" controlId="formGridState">
-        <Form.Label>Membership</Form.Label>
-
-        {this.membership(this.memberships,user)}
-
-      </Form.Group>
-
-    </Form.Row>
-    );
-  }
 
   aircraft(type){
     var handleClick = (event,figure) => {
@@ -745,9 +753,33 @@ class Logger extends React.Component {
 
             {this.aircraft('tug')}
 
-            {this.user('p1')}
+            <User 
+              user='p1' 
+              totalClubUsers={this.totalClubUsers} 
+              setUser={this.setUser} 
+              userData={this.state.data['p1']} 
+              textboxChange={(event,row,column) => {var data = this.state.data;data[row][column] = event.value;this.setState({data:data})}}
+              membership={<Membership
+                user='p1'
+                value={this.state.data['p1']['membershipId']}
+                memberships={this.memberships}
+                setMembership={this.setMembership}
+              />}
+            />
 
-            {this.user('p2')}
+            <User 
+              user='p2' 
+              totalClubUsers={this.totalClubUsers} 
+              setUser={this.setUser} 
+              userData={this.state.data['p2']} 
+              textboxChange={(event,row,column) => {var data = this.state.data;data[row][column] = event.value;this.setState({data:data})}}
+              membership={<Membership
+                user='p2'
+                value={this.state.data['p2']['membershipId']}
+                memberships={this.memberships}
+                setMembership={this.setMembership}
+              />}
+            />
 
             {this.fees()}
   
