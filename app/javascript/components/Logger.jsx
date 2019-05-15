@@ -282,15 +282,104 @@ class User extends React.Component {
   }
 }
 
+class AircraftAux extends React.Component {
+  constructor(props){
+    super(props)
+
+  }
+
+  render(){
+    if(this.props.type == 'aircraft'){
+      return (
+        <Form.Group className="group" controlId="formGridacName">
+          <Form.Label>Launch</Form.Label>
+          <ToggleButtonGroup vertical name="launchType" type="radio" onChange={this.props.onLaunchChange} value={this.props.launchType}>
+            <ToggleButton variant="outline-primary" value={'winch'}>Winch</ToggleButton>
+            <ToggleButton variant="outline-primary" value={'aerotow'}>Aerotow</ToggleButton>
+          </ToggleButtonGroup>
+        </Form.Group>
+      );
+    } else {
+      return (
+        <Form.Group className="group" controlId="formGridacName">
+          <Form.Label>Release Height</Form.Label>
+          <InputGroup className="mb-3">
+            <InputGroup.Prepend>
+              <Button variant="outline-primary" onClick={(e) => this.props.setReleaseHeight(e,+1000)}>+</Button>
+              <Button variant="outline-primary" onClick={(e) => this.props.setReleaseHeight(e,-1000)}>-</Button>
+              <Button variant="outline-primary" onClick={(e) => this.props.setReleaseHeight(e,+1000)}>{this.props.releaseHeight}</Button>
+            </InputGroup.Prepend>
+          </InputGroup>
+        </Form.Group>
+      );
+    }
+  }
+}
+
+class Aircraft extends React.Component {
+  constructor(props){
+    super(props);
+
+  }
+
+  render(){
+    var status = () => {
+      if(this.props.type == 'tug'){
+        if(this.props.launchType == 'winch'){
+          return "row hideTug"
+        } else { 
+          return "row showTug"
+        }
+      } else {
+        return "row"
+      }
+    }
+
+    return(
+
+    <Form.Row className={(this.props.type == 'tug')?(this.props.launchType == 'winch') ? "row hideTug" : "row showTug" : "row"}>
+      <Form.Label><h3>{this.props.type.charAt(0).toUpperCase() + this.props.type.slice(1)}</h3></Form.Label>
+
+      <Form.Group className="group" controlId="formGridName" >
+        <Form.Label>Registration</Form.Label>
+
+        <DropdownGroup menuName={this.props.type} menuData={this.props.totalAircrafts} onMenuUpdate={(menuNum) => {this.props.setAircraft(this.props.totalAircrafts[menuNum]['id'],this.props.type)}}>
+          <DropdownBox column='registration' placeholder='Registration' onChange={(event) => {this.props.textboxChange(event,this.props.type,'registration')}} value={this.props.aircraftData['registration']} 
+            filter={(textOriginal,search) => {
+              if((textOriginal.toLowerCase().startsWith(search.toLowerCase()))||(search == '')){
+                return true
+              } else if(textOriginal.toLowerCase().slice(3).startsWith(search.toLowerCase())){
+                return true
+              } else {
+                return false
+              }
+            }}/>
+          <DropdownBox column='acName' placeholder='Name' onChange={(event) => {this.props.textboxChange(event,this.props.type,'acName')}} value={this.props.aircraftData['acName']} 
+            filter={(textOriginal,search) => {return ((textOriginal.toLowerCase().startsWith(search.toLowerCase()))||(search == ''))}}      
+          />
+        </DropdownGroup>
+        
+      </Form.Group>
+
+      {this.props.aircraftAux}
+
+    </Form.Row>
+    );
+  }
+}
+
 class Logger extends React.Component {
 	constructor(props){
 		super(props);
 
 		//this.handleAdd = this.handleAdd.bind(this);
+    this.importEditData = this.importEditData.bind(this);
     this.setUser = this.setUser.bind(this);
     this.setMembership = this.setMembership.bind(this);
     this.setPayee = this.setPayee.bind(this);
-    this.importEditData = this.importEditData.bind(this);
+    this.setAircraft = this.setAircraft.bind(this);
+    this.setReleaseHeight = this.setReleaseHeight.bind(this);
+    
 
     window.flightControllerDependents['logger'] = this
     this.flightController = window.flightController
@@ -360,6 +449,15 @@ class Logger extends React.Component {
     }
     this.state = stateObj
 	}
+
+//foreign functions
+  importEditData(importData){
+    var currentData = JSON.parse(JSON.stringify(this.state.data))
+
+    this.setState({mode:'edit'},console.log(this.state))
+    this.setState({data:importData},console.log(this.state))
+  }
+
 //Calculations
   getAerotowFee(launchFee,unitFee,height){
     var figure = parseFloat(launchFee) + parseFloat(unitFee)*parseInt(height - 2000)/1000
@@ -396,15 +494,15 @@ class Logger extends React.Component {
     this.setState({data:data},successHandler);
   }
 
-  /*setDataRow(row,nameValue,successHandler = () => {console.log(this.state.data)}){
-    console.log(nameValue)
-    const data = this.state.data
-    for(var key in nameValue){
-      data[row][nameValue[key][0]] = nameValue[key][1]
-    }
-    this.setState({data:data},successHandler);
-  }*/
+//handlers -----------------------------------
+	/*handleChange(event){ //?????
+		const data = this.state.data
+		const {name,value} = event.target
+		data[name] = value
+		this.setState({data:data},console.log(this.state.data));
+	}*/
 
+// Sets
   setMembership(membership,user,updateGlobal=false){
     var data = this.state.data
 
@@ -465,6 +563,20 @@ class Logger extends React.Component {
     this.setState({data:data})
   }
 
+  setReleaseHeight(event,figure){
+    var height = this.state.data['releaseHeight']
+    var returnHeight = (height + figure)
+    var returnLst = [['releaseHeight',returnHeight]]
+
+    if(returnHeight >= 2000){
+      if(this.state.data['aerotowLaunchFee'] != ''){
+        returnLst[1] = ['aerotowLaunchFee',this.getAerotowFee(this.state.data['aerotowStandardFee'],this.state.data['aerotowUnitFee'],returnHeight)]
+      }
+
+      this.setData(returnLst);
+    }
+  }
+
   setPayee(payee){
     const columns = ['winchLaunchFee','soaringFee','aerotowStandardFee','aerotowUnitFee']
     const data = this.state.data
@@ -480,121 +592,7 @@ class Logger extends React.Component {
     this.setState({data:data},console.log(this.state.data))
   }
 
-//foreign functions -----------------------------
-
-  importEditData(importData){
-    var currentData = JSON.parse(JSON.stringify(this.state.data))
-
-    this.setState({mode:'edit'},console.log(this.state))
-    this.setState({data:importData},console.log(this.state))
-  }
-
-//handlers -----------------------------------
-	/*handleChange(event){ //?????
-		const data = this.state.data
-		const {name,value} = event.target
-		data[name] = value
-		this.setState({data:data},console.log(this.state.data));
-	}*/
-
-
 //constructors ---------------------------------
-  
-
-  aircraft(type){
-    var handleClick = (event,figure) => {
-      var height = this.state.data['releaseHeight']
-      var returnHeight = (height + figure)
-      var returnLst = [['releaseHeight',returnHeight]]
-
-      if(returnHeight >= 2000){
-        if(this.state.data['aerotowLaunchFee'] != ''){
-          returnLst[1] = ['aerotowLaunchFee',this.getAerotowFee(this.state.data['aerotowStandardFee'],this.state.data['aerotowUnitFee'],returnHeight)]
-        }
-
-        this.setData(returnLst);
-      }
-    }
-
-    var auxGroup = () =>{
-      if(type == 'aircraft'){
-        return (
-          <Form.Group className="group" controlId="formGridacName">
-            <Form.Label>Launch</Form.Label>
-            <ToggleButtonGroup vertical name="launchType" type="radio" onChange={(event) => this.setData([['launchType',event]])} value={this.state.data['launchType']}>
-              <ToggleButton variant="outline-primary" value={'winch'}>Winch</ToggleButton>
-              <ToggleButton variant="outline-primary" value={'aerotow'}>Aerotow</ToggleButton>
-            </ToggleButtonGroup>
-          </Form.Group>
-        );
-      } else {
-        return (
-          <Form.Group className="group" controlId="formGridacName">
-            <Form.Label>Release Height</Form.Label>
-            <InputGroup className="mb-3">
-              <InputGroup.Prepend>
-                <Button variant="outline-primary" onClick={(e) => handleClick(e,+1000)}>+</Button>
-                <Button variant="outline-primary" onClick={(e) => handleClick(e,-1000)}>-</Button>
-                <Button variant="outline-primary" onClick={(e) => handleClick(e,+1000)}>{this.state.data['releaseHeight']}</Button>
-              </InputGroup.Prepend>
-            </InputGroup>
-          </Form.Group>
-        );
-      }
-    }
-
-    var boxChange = (event,row,column) => {
-      console.log('boxChange')
-      var data = this.state.data
-      data[row][column] = event.value
-      //data[row]['id'] = ''
-      this.setState({data:data})
-    }
-
-    var status = () => {
-      if(type == 'tug'){
-        if(this.state.data['launchType'] == 'winch'){
-          return "row hideTug"
-        } else { 
-          return "row showTug"
-        }
-      } else {
-        return "row"
-      }
-    }
-
-    return(
-
-    <Form.Row className={(type == 'tug')?(this.state.data['launchType'] == 'winch') ? "row hideTug" : "row showTug" : "row"}>
-      <Form.Label><h3>{type.charAt(0).toUpperCase() + type.slice(1)}</h3></Form.Label>
-
-      <Form.Group className="group" controlId="formGridName" >
-        <Form.Label>Registration</Form.Label>
-
-        <DropdownGroup menuName={type} menuData={this.totalAircrafts} onMenuUpdate={(menuNum) => {this.setAircraft(this.totalAircrafts[menuNum]['id'],type)}}>
-          <DropdownBox column='registration' placeholder='Registration' onChange={(event) => {boxChange(event,type,'registration')}} value={this.state.data[type]['registration']} 
-            filter={(textOriginal,search) => {
-              if((textOriginal.toLowerCase().startsWith(search.toLowerCase()))||(search == '')){
-                return true
-              } else if(textOriginal.toLowerCase().slice(3).startsWith(search.toLowerCase())){
-                return true
-              } else {
-                return false
-              }
-            }}/>
-          <DropdownBox column='acName' placeholder='Name' onChange={(event) => {boxChange(event,type,'acName')}} value={this.state.data[type]['acName']} 
-            filter={(textOriginal,search) => {return ((textOriginal.toLowerCase().startsWith(search.toLowerCase()))||(search == ''))}}      
-          />
-        </DropdownGroup>
-        
-      </Form.Group>
-
-      {auxGroup()}
-
-    </Form.Row>
-    );
-  }
-
   fees(){
     var aerotowUpdate = (event) => {
       const {name,value} = event.target
@@ -749,16 +747,44 @@ class Logger extends React.Component {
 
             </Form.Row>
 
-            {this.aircraft('aircraft')}
+            <Aircraft
+              type={'aircraft'}
+              launchType={this.state.data['launchType']}
+              aircraftData={this.state.data['aircraft']}
+              totalAircrafts={this.totalAircrafts}
+              setAircraft={this.setAircraft} 
+              textboxChange={(event,row,column) => {var data= this.state.data; data[row][column]= event.value; this.setState({data:data})}}
+              aircraftAux={<AircraftAux
+                type={'aircraft'} 
+                releaseHeight={this.state.data['releaseHeight']} 
+                launchType={this.state.data['launchType']} 
+                onLaunchChange={(event) => this.setData([['launchType',event]])} 
+                setReleaseHeight={this.setReleaseHeight}
+              />}
+            />
 
-            {this.aircraft('tug')}
+            <Aircraft
+              type={'tug'}
+              launchType={this.state.data['launchType']}
+              aircraftData={this.state.data['tug']}
+              totalAircrafts={this.totalAircrafts}
+              setAircraft={this.setAircraft} 
+              textboxChange={(event,row,column) => {var data= this.state.data; data[row][column]= event.value; this.setState({data:data})}}
+              aircraftAux={<AircraftAux
+                type={'tug'} 
+                releaseHeight={this.state.data['releaseHeight']} 
+                launchType={this.state.data['launchType']} 
+                onLaunchChange={(event) => this.setData([['launchType',event]])} 
+                setReleaseHeight={this.setReleaseHeight}
+              />}
+            />
 
             <User 
               user='p1' 
               totalClubUsers={this.totalClubUsers} 
               setUser={this.setUser} 
               userData={this.state.data['p1']} 
-              textboxChange={(event,row,column) => {var data = this.state.data;data[row][column] = event.value;this.setState({data:data})}}
+              textboxChange={(event,row,column) => {var data= this.state.data; data[row][column]= event.value; this.setState({data:data})}}
               membership={<Membership
                 user='p1'
                 value={this.state.data['p1']['membershipId']}
@@ -772,7 +798,7 @@ class Logger extends React.Component {
               totalClubUsers={this.totalClubUsers} 
               setUser={this.setUser} 
               userData={this.state.data['p2']} 
-              textboxChange={(event,row,column) => {var data = this.state.data;data[row][column] = event.value;this.setState({data:data})}}
+              textboxChange={(event,row,column) => {var data= this.state.data; data[row][column]= event.value; this.setState({data:data})}}
               membership={<Membership
                 user='p2'
                 value={this.state.data['p2']['membershipId']}
