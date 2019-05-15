@@ -368,19 +368,88 @@ class Aircraft extends React.Component {
   }
 }
 
+class FeesLaunch extends React.Component {
+  constructor(props){
+    super(props);
+
+  }
+
+  render(){
+    if(this.props.launchType == 'aerotow'){
+
+      return (
+        <Form.Group className="group" controlId="formGridEmail" >
+          <Form.Label>Launch Fee</Form.Label>
+          <Form.Control placeholder="Launch Fee" name="aerotowLaunchFee" onChange={this.props.aerotowChange} onClick={(e)=>e.target.select()} value={this.props.aerotowValue}/>
+        </Form.Group>
+      );
+
+    } else {
+    
+      return (
+        <Form.Group className="group" controlId="formGridEmail" >
+          <Form.Label>Launch Fee</Form.Label>
+          <Form.Control placeholder="Launch Fee" name="winchLaunchFee" onChange={this.props.winchChange} onClick={(e)=>e.target.select()} value={this.props.winchValue}/>
+        </Form.Group>
+      );
+
+    }
+  }
+}
+
+class Fees extends React.Component {
+  constructor(props){
+    super(props)
+
+  }
+
+  render(){
+    return (
+      <Form.Row className="row">
+      <Form.Label><h3>Fees</h3></Form.Label>
+
+      <Form.Group className="group" controlId="formGridacName">
+        <Form.Label>Payee</Form.Label>
+        <ToggleButtonGroup vertical name="launchType" type="radio" onChange={this.props.setPayee} value={this.props.payee}>
+        <ToggleButton variant="outline-primary" value={'p1'}>P1</ToggleButton>
+        <ToggleButton variant="outline-primary" value={'p2'}>P2</ToggleButton>
+        </ToggleButtonGroup>
+      </Form.Group>
+
+      <Form.Group className={(this.props.launchType == 'winch') ? "group hideElement" : "group showElement"} controlId="formGridEmail" >
+        <Form.Label>Aerotow Launch to 2000</Form.Label>
+        <Form.Control placeholder="Launch Fee" name="aerotowStandardFee" onChange={this.props.setAerotow} onClick={(e)=>e.target.select()} value={this.props.aerotowStandardFee}/>
+      </Form.Group>
+
+      <Form.Group className={(this.props.launchType == 'winch') ? "group hideElement" : "group showElement"} controlId="formGridEmail" >
+        <Form.Label>Fee per 1000ft above</Form.Label>
+        <Form.Control placeholder="Launch Fee" name="aerotowUnitFee" onChange={this.props.setAerotow} onClick={(e)=>e.target.select()} value={this.props.aerotowUnitFee}/>
+      </Form.Group>
+
+      {this.props.feesLaunch}
+      
+      <Form.Group className="group" controlId="formGridPassword" >
+        <Form.Label>Soaring Fee</Form.Label>
+        <Form.Control placeholder="Soaring Fee" name="soaringFee" onChange={this.props.setSoaringFee} onClick={(e)=>e.target.select()} value={this.props.soaringFee}/>
+      </Form.Group>
+
+      </Form.Row>
+    );
+  }
+}
+
 class Logger extends React.Component {
 	constructor(props){
 		super(props);
 
-		//this.handleAdd = this.handleAdd.bind(this);
     this.importEditData = this.importEditData.bind(this);
     this.setUser = this.setUser.bind(this);
     this.setMembership = this.setMembership.bind(this);
     this.setPayee = this.setPayee.bind(this);
     this.setAircraft = this.setAircraft.bind(this);
     this.setReleaseHeight = this.setReleaseHeight.bind(this);
+    this.setAerotow = this.setAerotow.bind(this);
     
-
     window.flightControllerDependents['logger'] = this
     this.flightController = window.flightController
 
@@ -435,10 +504,6 @@ class Logger extends React.Component {
 
     this.defaultObjects = [
       ['data',this.data],
-      ['p1ClubUsers',this.totalClubUsers],
-      ['p2ClubUsers',this.totalClubUsers],
-      ['aircrafts',this.totalAircrafts],
-      ['tugAircrafts',this.totalAircrafts],
       ['mode','create']
     ];
 
@@ -460,9 +525,7 @@ class Logger extends React.Component {
 
 //Calculations
   getAerotowFee(launchFee,unitFee,height){
-    var figure = parseFloat(launchFee) + parseFloat(unitFee)*parseInt(height - 2000)/1000
-    console.log(figure)
-    return figure 
+    return parseFloat(launchFee) + parseFloat(unitFee)*parseInt(height - 2000)/1000
   }
 
 //formatters
@@ -493,14 +556,6 @@ class Logger extends React.Component {
     }
     this.setState({data:data},successHandler);
   }
-
-//handlers -----------------------------------
-	/*handleChange(event){ //?????
-		const data = this.state.data
-		const {name,value} = event.target
-		data[name] = value
-		this.setState({data:data},console.log(this.state.data));
-	}*/
 
 // Sets
   setMembership(membership,user,updateGlobal=false){
@@ -592,81 +647,25 @@ class Logger extends React.Component {
     this.setState({data:data},console.log(this.state.data))
   }
 
-//constructors ---------------------------------
-  fees(){
-    var aerotowUpdate = (event) => {
-      const {name,value} = event.target
-      var data = this.state.data
+  setAerotow(event){
+    const {name,value} = event.target
+    var data = this.state.data
 
-      if(name == 'aerotowStandardFee'){
-        var aerotowStandardFee = value
-        var aerotowUnitFee = data['aerotowUnitFee']
-      } else {
-        var aerotowStandardFee = data['aerotowStandardFee']
-        var aerotowUnitFee = value
-      }
-
-      data[name] = value
-      data['aerotowLaunchFee'] = this.getAerotowFee(aerotowStandardFee,aerotowUnitFee,data['releaseHeight'])
-
-      this.setState({data:data})
+    if(name == 'aerotowStandardFee'){
+      var aerotowStandardFee = value
+      var aerotowUnitFee = data['aerotowUnitFee']
+    } else {
+      var aerotowStandardFee = data['aerotowStandardFee']
+      var aerotowUnitFee = value
     }
 
-    var launch = () => {
-      if(this.state.data['launchType'] == 'aerotow'){
+    data[name] = value
+    data['aerotowLaunchFee'] = this.getAerotowFee(aerotowStandardFee,aerotowUnitFee,data['releaseHeight'])
 
-        return (
-        <Form.Group className="group" controlId="formGridEmail" >
-          <Form.Label>Launch Fee</Form.Label>
-          <Form.Control placeholder="Launch Fee" name="aerotowLaunchFee" onChange={(e) => {this.setData([[e.target.name,e.target.value]])}} onClick={(e)=>e.target.select()} value={this.state.data["aerotowLaunchFee"]}/>
-        </Form.Group>
-        );
-
-      } else {
-    
-        return (
-        <Form.Group className="group" controlId="formGridEmail" >
-          <Form.Label>Launch Fee</Form.Label>
-          <Form.Control placeholder="Launch Fee" name="winchLaunchFee" onChange={(e) => {this.setData([[e.target.name,e.target.value]])}} onClick={(e)=>e.target.select()} value={this.state.data["winchLaunchFee"]}/>
-        </Form.Group>
-        );
-
-      }
-    }
-    
-    return (
-      <Form.Row className="row">
-      <Form.Label><h3>Fees</h3></Form.Label>
-
-      <Form.Group className="group" controlId="formGridacName">
-        <Form.Label>Payee</Form.Label>
-        <ToggleButtonGroup vertical name="launchType" type="radio" onChange={this.setPayee} value={this.state.data['payee']}>
-        <ToggleButton variant="outline-primary" value={'p1'}>P1</ToggleButton>
-        <ToggleButton variant="outline-primary" value={'p2'}>P2</ToggleButton>
-        </ToggleButtonGroup>
-      </Form.Group>
-
-      <Form.Group className={(this.state.data['launchType'] == 'winch') ? "group hideElement" : "group showElement"} controlId="formGridEmail" >
-        <Form.Label>Aerotow Launch to 2000</Form.Label>
-        <Form.Control placeholder="Launch Fee" name="aerotowStandardFee" onChange={aerotowUpdate} onClick={(e)=>e.target.select()} value={this.state.data["aerotowStandardFee"]}/>
-      </Form.Group>
-
-      <Form.Group className={(this.state.data['launchType'] == 'winch') ? "group hideElement" : "group showElement"} controlId="formGridEmail" >
-        <Form.Label>Fee per 1000ft above</Form.Label>
-        <Form.Control placeholder="Launch Fee" name="aerotowUnitFee" onChange={aerotowUpdate} onClick={(e)=>e.target.select()} value={this.state.data["aerotowUnitFee"]}/>
-      </Form.Group>
-
-      {launch()}
-      
-      <Form.Group className="group" controlId="formGridPassword" >
-        <Form.Label>Soaring Fee</Form.Label>
-        <Form.Control placeholder="Soaring Fee" name="soaringFee" onChange={(e) => {this.setData([[e.target.name,e.target.value]])}} onClick={(e)=>e.target.select()} value={this.state.data["soaringFee"]}/>
-      </Form.Group>
-
-      </Form.Row>
-    );
+    this.setState({data:data})
   }
 
+//constructors ---------------------------------
   buttons(){
     var columns = ['winchLaunchFee','aerotowLaunchFee','aerotowStandardFee','aerotowUnitFee','soaringFee']
     
@@ -807,7 +806,23 @@ class Logger extends React.Component {
               />}
             />
 
-            {this.fees()}
+            <Fees
+              launchType={this.state.data['launchType']}
+              payee={this.state.data['payee']}
+              setPayee={this.setPayee}
+              setAerotow={this.setAerotow}
+              aerotowStandardFee={this.state.data["aerotowStandardFee"]}
+              aerotowUnitFee={this.state.data["aerotowUnitFee"]}
+              setSoaringFee={(e) => {this.setData([[e.target.name,e.target.value]])}}
+              soaringFee={this.state.data["soaringFee"]}
+              feesLaunch={<FeesLaunch 
+                launchType={this.state.data['launchType']} 
+                aerotowValue={this.state.data["aerotowLaunchFee"]} 
+                aerotowChange={(e) => {this.setData([[e.target.name,e.target.value]])}} 
+                winchValue={this.state.data["winchLaunchFee"]} 
+                winchChange={(e) => {this.setData([[e.target.name,e.target.value]])}}
+              />}
+            />
   
             {this.buttons()}
 
