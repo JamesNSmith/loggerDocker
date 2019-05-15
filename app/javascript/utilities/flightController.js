@@ -15,28 +15,20 @@ class FlightController {
     var twoDP = (num) => {
       return Math.round(num*100)/100
     }
-    console.log('calculateTimeFees')
-    console.log(record)
-    var launchFee = parseFloat(record['launchFee'])
+    
+    var winchLaunchFee = parseFloat(record['winchLaunchFee'])
+    var aerotowLaunchFee = parseFloat(record['aerotowLaunchFee'])
     var soaringFee = parseFloat(record['soaringFee'])
-
-    console.log(record['launchTime']['formatted'])
-    console.log(record['landTime']['formatted'])
-
-    console.log(record['launchTime']['input'])
-    console.log(record['landTime']['input'])
 
     var launchTime =  new Date(record['launchTime']['formatted']).setFullYear(2020, 11, 3) //dodgy fix -- needs :()
     var landTime =  new Date(record['landTime']['formatted']).setFullYear(2020, 11, 3) //dodgy fix -- needs :()
-    console.log(landTime)
-    console.log(launchTime)
     var flightTime = Math.floor(Math.abs((landTime - launchTime))/(1000*60)) //.getTime()
-    console.log('flightTime: ' + flightTime)
 
     var soaringTotal = twoDP(flightTime * soaringFee);
-    var total = launchFee + soaringTotal
+    var winchTotal = winchLaunchFee + soaringTotal
+    var aerotowTotal = aerotowLaunchFee + soaringTotal
 
-    var returnVals = [['flightTime',flightTime],['soaringTotal',soaringTotal],['total',total]]
+    var returnVals = [['flightTime',flightTime],['soaringTotal',soaringTotal],['winchTotal',winchTotal],['aerotowTotal',aerotowTotal]]
     console.log(returnVals)
 
     return {record,returnVals}

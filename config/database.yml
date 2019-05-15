@@ -39,7 +39,7 @@ default: &test
   port: 3306
 
 development:
-  <<: *test  
+  <<: *local  
   database: Logger2_development
 
 # Warning: The database defined as "test" will be erased and
@@ -47,7 +47,7 @@ development:
 # Do not set this db to the same as development or production.
 
 test:
-  <<: *test
+  <<: *local
   database: Logger2_test
 
 # As with config/secrets.yml, you never want to store sensitive information,

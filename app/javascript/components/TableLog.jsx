@@ -273,6 +273,24 @@ class Row extends React.Component {
 	 		}
 		}
 
+		var launchFee = () => {
+			var items = []
+			if(this.props.data['launchType'] == 'winch'){
+				return (<li>{this.currencyFormat(this.props.data['winchLaunchFee'])}</li>);
+			} else {
+				return (<li>{this.currencyFormat(this.props.data['aerotowLaunchFee'])}</li>);
+			}
+		}
+
+		var total = () =>{
+			if(this.props.data['launchType'] == 'winch'){
+				return (<li>{this.currencyFormat(this.props.data['winchTotal'])}</li>);
+			} else {
+				return (<li>{this.currencyFormat(this.props.data['aerotowTotal'])}</li>);
+			}
+		}
+		
+
 		if(!this.props.data){
   			return (<tr key = "last"><td colSpan="100%" height="60"></td></tr>)
   			this.rowId = "table_row_end"
@@ -304,13 +322,14 @@ class Row extends React.Component {
 						<ul className = "td"><li className = {editHide()}>{this.props.data['flightTime']}</li>
 						</ul></td>
 					<td><ul className = "td">
-						<li>{this.currencyFormat(this.props.data['launchFee'])}</li>
+						<li>{this.props.data['launchType']}</li>
+						{launchFee()}
 						<li>{this.currencyFormat(this.props.data['soaringFee'])}</li>
 						<li>{this.currencyFormat(this.props.data['soaringTotal'])}</li>
 						</ul></td>
 					<td><ul className = "td">
 						<li>{this.capitaliseFormat(this.props.data['payee'])}</li>
-						<li>{this.currencyFormat(this.props.data['total'])}</li>
+						{total()}
 						</ul></td>
 					<td>
 						{this.props.buttons}
@@ -345,12 +364,11 @@ class TableLog extends React.Component {
 		window.flightControllerDependents['table'] = this
     	console.log(flightControllerDependents)
 		
-    	this.input = {}
+    	//this.input = {}
 		this.state = {
 			tableData:{},
 			indexCount:1,
 			page:1
-			//inputData:{}
 		}
 		
 	}
@@ -372,41 +390,7 @@ class TableLog extends React.Component {
 		return (hours + separator + minutes);
 	}
 
-	/*capitaliseFormat(word){
-		return word.charAt(0).toUpperCase() + word.slice(1)
-	}*/
-
 //helpers ---------------------------------
-	/*defaultData(){ // not sure -----------------------------
-		var aircraftObj = {id:'',registration:'',acName:''}
-    	var userObj = {userId:'',username:'',fName:'',lName:'',membershipId:'',launchFee:'',soaringFee:'',aerotowStandardFee:'',aerotowUnitFee:''}
-		
-		var data = {
-        user:'',//Info
-        date:'', 
-        club:'',
-
-        aircraft:JSON.parse(JSON.stringify(this.aircraftObj)),
-		tug:JSON.parse(JSON.stringify(this.aircraftObj)),
-        
-        launchType:'',
-        releaseHeight:'',
-
-        p1:JSON.parse(JSON.stringify(this.userObj)),
-        p2:JSON.parse(JSON.stringify(this.userObj)),
-
-        payee:'',//payment
-        aerotowStandardFee:'',//aerotow
-        aerotowUnitFee:'',
-        aerotowLaunchFee:'',
-		launchFee:'', //winch
-		soaringFee:'',
-        launchTime:'',//time
-        landTime:'',
-        //notes:''
-		}
-	}*/
-
 	setData(row,columnValue,successHandler = () => {console.log(this.state.tableData)}){
 		console.log(row)
     	console.log(columnValue)
@@ -510,21 +494,9 @@ class TableLog extends React.Component {
 				inputData[count]['landTime']['status'] = 'indexed'
 			}
 
-			//inputData[count]['launchTimeInput']
-			//inputData[count]['landTimeInput']
-
-			//inputData[count]['notes'] = '' // dodgy -------------------------
-
-			//console.log('input')
-			//console.log(inputData[count])
-
-
-
 			inputData[count]['indexNumber'] = parseInt(indexCount) + parseInt(count)
 
-			tableData[inputData[count]['indexNumber']] = inputData[count]
-
-			
+			tableData[inputData[count]['indexNumber']] = inputData[count]			
 		}
 
 		this.setState({indexCount:(parseInt(indexCount)+parseInt(count)+1)},console.log('indexEndCount: ',this.state.indexCount))

@@ -248,7 +248,7 @@ class Logger extends React.Component {
     }
 
     this.aircraftObj = {id:'',registration:'',acName:''}
-    this.userObj = {userId:'',username:'',fName:'',lName:'',membershipId:'',launchFee:'',soaringFee:'',aerotowStandardFee:'',aerotowUnitFee:''}
+    this.userObj = {userId:'',username:'',fName:'',lName:'',membershipId:'',winchLaunchFee:'',soaringFee:'',aerotowStandardFee:'',aerotowUnitFee:''}
     this.timeObj = {formatted:'',input:'',status:''}
 		
     this.data = {
@@ -271,12 +271,13 @@ class Logger extends React.Component {
       aerotowStandardFee:'',//aerotow
       aerotowUnitFee:'',
       aerotowLaunchFee:'',
-      launchFee:'', //winch
+      winchLaunchFee:'', //winch
       soaringFee:'',
       launchTime:this.timeObj,//time
       landTime:this.timeObj,
       soaringTotal:'',
-      total:''
+      aerotowTotal:'',
+      winchTotal:''
       //notes:''
     }
 
@@ -298,7 +299,7 @@ class Logger extends React.Component {
 	}
 //Calculations
   getAerotowFee(launchFee,unitFee,height){
-    var figure = parseInt(launchFee) + parseInt(unitFee)*parseInt(height - 2000)/1000
+    var figure = parseFloat(launchFee) + parseFloat(unitFee)*parseInt(height - 2000)/1000
     console.log(figure)
     return figure 
   }
@@ -332,42 +333,49 @@ class Logger extends React.Component {
     this.setState({data:data},successHandler);
   }
 
-  setDataRow(row,nameValue,successHandler = () => {console.log(this.state.data)}){
+  /*setDataRow(row,nameValue,successHandler = () => {console.log(this.state.data)}){
     console.log(nameValue)
     const data = this.state.data
     for(var key in nameValue){
       data[row][nameValue[key][0]] = nameValue[key][1]
     }
     this.setState({data:data},successHandler);
-  }
+  }*/
 
   setMembership(membership,user,updateGlobal=false){
-    console.log('setMembership')
-    console.log('User: ' + user)
-    console.log(membership)
-    var data = [
+    var data = this.state.data
+
+    var userMem = [
       ['membershipId', membership['membershipId']],
-      ['launchFee', membership['launchFee']],
+      ['winchLaunchFee', membership['winchLaunchFee']],
       ['soaringFee', membership['soaringFee']],
       ['aerotowStandardFee', membership['aerotowStandardFee']],
       ['aerotowUnitFee', membership['aerotowUnitFee']]
     ]
 
-    this.setDataRow(user,data)
+    var globalMem = [
+      ['payee', user],
+      ['winchLaunchFee', membership['winchLaunchFee']],
+      ['soaringFee', membership['soaringFee']],
+      ['aerotowStandardFee', membership['aerotowStandardFee']],
+      ['aerotowUnitFee', membership['aerotowUnitFee']],
+      ['aerotowLaunchFee',this.getAerotowFee(membership['aerotowStandardFee'],membership['aerotowUnitFee'],this.state.data['releaseHeight'])]
+    ]
 
-    if(updateGlobal){
+    for(var mem in userMem){
+      data[user][userMem[mem][0]] = userMem[mem][1]
+    }
+
+    if(user == data['payee']||updateGlobal){
       console.log('updateGlobal')
-      var fees = [
-        ['payee', user],
-        ['launchFee', membership['launchFee']],
-        ['soaringFee', membership['soaringFee']],
-        ['aerotowStandardFee', membership['aerotowStandardFee']],
-        ['aerotowUnitFee', membership['aerotowUnitFee']],
-        ['aerotowLaunchFee',this.getAerotowFee(membership['aerotowStandardFee'],membership['aerotowUnitFee'],this.state.data['releaseHeight'])]
-      ]
-      this.setData(fees)
+
+      for(var globe in globalMem){
+        data[globalMem[globe][0]] = globalMem[globe][1]
+      }
 
     }
+
+    this.setState({data:data})
   }
 
   setUser(userId,user) {
@@ -395,17 +403,16 @@ class Logger extends React.Component {
   }
 
   setPayee(payee){
-    const columns = ['launchFee','soaringFee']
-
+    const columns = ['winchLaunchFee','soaringFee','aerotowStandardFee','aerotowUnitFee']
     const data = this.state.data
-    var launchType = this.state.data['launchType']
 
     data['payee'] = payee
 
-    var objectKey = ''
     for(var key in columns){
       data[columns[key]] = data[payee][columns[key]]
     }
+
+    data['aerotowLaunchFee'] = this.getAerotowFee(data[payee]['aerotowStandardFee'],data[payee]['aerotowUnitFee'],data['releaseHeight'])
 
     this.setState({data:data},console.log(this.state.data))
   }
@@ -438,13 +445,8 @@ class Logger extends React.Component {
       return lst
     }
 
-    var memHandler = (e) => {
-      console.log('memHandler')
-      this.setMembership(memberships[e.target.value],user)
-    }
-  
     return(
-      <Form.Control as="select" onChange={memHandler} value={this.state.data[user]['membershipId']}>
+      <Form.Control as="select" onChange={(e) => {this.setMembership(memberships[e.target.value],user)}} value={this.state.data[user]['membershipId']}>
         {options()}
       </Form.Control>
     );
@@ -492,6 +494,19 @@ class Logger extends React.Component {
   }
 
   aircraft(type){
+    var handleClick = (event,figure) => {
+      var height = this.state.data['releaseHeight']
+      var returnHeight = (height + figure)
+      var returnLst = [['releaseHeight',returnHeight]]
+
+      if(returnHeight >= 2000){
+        if(this.state.data['aerotowLaunchFee'] != ''){
+          returnLst[1] = ['aerotowLaunchFee',this.getAerotowFee(this.state.data['aerotowStandardFee'],this.state.data['aerotowUnitFee'],returnHeight)]
+        }
+
+        this.setData(returnLst);
+      }
+    }
 
     var auxGroup = () =>{
       if(type == 'aircraft'){
@@ -573,6 +588,23 @@ class Logger extends React.Component {
   }
 
   fees(){
+    var aerotowUpdate = (event) => {
+      const {name,value} = event.target
+      var data = this.state.data
+
+      if(name == 'aerotowStandardFee'){
+        var aerotowStandardFee = value
+        var aerotowUnitFee = data['aerotowUnitFee']
+      } else {
+        var aerotowStandardFee = data['aerotowStandardFee']
+        var aerotowUnitFee = value
+      }
+
+      data[name] = value
+      data['aerotowLaunchFee'] = this.getAerotowFee(aerotowStandardFee,aerotowUnitFee,data['releaseHeight'])
+
+      this.setState({data:data})
+    }
 
     var launch = () => {
       if(this.state.data['launchType'] == 'aerotow'){
@@ -589,7 +621,7 @@ class Logger extends React.Component {
         return (
         <Form.Group className="group" controlId="formGridEmail" >
           <Form.Label>Launch Fee</Form.Label>
-          <Form.Control placeholder="Launch Fee" name="launchFee" onChange={(e) => {this.setData([[e.target.name,e.target.value]])}} onClick={(e)=>e.target.select()} value={this.state.data["launchFee"]}/>
+          <Form.Control placeholder="Launch Fee" name="winchLaunchFee" onChange={(e) => {this.setData([[e.target.name,e.target.value]])}} onClick={(e)=>e.target.select()} value={this.state.data["winchLaunchFee"]}/>
         </Form.Group>
         );
 
@@ -610,12 +642,12 @@ class Logger extends React.Component {
 
       <Form.Group className={(this.state.data['launchType'] == 'winch') ? "group hideElement" : "group showElement"} controlId="formGridEmail" >
         <Form.Label>Aerotow Launch to 2000</Form.Label>
-        <Form.Control placeholder="Launch Fee" name="aerotowStandardFee" onChange={(e) => {this.setData([[e.target.name,e.target.value]])}} onClick={(e)=>e.target.select()} value={this.state.data["aerotowStandardFee"]}/>
+        <Form.Control placeholder="Launch Fee" name="aerotowStandardFee" onChange={aerotowUpdate} onClick={(e)=>e.target.select()} value={this.state.data["aerotowStandardFee"]}/>
       </Form.Group>
 
       <Form.Group className={(this.state.data['launchType'] == 'winch') ? "group hideElement" : "group showElement"} controlId="formGridEmail" >
         <Form.Label>Fee per 1000ft above</Form.Label>
-        <Form.Control placeholder="Launch Fee" name="aerotowUnitFee" onChange={(e) => {this.setData([[e.target.name,e.target.value]])}} onClick={(e)=>e.target.select()} value={this.state.data["aerotowUnitFee"]}/>
+        <Form.Control placeholder="Launch Fee" name="aerotowUnitFee" onChange={aerotowUpdate} onClick={(e)=>e.target.select()} value={this.state.data["aerotowUnitFee"]}/>
       </Form.Group>
 
       {launch()}
@@ -630,7 +662,7 @@ class Logger extends React.Component {
   }
 
   buttons(){
-    var columns = ['launchFee','aerotowLaunchFee','aerotowStandardFee','aerotowUnitFee','soaringFee']
+    var columns = ['winchLaunchFee','aerotowLaunchFee','aerotowStandardFee','aerotowUnitFee','soaringFee']
     
     var floatData = (data,columns) =>{
       for(var key in columns){
