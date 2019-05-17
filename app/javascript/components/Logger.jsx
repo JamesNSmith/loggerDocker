@@ -102,9 +102,12 @@ class DropdownBox extends React.Component {
 }
 
 class DropdownGroup extends React.Component {
+  static objs = [];
+
   constructor(props){
     super(props)
 
+    //this.reset = this.reset.bind(this);
     this.addProps = this.addProps.bind(this);
     this.update = this.update.bind(this);
 
@@ -118,6 +121,14 @@ class DropdownGroup extends React.Component {
     this.state = {
       menuData:this.props.menuData,
       columns:[]
+    }
+
+    DropdownGroup.objs.push([this,this.props.menuData])
+  }
+
+  static reset(){
+    for(var key in DropdownGroup.objs){
+      DropdownGroup.objs[key][0].setState({menuData:JSON.parse(JSON.stringify(DropdownGroup.objs[key][1]))})
     }
   }
 
@@ -142,16 +153,14 @@ class DropdownGroup extends React.Component {
       if(count == this.state.columns.length){menuData[menuNum] = this.menuData[menuNum]}
     }
 
-    if(menuData.length == 1){
+    var length = Object.keys(menuData).length
+    if(length == 1){
       console.log('Match')
-    } else if(menuData.length == 0){
+    } else if(length == 0){
       console.log('No Match')
     } else {
       console.log('Multiple Match')
     }
-
-    console.log('menuData')
-    console.log(menuData)
 
     this.setState({menuData:menuData});
   }
@@ -196,18 +205,12 @@ class DropdownGroup extends React.Component {
 
     var menuLst = []
     var columnString = ''
-
-    console.log('menuKeys')
-    console.log(columns)
-    console.log(this.state.menuData)
-    console.log(menuKeys)
+   
     for(var menuNum in menuKeys){
       var columnLst = []
-      console.log('menuNum')
-      console.log(menuNum)
-      console.log(menuKeys[menuNum])
+      
       for(var columnNum in columns){
-        columnLst.push(<td className="dbTd" key={"DI" + columns[columnNum] + menuKeys[menuNum]}><Dropdown.Item  eventKey={menuKeys[menuNum]} onSelect={(e) => {console.log(e);console.log(this.menuData);this.menuHandler(e)}}>{menuData[menuKeys[menuNum]][columns[columnNum]]}</Dropdown.Item></td>)
+        columnLst.push(<td className="dbTd" key={"DI" + columns[columnNum] + menuKeys[menuNum]}><Dropdown.Item  key={"DIDI" + columns[columnNum] + menuKeys[menuNum]} eventKey={menuKeys[menuNum]} onSelect={(e) => {this.menuHandler(e)}}>{menuData[menuKeys[menuNum]][columns[columnNum]]}</Dropdown.Item></td>)
       }
   
       menuLst.push(dropRow(menuKeys[menuNum],columnLst));
@@ -576,6 +579,7 @@ class Logger extends React.Component {
 
 // Helpers
   clear(){
+    DropdownGroup.reset();
     for(var key in this.defaultObjects){
       var stateObj = {};
       stateObj[this.defaultObjects[key][0]] = JSON.parse(JSON.stringify(this.defaultObjects[key][1]));

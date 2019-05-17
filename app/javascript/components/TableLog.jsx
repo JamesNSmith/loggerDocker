@@ -688,8 +688,6 @@ class TableLog extends React.Component {
 	}
 
 	render(){
-		console.log('uio')
-
 		const rows = [];
 
 		var pageLength = 4

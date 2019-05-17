@@ -40,11 +40,11 @@ export const demoClubUsers = {
 }
 
 export const demoAircrafts = {
-      0:{id:0,registration:'G-CUHJ', acName:'k13'},
-      1:{id:1,registration:'G-CUGF', acName:'k13'},
-      2:{id:2,registration:'G-CIOP', acName:'k8'},
+      0:{id:0,registration:'G-CUHJ', acName:'K13'},
+      1:{id:1,registration:'G-CUGF', acName:'K13'},
+      2:{id:2,registration:'G-CIOP', acName:'K8'},
       3:{id:3,registration:'G-CHYT', acName:'Puchacz'},
-      4:{id:4,registration:'G-CIRC', acName:'k8'},
+      4:{id:4,registration:'G-CIRC', acName:'K8'},
       5:{id:5,registration:'G-CHUV', acName:'Puchacz'}
       }
 
