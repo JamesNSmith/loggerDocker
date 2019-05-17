@@ -76,6 +76,16 @@ div.form{
     
 }
 
+.demoLogger {
+  margin: 45px auto;
+  width: 100%;
+  min-height: 1000px;
+}
+
+.logger {
+    margin: 30px auto;
+}
+
 .showTug {
     transition-delay: 500ms;
     transition: all 2s linear;
@@ -196,7 +206,7 @@ div.form{
 }
 
 .feeTwo{
-    width:220px;
+    width:210px;
     //margin:10px auto;
     margin:10px;
     margin-left:10px;
@@ -236,3 +246,17 @@ div.form{
     float: left;
     padding: 5px;
 }
+
+.loggerButtons{
+    width:180px;
+    margin:10px auto;
+
+    button {
+        width:80px;
+        margin:10px 5px;
+    }
+}
+
+/*.tableRow {
+    min-height:150px;
+}*/

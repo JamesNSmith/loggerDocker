@@ -735,7 +735,7 @@ class Logger extends React.Component {
 
     if(this.state.mode == 'edit'){
       return (
-        <div>
+        <div className='loggerButtons'>
         <Button variant="outline-success" onClick={e => handleUpdate(e)}>
           Update
         </Button>
@@ -747,7 +747,7 @@ class Logger extends React.Component {
       
     } else {
       return (
-        <div>
+        <div className='loggerButtons'>
         <Button variant="outline-success" onClick={e => handleAdd(e)}>
           Add
         </Button>

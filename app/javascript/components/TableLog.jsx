@@ -292,7 +292,7 @@ class Row extends React.Component {
 		
 
 		if(!this.props.data){
-  			return (<tr key = "last"><td colSpan="100%" height="60"></td></tr>)
+  			return (<tr key = "last"><td colSpan="100%" height="50"></td></tr>)
   			this.rowId = "table_row_end"
 		} else {
 			this.rowId = "table_row" + this.props.data['indexNumber']
@@ -740,6 +740,8 @@ class TableLog extends React.Component {
 					/>}
 				/>);
 		}
+
+		rows.push(<Row />)
 
 		return(
 		<div className="table">
