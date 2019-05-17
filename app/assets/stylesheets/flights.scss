@@ -49,7 +49,7 @@ td{
     padding:"20px" "20px";
     vertical-align: text-top;
     align:center;
-    border:black 0.05px solid;
+    //border:black 0.05px solid;
     //display:inline-grid;
 }
 
@@ -57,7 +57,7 @@ table{
     margin:auto;
     padding:"20px";
     align:center;
-    border:black 0.05px solid;
+    //border:black 0.05px solid;
     width:200px;
 }
 
@@ -103,22 +103,110 @@ div.form{
 .formform{
         //position:absolute;
         align:center;
-        border:1px solid black;
-        width:1020px;
+        //border:1px solid black;
+        width:900px;
         margin:10px auto;
-    }
+}
+
+
 
 .row{
     align:center;
-    border:1px solid black;
+    //border:1px solid black;
     width:95%;
+    height:100px;
     margin:10px auto;
+    background-color: rgba(0,0,0,.05);
+
+    /*.feeDiv {
+        display:inline;
+        height:40px;
+        width:350px;
+
+    }*/
+}
+
+.row-expand{
+    height:250px;
+}
+
+.form-label {
+    margin:10px;
+}
+
+.form-heading{
+    margin: auto 10px;
+    width:135px;
+    height:40px;
 }
 
 .group {
     align:center;
-    border:1px solid black;
-    margin:10px auto;
+    //height:80px;
+    //position:absolute;
+    //border:1px solid black;
+    margin:auto 10px;
+}
+
+.columnOne{
+    width:50px;
+
+}
+.columnTwo{
+    width:400px;
+}
+
+.columnThree{
+    width:160px;
+}
+
+.dropdown-menu{
+    //position:absolute;
+    left:-190px !important;
+    margin:auto;
+    width:370px;
+}
+
+.dropdown-item {
+    width:180px;
+    //word-spacing:10px;
+    //display:inline;
+    //margin:40px auto;
+
+
+    /*div{
+        width:100px;
+
+    }*/
+}
+
+.dpTable{
+    border:none !important;
+}
+
+.dpTd{
+    border:none !important;
+    margin:15px;
+    width:150px;
+}
+
+.feeOne{
+    width:150px;
+    margin:10px;
+}
+
+.feeTwo{
+    width:220px;
+    //margin:10px auto;
+    margin:10px;
+    margin-left:10px;
+}
+
+.feeThree{
+    width:200px;
+    margin:10px;
+    margin-left:10px;
+    margin-right:auto;
 }
 
 .table{

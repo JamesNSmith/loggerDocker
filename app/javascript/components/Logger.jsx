@@ -196,24 +196,32 @@ class DropdownGroup extends React.Component {
 
   //Builders
   rows(){
-    const dropRow = (menuNum) => {
-      return <Dropdown.Item key={"DI" + menuNum} eventKey={menuNum} onClick={e => this.menuHandler(menuNum)} >{columnLst}</Dropdown.Item>
+    const dropRow = (menuNum,line) => {
+      return (<tr key={"TRDI" + menuNum} id={"TRDI" + menuNum} >{line}</tr>);
     }
     
     var columns = this.state.columns
     var menuData = this.state.menuData
 
     var menuLst = []
+    var columnString = ''
 
     for(var menuNum in menuData){
       var columnLst = []
       for(var columnNum in columns){
-        columnLst.push(menuData[menuNum][columns[columnNum]])
-      }  
-      menuLst.push(dropRow(menuNum));
+        columnLst.push(<td className="dbTd" key={"DI" + columns[columnNum] + menuNum}><Dropdown.Item  eventKey={menuNum} onSelect={(e) => {this.menuHandler(e)}}>{menuData[menuNum][columns[columnNum]]}</Dropdown.Item></td>)
+      }
+  
+      menuLst.push(dropRow(menuNum,columnLst));
     }
     
-    return menuLst
+    return (
+      <table className="dbTable">
+      <tbody>
+        {menuLst}
+      </tbody>
+      </table>
+      );
   }
 
   render(){
@@ -271,13 +279,16 @@ class User extends React.Component {
 
   }
 
+  //<Form.Group className="group columnOne" controlId="formGridState">
+  //    </Form.Group>
+
   render(){
     return(
 
     <Form.Row className="row">
-      <Form.Label><h3>{this.props.user.charAt(0).toUpperCase() + this.props.user.slice(1)}</h3></Form.Label>
+      <Form.Label className="form-heading"><h3>{this.props.user.charAt(0).toUpperCase() + this.props.user.slice(1)}</h3></Form.Label>
 
-      <Form.Group className="group" controlId="formGridName" >
+      <Form.Group className="group columnTwo" controlId="formGridName" >
         <Form.Label>Name</Form.Label>
 
         <DropdownGroup menuName={this.props.user+'ClubUsers'} menuData={this.props.totalClubUsers} onMenuUpdate={(menuNum) => {this.props.setUser(this.props.totalClubUsers[menuNum]['userId'],this.props.user)}}>
@@ -291,7 +302,7 @@ class User extends React.Component {
         
       </Form.Group>
 
-      <Form.Group className="group" controlId="formGridState">
+      <Form.Group className="group columnThree" controlId="formGridState">
         <Form.Label>Membership</Form.Label>
 
         {this.props.membership}
@@ -312,9 +323,9 @@ class AircraftAux extends React.Component {
   render(){
     if(this.props.type == 'aircraft'){
       return (
-        <Form.Group className="group" controlId="formGridacName">
+        <Form.Group className="group columnThree" controlId="formGridacName">
           <Form.Label>Launch</Form.Label>
-          <ToggleButtonGroup vertical name="launchType" type="radio" onChange={this.props.onLaunchChange} value={this.props.launchType}>
+          <ToggleButtonGroup name="launchType" type="radio" onChange={this.props.onLaunchChange} value={this.props.launchType}>
             <ToggleButton variant="outline-primary" value={'winch'}>Winch</ToggleButton>
             <ToggleButton variant="outline-primary" value={'aerotow'}>Aerotow</ToggleButton>
           </ToggleButtonGroup>
@@ -322,7 +333,7 @@ class AircraftAux extends React.Component {
       );
     } else {
       return (
-        <Form.Group className="group" controlId="formGridacName">
+        <Form.Group className="group columnThree" controlId="formGridacName">
           <Form.Label>Release Height</Form.Label>
           <InputGroup className="mb-3">
             <InputGroup.Prepend>
@@ -359,9 +370,9 @@ class Aircraft extends React.Component {
     return(
 
     <Form.Row className={(this.props.type == 'tug')?(this.props.launchType == 'winch') ? "row hideTug" : "row showTug" : "row"}>
-      <Form.Label><h3>{this.props.type.charAt(0).toUpperCase() + this.props.type.slice(1)}</h3></Form.Label>
+      <Form.Label className="form-heading"><h3>{this.props.type.charAt(0).toUpperCase() + this.props.type.slice(1)}</h3></Form.Label>
 
-      <Form.Group className="group" controlId="formGridName" >
+      <Form.Group className="group columnTwo" controlId="formGridName" >
         <Form.Label>Registration</Form.Label>
 
         <DropdownGroup menuName={this.props.type} menuData={this.props.totalAircrafts} onMenuUpdate={(menuNum) => {this.props.setAircraft(this.props.totalAircrafts[menuNum]['id'],this.props.type)}}>
@@ -399,7 +410,7 @@ class FeesLaunch extends React.Component {
     if(this.props.launchType == 'aerotow'){
 
       return (
-        <Form.Group className="group" controlId="formGridEmail" >
+        <Form.Group className="group feeTwo" controlId="formGridEmail" >
           <Form.Label>Launch Fee</Form.Label>
           <Form.Control placeholder="Launch Fee" name="aerotowLaunchFee" onChange={this.props.aerotowChange} onClick={(e)=>e.target.select()} value={this.props.aerotowValue}/>
         </Form.Group>
@@ -408,7 +419,7 @@ class FeesLaunch extends React.Component {
     } else {
     
       return (
-        <Form.Group className="group" controlId="formGridEmail" >
+        <Form.Group className="group feeTwo" controlId="formGridEmail" >
           <Form.Label>Launch Fee</Form.Label>
           <Form.Control placeholder="Launch Fee" name="winchLaunchFee" onChange={this.props.winchChange} onClick={(e)=>e.target.select()} value={this.props.winchValue}/>
         </Form.Group>
@@ -426,33 +437,39 @@ class Fees extends React.Component {
 
   render(){
     return (
-      <Form.Row className="row">
-      <Form.Label><h3>Fees</h3></Form.Label>
+      <Form.Row className={(this.props.launchType == 'winch') ? "row" : "row row-expand"}>
+      <Form.Label className="form-heading"><h3>Fees</h3></Form.Label>
 
-      <Form.Group className="group" controlId="formGridacName">
+      <Form.Group className="group feeOne" controlId="formGridacName">
         <Form.Label>Payee</Form.Label>
-        <ToggleButtonGroup vertical name="launchType" type="radio" onChange={this.props.setPayee} value={this.props.payee}>
+        <ToggleButtonGroup name="launchType" type="radio" onChange={this.props.setPayee} value={this.props.payee}>
         <ToggleButton variant="outline-primary" value={'p1'}>P1</ToggleButton>
         <ToggleButton variant="outline-primary" value={'p2'}>P2</ToggleButton>
         </ToggleButtonGroup>
       </Form.Group>
 
-      <Form.Group className={(this.props.launchType == 'winch') ? "group hideElement" : "group showElement"} controlId="formGridEmail" >
+      {this.props.feesLaunch}
+      
+      <Form.Group className="group feeThree" controlId="formGridPassword" >
+        <Form.Label>Soaring Fee</Form.Label>
+        <Form.Control placeholder="Soaring Fee" name="soaringFee" onChange={this.props.setSoaringFee} onClick={(e)=>e.target.select()} value={this.props.soaringFee}/>
+      </Form.Group>
+
+      <Form.Label className="form-heading"><h3></h3></Form.Label>
+
+      <Form.Group className="group feeOne" controlId="formGridacName">
+      </Form.Group>
+
+      <Form.Group className={(this.props.launchType == 'winch') ? "group feeTwo hideElement" : "group feeTwo showElement"} controlId="formGridEmail" >
         <Form.Label>Aerotow Launch to 2000</Form.Label>
         <Form.Control placeholder="Launch Fee" name="aerotowStandardFee" onChange={this.props.setAerotow} onClick={(e)=>e.target.select()} value={this.props.aerotowStandardFee}/>
       </Form.Group>
 
-      <Form.Group className={(this.props.launchType == 'winch') ? "group hideElement" : "group showElement"} controlId="formGridEmail" >
+      <Form.Group className={(this.props.launchType == 'winch') ? "group feeThree hideElement" : "group feeThree showElement"} controlId="formGridEmail" >
         <Form.Label>Fee per 1000ft above</Form.Label>
         <Form.Control placeholder="Launch Fee" name="aerotowUnitFee" onChange={this.props.setAerotow} onClick={(e)=>e.target.select()} value={this.props.aerotowUnitFee}/>
       </Form.Group>
 
-      {this.props.feesLaunch}
-      
-      <Form.Group className="group" controlId="formGridPassword" >
-        <Form.Label>Soaring Fee</Form.Label>
-        <Form.Control placeholder="Soaring Fee" name="soaringFee" onChange={this.props.setSoaringFee} onClick={(e)=>e.target.select()} value={this.props.soaringFee}/>
-      </Form.Group>
 
       </Form.Row>
     );
@@ -749,14 +766,16 @@ class Logger extends React.Component {
           <Form className="formform" onSubmit={e => this.handleAdd(e)} >
 
             <Form.Row className="row">
-            <Form.Label><h3>Info</h3></Form.Label>
+            <Form.Label className="form-heading"><h3>Info</h3></Form.Label>
 
-              <Form.Group className="group" controlId="formGridDate" >
-                <Form.Control disabled aria-describedby="basic-addon1" placeholder="Date" name="date" value={this.formatDate(this.state.data['date'])}/> 
+              <Form.Group className="group columnTwo" controlId="formGridClub" >
+                <Form.Label>Club</Form.Label>
+                <Form.Control disabled aria-describedby="basic-addon1" placeholder="Club" name="club" value={this.state.data['club']['name']}/>
               </Form.Group>
 
-              <Form.Group className="group" controlId="formGridClub" >
-                <Form.Control disabled aria-describedby="basic-addon1" placeholder="Club" name="club" value={this.state.data['club']['name']}/>
+              <Form.Group className="group columnThree" controlId="formGridDate" >
+                <Form.Label>Date</Form.Label>
+                <Form.Control disabled aria-describedby="basic-addon1" placeholder="Date" name="date" value={this.formatDate(this.state.data['date'])}/> 
               </Form.Group>
 
             </Form.Row>
