@@ -741,7 +741,7 @@ class TableLog extends React.Component {
 				/>);
 		}
 
-		rows.push(<Row />)
+		rows.push(<Row key='lastRow'/>)
 
 		return(
 		<div className="table">

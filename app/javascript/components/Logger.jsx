@@ -580,9 +580,16 @@ class Logger extends React.Component {
 // Helpers
   clear(){
     DropdownGroup.reset();
+    var launchType = this.state.data['launchType']
+
     for(var key in this.defaultObjects){
       var stateObj = {};
       stateObj[this.defaultObjects[key][0]] = JSON.parse(JSON.stringify(this.defaultObjects[key][1]));
+
+      if(this.defaultObjects[key][0] == 'data'){
+        stateObj[this.defaultObjects[key][0]]['launchType'] = launchType
+      }
+
       this.setState(stateObj);
     }
   }
