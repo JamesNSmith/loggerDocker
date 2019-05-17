@@ -65,6 +65,40 @@ class CustomMenu extends React.Component {
   }
 }
 
+class DropdownBox extends React.Component {
+  constructor(props){
+    super(props)
+
+    this.column = this.props.column
+    this.placehold = this.props.placeholder
+
+    this.update = this.props.update
+
+    this.changeHandler = this.changeHandler.bind(this);
+
+    this.columnNum = this.props.setProps(this.column,this.props.filter,this.props.onChange,this)
+
+  }
+
+  changeHandler(event){
+    const {name,value} = event.target
+    this.props.onChange({name:name,value:value})
+    this.update(this.columnNum,value)
+  }
+
+  render(){
+
+    return (
+        <li>
+          <Dropdown.Toggle as={CustomToggle} id="dropdown-custom-components">
+            <Form.Control autoComplete="new-password" placeholder={this.props.placeholder} name={this.props.column} onChange={this.changeHandler}  value={this.props.value}/>
+          </Dropdown.Toggle>
+        </li>
+      );
+
+  }
+}
+
 class DropdownGroup extends React.Component {
   constructor(props){
     super(props)
@@ -87,17 +121,24 @@ class DropdownGroup extends React.Component {
 
   //Foreign Functions 
   update(valueColumnNum,value){
+    console.log('update')
+    console.log(valueColumnNum)
+    console.log(value)
     var menuData = []
     
     for(var menuNum in this.menuData){
       var count = 0
+      console.log('1')
       for(var columnNum in this.state.columns){
+        console.log('2')
         if(columnNum == valueColumnNum){
+          console.log('3')
           var filterValue = value
         } else {
+          console.log('4')
           var filterValue = this.children[columnNum].props.value
         }
-        
+        console.log(filterValue)
         if(this.filters[columnNum](this.menuData[menuNum][this.state.columns[columnNum]],filterValue)){
           count++
         } 
@@ -113,6 +154,9 @@ class DropdownGroup extends React.Component {
     } else {
       console.log('Multiple Match')
     }
+
+    console.log('menuData')
+    console.log(menuData)
 
     this.setState({menuData:menuData});
   }
@@ -131,12 +175,23 @@ class DropdownGroup extends React.Component {
 
   //Handlers
   menuHandler(menuNum) {
+    console.log('menuHandle')
     for(var columnNum in this.state.columns){
       this.change[columnNum]({value:JSON.parse(JSON.stringify(this.menuData[menuNum][this.state.columns[columnNum]]))})
     }
 
+    const sleep = (milliseconds) => {
+      return new Promise(resolve => setTimeout(resolve, milliseconds))
+    }
+
+    sleep(0).then(() => {
+      console.log('active')
+      
+    })
+
     this.update()
     this.props.onMenuUpdate(menuNum)
+    
   }
 
   //Builders
@@ -184,40 +239,6 @@ class DropdownGroup extends React.Component {
       </Dropdown>
     );
     
-  }
-}
-
-class DropdownBox extends React.Component {
-  constructor(props){
-    super(props)
-
-    this.column = this.props.column
-    this.placehold = this.props.placeholder
-
-    this.update = this.props.update
-
-    this.changeHandler = this.changeHandler.bind(this);
-
-    this.columnNum = this.props.setProps(this.column,this.props.filter,this.props.onChange,this)
-
-  }
-
-  changeHandler(event){
-    const {name,value} = event.target
-    this.props.onChange({name:name,value:value})
-    this.update(this.columnNum,value)
-  }
-
-  render(){
-
-    return (
-        <li>
-          <Dropdown.Toggle as={CustomToggle} id="dropdown-custom-components">
-            <Form.Control autoComplete="new-password" placeholder={this.props.placeholder} name={this.props.column} onChange={this.changeHandler}  value={this.props.value}/>
-          </Dropdown.Toggle>
-        </li>
-      );
-
   }
 }
 
@@ -507,7 +528,6 @@ class Logger extends React.Component {
       ['mode','create']
     ];
 
-
     var stateObj = {};
     for(var key in this.defaultObjects){ 
       stateObj[this.defaultObjects[key][0]] = JSON.parse(JSON.stringify(this.defaultObjects[key][1]));
@@ -549,7 +569,6 @@ class Logger extends React.Component {
   }
 
   setData(nameValue,successHandler = () => {console.log(this.state.data)}){
-    console.log(nameValue)
     const data = this.state.data
     for(var key in nameValue){
       data[nameValue[key][0]] = nameValue[key][1]
@@ -583,8 +602,6 @@ class Logger extends React.Component {
     }
 
     if(user == data['payee']||updateGlobal){
-      console.log('updateGlobal')
-
       for(var globe in globalMem){
         data[globalMem[globe][0]] = globalMem[globe][1]
       }
@@ -595,7 +612,6 @@ class Logger extends React.Component {
   }
 
   setUser(userId,user) {
-    console.log('setUser')
     var userObj = this.totalClubUsers[userId]
     var data = this.state.data
 
@@ -607,7 +623,6 @@ class Logger extends React.Component {
   }
 
   setAircraft(id,type) {
-    console.log('setAircraft')
     var userObj = this.totalAircrafts[id]
     var data = this.state.data
 
@@ -644,7 +659,7 @@ class Logger extends React.Component {
 
     data['aerotowLaunchFee'] = this.getAerotowFee(data[payee]['aerotowStandardFee'],data[payee]['aerotowUnitFee'],data['releaseHeight'])
 
-    this.setState({data:data},console.log(this.state.data))
+    this.setState({data:data})
   }
 
   setAerotow(event){
@@ -834,7 +849,7 @@ class Logger extends React.Component {
 	}
 
   componentDidMount(){
-    console.log('logger did mount')
+    //console.log('logger did mount')
     //this.setMembership(this.memberships[Object.keys(this.memberships)[0]],'p1',true)
     //this.setMembership(this.memberships[Object.keys(this.memberships)[0]],'p2',true)
     

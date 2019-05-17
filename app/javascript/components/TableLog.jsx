@@ -373,87 +373,6 @@ class TableLog extends React.Component {
 		
 	}
 
-//formatters -------------------------------
-	timeFormat(time, separator = ':'){
-		if(time == ''){
-			return ''
-		}
-
-		const timeDate = new Date(time);
-		var hours = timeDate.getHours()
-		var minutes = timeDate.getMinutes()
-
-		if(minutes < 10){
-			minutes = "0" + minutes;
-		}
-
-		return (hours + separator + minutes);
-	}
-
-//helpers ---------------------------------
-	setData(row,columnValue,successHandler = () => {console.log(this.state.tableData)}){
-		console.log(row)
-    	console.log(columnValue)
-    	const data = this.state.tableData
-    	for(var key in columnValue){
-
-    		if(typeof columnValue[key][1] == 'object'){
-    			var tierTwo = data[row][columnValue[key][0]]
-    			var objTwo = columnValue[key][1]
-
-    			for(var keyTwo in objTwo){
-    				tierTwo[objTwo[keyTwo][0]] = objTwo[keyTwo][1]
-    			}
-    			data[row][columnValue[key][0]] = tierTwo
-
-    		} else {
-      			data[row][columnValue[key][0]] = columnValue[key][1]
-      		}
-    	}
-    	
-    	this.setState({tableData:data},successHandler());
-  	}
-
-  	scrollFocus(top){
-  		var winWidth = window.innerWidth;
-		var winHeight = window.innerHeight;
-		var docHeight = document.height;
-
-  		window.scroll({
-  			top: top + 2*winHeight/3,
-  			left: 0,
-  			behavior: 'smooth'
-		});
-  	}
-
-//Utils -------------------------------------
-	clearData(){
-		this.setState({tableData:[]},console.log('ready'));
-	}
-	
-	updateData(id,name,time){
-		var table = 'flights'
-		var timeFormated = time.toISOString()
-
-		this.setData(id,[[name,[['formatted',timeFormated]]]],() => {console.log('updateData ready');console.log(this.state.tableData)})
-
-		window.flightController.tableUpdateTime(table,id,name,timeFormated)
-	}
-
-	deleteRecord(index){
-  		const data = this.state.tableData
-  		const flightNumber = data['flightNumber']
-
-  		if(!confirm('Are you sure you want to delete this record?')){
-  			return ''
-  		}
-
-  		window.flightController.tableDeleteRecord(index,flightNumber)
-
-  		delete data[index]
-  		this.setState({tableData:data});
-  	}
-
 //foreign functions -----------------------------
 	addDataTable(inputData){
 		//table
@@ -566,6 +485,87 @@ class TableLog extends React.Component {
 
 		this.setData(id,columnValues,success)
 	}
+
+//formatters -------------------------------
+	timeFormat(time, separator = ':'){
+		if(time == ''){
+			return ''
+		}
+
+		const timeDate = new Date(time);
+		var hours = timeDate.getHours()
+		var minutes = timeDate.getMinutes()
+
+		if(minutes < 10){
+			minutes = "0" + minutes;
+		}
+
+		return (hours + separator + minutes);
+	}
+
+//helpers ---------------------------------
+	setData(row,columnValue,successHandler = () => {console.log(this.state.tableData)}){
+		console.log(row)
+    	console.log(columnValue)
+    	const data = this.state.tableData
+    	for(var key in columnValue){
+
+    		if(typeof columnValue[key][1] == 'object'){
+    			var tierTwo = data[row][columnValue[key][0]]
+    			var objTwo = columnValue[key][1]
+
+    			for(var keyTwo in objTwo){
+    				tierTwo[objTwo[keyTwo][0]] = objTwo[keyTwo][1]
+    			}
+    			data[row][columnValue[key][0]] = tierTwo
+
+    		} else {
+      			data[row][columnValue[key][0]] = columnValue[key][1]
+      		}
+    	}
+    	
+    	this.setState({tableData:data},successHandler());
+  	}
+
+  	scrollFocus(top){
+  		var winWidth = window.innerWidth;
+		var winHeight = window.innerHeight;
+		var docHeight = document.height;
+
+  		window.scroll({
+  			top: top + 2*winHeight/3,
+  			left: 0,
+  			behavior: 'smooth'
+		});
+  	}
+
+//Utils -------------------------------------
+	clearData(){
+		this.setState({tableData:[]},console.log('ready'));
+	}
+	
+	updateData(id,name,time){
+		var table = 'flights'
+		var timeFormated = time.toISOString()
+
+		this.setData(id,[[name,[['formatted',timeFormated]]]],() => {console.log('updateData ready');console.log(this.state.tableData)})
+
+		window.flightController.tableUpdateTime(table,id,name,timeFormated)
+	}
+
+	deleteRecord(index){
+  		const data = this.state.tableData
+  		const flightNumber = data['flightNumber']
+
+  		if(!confirm('Are you sure you want to delete this record?')){
+  			return ''
+  		}
+
+  		window.flightController.tableDeleteRecord(index,flightNumber)
+
+  		delete data[index]
+  		this.setState({tableData:data});
+  	}
 
 	
 //handlers ----------------------------------
@@ -729,7 +729,8 @@ class TableLog extends React.Component {
 					status = {data['status']}
 					timeTextHandler={this.timeTextHandler}
 					timeButtonHandler={this.timeButtonHandler} 
-					/>} 	
+					/>} 
+
 				buttons={<Buttons 
 					indexNumber={data['indexNumber']}
 					status={data['status']}
