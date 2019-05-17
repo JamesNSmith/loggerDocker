@@ -72,8 +72,6 @@ class DropdownBox extends React.Component {
     this.column = this.props.column
     this.placehold = this.props.placeholder
 
-    this.update = this.props.update
-
     this.changeHandler = this.changeHandler.bind(this);
 
     this.columnNum = this.props.setProps(this.column,this.props.filter,this.props.onChange,this)
@@ -81,9 +79,13 @@ class DropdownBox extends React.Component {
   }
 
   changeHandler(event){
+    console.log('change')
     const {name,value} = event.target
+    var updateObj = {}
+    updateObj[this.columnNum] = value
+
     this.props.onChange({name:name,value:value})
-    this.update(this.columnNum,value)
+    this.props.update(updateObj)
   }
 
   render(){
@@ -120,31 +122,24 @@ class DropdownGroup extends React.Component {
   }
 
   //Foreign Functions 
-  update(valueColumnNum,value){
-    console.log('update')
-    console.log(valueColumnNum)
-    console.log(value)
-    var menuData = []
+  update(valueObj){
+    var menuData = {}
+    //var menuKeys = Object.keys(this.menuData)
     
     for(var menuNum in this.menuData){
       var count = 0
-      console.log('1')
       for(var columnNum in this.state.columns){
-        console.log('2')
-        if(columnNum == valueColumnNum){
-          console.log('3')
-          var filterValue = value
+        if(valueObj[columnNum] != null){
+          var filterValue = valueObj[columnNum]
         } else {
-          console.log('4')
           var filterValue = this.children[columnNum].props.value
         }
-        console.log(filterValue)
         if(this.filters[columnNum](this.menuData[menuNum][this.state.columns[columnNum]],filterValue)){
           count++
         } 
       }
 
-      if(count == this.state.columns.length){menuData.push(this.menuData[menuNum])}
+      if(count == this.state.columns.length){menuData[menuNum] = this.menuData[menuNum]}
     }
 
     if(menuData.length == 1){
@@ -175,21 +170,16 @@ class DropdownGroup extends React.Component {
 
   //Handlers
   menuHandler(menuNum) {
-    console.log('menuHandle')
+    console.log('menuHandler')
+    var updateObj = {}
+    var value = 0
     for(var columnNum in this.state.columns){
-      this.change[columnNum]({value:JSON.parse(JSON.stringify(this.menuData[menuNum][this.state.columns[columnNum]]))})
+      value = this.menuData[menuNum][this.state.columns[columnNum]]
+      this.change[columnNum]({value:JSON.parse(JSON.stringify(value))})
+      updateObj[columnNum] = value
     }
 
-    const sleep = (milliseconds) => {
-      return new Promise(resolve => setTimeout(resolve, milliseconds))
-    }
-
-    sleep(0).then(() => {
-      console.log('active')
-      
-    })
-
-    this.update()
+    this.update(updateObj)
     this.props.onMenuUpdate(menuNum)
     
   }
@@ -202,17 +192,25 @@ class DropdownGroup extends React.Component {
     
     var columns = this.state.columns
     var menuData = this.state.menuData
+    var menuKeys = Object.keys(menuData)
 
     var menuLst = []
     var columnString = ''
 
-    for(var menuNum in menuData){
+    console.log('menuKeys')
+    console.log(columns)
+    console.log(this.state.menuData)
+    console.log(menuKeys)
+    for(var menuNum in menuKeys){
       var columnLst = []
+      console.log('menuNum')
+      console.log(menuNum)
+      console.log(menuKeys[menuNum])
       for(var columnNum in columns){
-        columnLst.push(<td className="dbTd" key={"DI" + columns[columnNum] + menuNum}><Dropdown.Item  eventKey={menuNum} onSelect={(e) => {this.menuHandler(e)}}>{menuData[menuNum][columns[columnNum]]}</Dropdown.Item></td>)
+        columnLst.push(<td className="dbTd" key={"DI" + columns[columnNum] + menuKeys[menuNum]}><Dropdown.Item  eventKey={menuKeys[menuNum]} onSelect={(e) => {console.log(e);console.log(this.menuData);this.menuHandler(e)}}>{menuData[menuKeys[menuNum]][columns[columnNum]]}</Dropdown.Item></td>)
       }
   
-      menuLst.push(dropRow(menuNum,columnLst));
+      menuLst.push(dropRow(menuKeys[menuNum],columnLst));
     }
     
     return (
