@@ -69,24 +69,24 @@ class Buttons extends React.Component {
 
 	render(){
 		const returnElements = []
-			
+		
+		var duplicate = false	
 		var editTimes = false
-		var deleteBu = false
 		var editAll = false
+		var deleteBu = false
 		var goLogger = false
 
 		switch(this.props.status){
 			case 'editTime':
+				//duplicate = true
 				deleteBu = true
 				editAll = true
 				break;
 			case 'editAll':
-				editTimes = false
-				deleteBu = false
-				editAll = false
 				goLogger = true
 				break;
 			case '':
+				//duplicate = true
 				editTimes = true
 				deleteBu = true
 				editAll = true
@@ -95,14 +95,17 @@ class Buttons extends React.Component {
 
 		var totalEditAll = this.props.checkForStatus('editAll') //Move to body function ??
 
+		if(duplicate){
+			returnElements.push(<Button key="duplicate" variant="outline-success" onClick={(e) => {console.log('duplicate');this.props.duplicate(this.props.indexNumber)}}>Duplicate</Button>)
+		}
 		if(editTimes){
 			returnElements.push(<Button key="editTimes" variant="outline-info" onClick={(e) => {this.props.editTimeHandler(this.props.indexNumber,[['status','editTime']])}}>Edit Times</Button>)
 		}
-		if(deleteBu){
-			returnElements.push(<Button key="delete" variant="outline-danger" onClick={(e) => {this.props.deleteHandler(this.props.indexNumber)}} >Delete</Button>)
-		}
 		if(editAll && !totalEditAll){
 			returnElements.push(<Button key="editAll" variant="outline-info" onClick={(e) => {this.scrollLogger();this.props.editAllHandler(this.props.indexNumber,[['status','editAll']],this.props.data)}}>Edit All</Button>)
+		}
+		if(deleteBu){
+			returnElements.push(<Button key="delete" variant="outline-danger" onClick={(e) => {this.props.deleteHandler(this.props.indexNumber)}} >Delete</Button>)
 		}
 		if(goLogger){
 			returnElements.push(<Button key="goLogger" variant="outline-info" onClick={this.scrollLogger}>Data in logger</Button>)
@@ -349,6 +352,7 @@ class TableLog extends React.Component {
 		//this.clickHandlert = this.clickHandlert.bind(this);
 
 		this.setData = this.setData.bind(this);
+		this.duplicate = this.duplicate.bind(this);
 		//this.addData = this.addData.bind(this);
 		this.addDataTable = this.addDataTable.bind(this);
 		this.clearData = this.clearData.bind(this);
@@ -533,10 +537,20 @@ class TableLog extends React.Component {
 		var docHeight = document.height;
 
   		window.scroll({
-  			top: top + 2*winHeight/3,
+  			top: top + 3*winHeight/3,
   			left: 0,
   			behavior: 'smooth'
 		});
+  	}
+
+  	duplicate(indexNumber){
+  		console.log(indexNumber)
+  		var duplicateData = JSON.parse(JSON.stringify(this.state.tableData[indexNumber]))
+  		duplicateData['launchTime'] = {formatted:'',input:'',status:''}
+		duplicateData['landTime'] = {formatted:'',input:'',status:''}
+
+		console.log(duplicateData)
+		this.addDataTable([duplicateData])
   	}
 
 //Utils -------------------------------------
@@ -587,57 +601,74 @@ class TableLog extends React.Component {
 		this.setData(id,[[name,[['input',value]]]])
 
 		if(value.length == 5){
-			console.log('validate')
+			console.log('validate 5')
 
-			var valHour = value.slice(0,2);
-			var valColon = value[2];
-			var valMinute = value.slice(3,5);
-
-			var hour = false
-			var colon = false
-			var minute = false
-
-			for(var count = 0;count<24;count++){
-				var compareVal = count.toString()
-				if (compareVal.length < 2){
-					compareVal = '0' + compareVal
-				}
-				if(valHour == compareVal){
-					hour = true
-					break;
-				}
-			}
-
-			if(valColon == ':'){ // needs improvement
-				colon = true
-			} 
-
-			for(var count = 0;count<60;count++){
-				var compareVal = count.toString()
-				if (compareVal.length < 2){
-					compareVal = '0' + compareVal
-				}
-				if(valMinute == compareVal){
-					minute = true
-					break;
-				}
-			}
-
-			if(hour && colon && minute){
-				console.log('success')
-				var time = new Date()
-				time.setHours(parseInt(valHour))
-				time.setMinutes(parseInt(valMinute))
-				time.setSeconds(0)
-				time.setMilliseconds(0)
-
-				this.updateData(parseInt(id),name,time)
-
+			if(value[2] == ':'){
+				var valHour = value.slice(0,2);
+				var valColon = value[2];
+				var valMinute = value.slice(3,5);
 			} else {
-				console.log('error')
+				return
 			}
-		}			
-		
+
+		} else if(value.length == 4){
+			console.log('validate 4')
+
+			if(value[1] == ':'){
+				var valHour = '0'+value[0];
+				var valColon = value[1];
+				var valMinute = value.slice(2,4);
+			} else {
+				return
+			}
+
+		} else {
+			return
+		}
+
+		var hour = false
+		var colon = false
+		var minute = false
+
+		for(var count = 0;count<24;count++){
+			var compareVal = count.toString()
+			if (compareVal.length < 2){
+				compareVal = '0' + compareVal
+			}
+			if(valHour == compareVal){
+				hour = true
+				break;
+			}
+		}
+
+		if(valColon == ':'){ // needs improvement
+			colon = true
+		} 
+
+		for(var count = 0;count<60;count++){
+			var compareVal = count.toString()
+			if (compareVal.length < 2){
+				compareVal = '0' + compareVal
+			}
+			if(valMinute == compareVal){
+				minute = true
+				break;
+			}
+		}
+
+		if(hour && colon && minute){
+			console.log('success')
+			var time = new Date()
+			time.setHours(parseInt(valHour))
+			time.setMinutes(parseInt(valMinute))
+			time.setSeconds(0)
+			time.setMilliseconds(0)
+
+			this.updateData(parseInt(id),name,time)
+
+		} else {
+			console.log('error')
+		}				
 	}
 
 	timeButtonHandler(id,name) {
@@ -698,7 +729,6 @@ class TableLog extends React.Component {
 		var numPages = pages
 
 		console.log('render')
-		console.log(keys)
 
 		for(var key in keys){
 			var data = this.state.tableData[keys[key]]
@@ -733,7 +763,8 @@ class TableLog extends React.Component {
 					indexNumber={data['indexNumber']}
 					status={data['status']}
 					data={data}
-					checkForStatus={this.checkForStatus} 
+					checkForStatus={this.checkForStatus}
+					duplicate={this.duplicate} 
 					editTimeHandler={this.setData} 
 					editAllHandler={(index,statusData,data) => {this.setData(index,statusData,window.flightController.tableEditRecord(data))}} 
 					deleteHandler={this.deleteRecord} 
