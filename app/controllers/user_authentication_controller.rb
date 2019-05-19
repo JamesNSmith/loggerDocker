@@ -6,7 +6,7 @@ class UserAuthenticationController < ApplicationController
       #session[:user_id] = @user.id #not sure
       #redirect_to '/'
       redirect_to '/login?email=' + @user.email, :success => "Welcome to FlightLogger! Your email has been confirmed.
-      Please sign in to continue."
+      Please log in to continue."
     else
       redirect_to '/', :danger => "Sorry. User does not exist"
     end

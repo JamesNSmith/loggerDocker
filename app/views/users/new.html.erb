@@ -2,31 +2,41 @@
   <div class="userContainer">
     <div class="inputForm">
 
-    <h1>Sign up</h1>
+    <h1>Sign Up</h1>
 
-    <%= form_for(@user, url: '/users/signup') do |f| %>
+    <%= form_for(@user, url: '/users/signup', validate: true) do |f| %>
     
       <ul>
-          <!--<li><%= f.label "Name " %></li>-->
-          <li>
-            <%= f.text_field :first_name, :placeholder => "First Name", :id => "first", :autocomplete => "given-name", :class => @status %>
-            <%= f.text_field :last_name, :placeholder => "Last Name", :id => "last", :autocomplete => "family-name", :class => @status %>  
-          </li>
-          <!--<li><%= f.label "Username " %></li>-->
-          <li><%= f.text_field :username, :placeholder => "Username", :autocomplete => "username", :class => @status %></li> 	
+          <li><%= f.label "Name " %></li>
+          <li><%= f.text_field :first_name, :placeholder => "First Name", :id => "first", :autocomplete => "given-name", :class => @status[:first_name] %></li>
+          <li class='errorText'><%= @user.errors[:first_name][0] %></li>
+          <li><%= f.text_field :last_name, :placeholder => "Last Name", :id => "last", :autocomplete => "family-name", :class => @status[:last_name] %></li>
+          <li class='errorText'><%= @user.errors[:last_name][0] %></li>
+
+          <li><%= f.label "User " %></li>
+          <li><%= f.text_field :username, :placeholder => "Username", :autocomplete => "username", :class => @status[:username] %></li>
+          <li class='errorText'><%= @user.errors[:username][0] %></li> 	
+
       	  <!--<li><%= f.label "Email " %></li>-->
-          <li><%= f.email_field :email, :placeholder => "Email", :autocomplete => "email", :class => @status %></li>
-      	  <!--<li><%= f.label "Password " %></li>-->
-          <li><%= f.password_field :password, :placeholder => "Password", :autocomplete => "password", :class => @status%></li> 
-          <li><%= f.password_field :password_confirmation, :placeholder => "Confirm Password", :autocomplete => "password", :class => @status%></li> 
+          <li><%= f.email_field :email, :placeholder => "Email", :autocomplete => "email", :class => @status[:email] %></li>
+          <li class='errorText'><%= @user.errors[:email][0] %></li>
+
+      	  <li><%= f.label "Password " %></li>
+          <li><%= f.password_field :password, :placeholder => "Password", :autocomplete => "password", :class => @status[:password] %></li>
+          <li class='errorText'><%= @user.errors[:password][0] %></li> 
+          <li><%= f.password_field :password_confirmation, :placeholder => "Confirm Password", :autocomplete => "password", :class => @status[:password_confirmation] %></li>
+          <li class='errorText'><%= @user.errors[:password_confirmation][0] %></li>
+
+          <!-- <li class='checkboxText'><%= f.check_box :email_confirmed %> I agree to the <%= link_to "terms and conditions.", "/termsandconditions", :target => "_blank" %></li> -->
        </ul>
   	 
   	<div class="actions"> 
       <%= f.submit "Create", class: "form-btn"%> 
   	</div> 
     <% end %>
- 
 
+    <%= render "shared/error_messages", :target => @user %>
+ 
     </div>
   </div>
 </div>

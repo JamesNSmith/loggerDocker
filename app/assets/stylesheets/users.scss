@@ -75,6 +75,20 @@
 
 }
 
+.inputForm form input[type='checkbox']{
+  width: 20px;
+  height: 20px;
+  vertical-align: middle;
+  //border:1px solid black;
+}
+
+li.checkboxText{
+  margin:5px;
+  //padding:5px;
+  font-size: 12px;
+  //line-height: 20px;
+}
+
 .inputForm form select{
   width: 290px;
   height: 40px;
@@ -89,9 +103,9 @@
   text-align:left;
 }
 
-.signup input#first, .signup input#last {
-    width: 140px;
-  }
+/*.signup input#first, .signup input#last {
+  width: 140px;
+}*/
 
 
 .inputForm form input.form-btn {
@@ -110,4 +124,10 @@
 
 .form-btn {
   background-color: #fff;
+}
+
+.errorText {
+  color: #ff0000;
+  font-size: 11px;
+
 }

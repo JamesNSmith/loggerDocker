@@ -43,7 +43,7 @@ class ApplicationController < ActionController::Base
   #Club ------------------------------------
   def set_club(club)
     require_user
-    session[:club_auth] = club.auth_token
+    session[:club_auth] = club.auth_token if club
   end 
 
   def current_club

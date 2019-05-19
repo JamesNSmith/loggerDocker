@@ -1,7 +1,8 @@
 Rails.application.routes.draw do
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 
-  root 'pages#index' 
+  root 'pages#index'
+  match '/termsandconditions', to: 'pages#tsandcs', via: :get 
 
   match '/users', to: 'users#index', via: [:get, :post]
   match '/users/signup', to: 'users#new', via: [:get, :post]

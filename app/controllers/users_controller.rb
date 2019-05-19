@@ -25,23 +25,24 @@ class UsersController < ApplicationController
     case request.method_symbol
     when :get
       @user = User.new
+      @status = {first_name:'',last_name:'',username:'',email:'',password:'',passeord_confirmation:''}
     when :post
       @user = User.new(user_params)
+      @status = {first_name:'',last_name:'',username:'',email:'',password:'',passeord_confirmation:''}
 
-      if User.find_by(email: user_params[:email])
-        flash[:danger] = "Email already in use!"
-        redirect_to '/users/signup'
-      elsif @user.save
-        #session[:user_id] = @user.id??????------------------------
+      if @user.save
         UserMailer.registration_confirmation(@user).deliver
-        flash[:success] = "Please confirm your email address to continue"
-        redirect_to '/'
+        redirect_to '/', :success => "Please confirm your email address to continue"
       else
-        flash[:danger] = "Ooooppss, something went wrong!"
-        redirect_to '/users/signup'
+        @user.errors.each do |attr, msg|
+          @status[attr] = 'error'
+        end
+        #flash[:danger] = "Oops, something went wrong!"
       end
     end
   end
+
+  #<li class='checkboxText'><%= f.check_box :email_confirmed %> I agree to the <%= link_to "terms and conditions.", "/termsandconditions" %></li>
 
   def send_registration_confirmation
     @user = User.find(params[:user][:id])

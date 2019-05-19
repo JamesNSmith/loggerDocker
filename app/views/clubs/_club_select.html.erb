@@ -1,0 +1,4 @@
+<%= form_for(:clubs, url: '/clubs/user') do |f| %> 
+<%= f.hidden_field :id, value: club.id %>
+<%= f.submit "Select", class: "btn" %>
+<% end %>
