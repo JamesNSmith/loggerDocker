@@ -3,6 +3,7 @@ class User < ApplicationRecord
 
 	before_create {generate_token(:auth_token)}
 	before_create {generate_token(:email_confirm_token)}
+	before_create {generate_u_id(:u_id)}
 
 	has_many :club_users
 	has_many :clubs, through: :club_users
@@ -33,6 +34,32 @@ class User < ApplicationRecord
   		UserMailer.password_reset(self).deliver
 	end
 
+	def generate_isbn
+  		@sum = 0
+  		@number = []
+  		@count = 10
+
+  		while @count > 1
+  			@numberTemp = rand(1...10)
+  			@number.push(@numberTemp)
+  			@sum += (@numberTemp * @count)
+  			@count -= 1
+  		end
+
+  		@numberTemp = @sum%11
+
+  		if @numberTemp != 0
+  			@numberTemp = 11 - @numberTemp
+  		end
+  		if @numberTemp != 10 
+  			@number.push(0)
+  		end
+
+  		@number.push(@numberTemp)
+
+  		return @number.join.to_i
+  	end
+
 	private
 	def generate_token(column)
     	begin
@@ -40,9 +67,9 @@ class User < ApplicationRecord
    		end while User.exists?(column => self[column])
   	end
 
-  	#uniqueness: {
-    #  message: ->(object, data) do
-    #    "#{data[:value]} is already in use!"
-    #  end
-    #}
+  	def generate_u_id(column)
+    	begin
+      		self[column] = generate_isbn
+   		end while User.exists?(column => self[column])
+  	end
 end

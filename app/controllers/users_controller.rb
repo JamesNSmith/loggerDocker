@@ -25,24 +25,30 @@ class UsersController < ApplicationController
     case request.method_symbol
     when :get
       @user = User.new
-      @status = {first_name:'',last_name:'',username:'',email:'',password:'',passeord_confirmation:''}
+      @status = {first_name:'',last_name:'',username:'',email:'',password:'',passeord_confirmation:'',tsandcs:''}
+      @ticked = false
     when :post
       @user = User.new(user_params)
-      @status = {first_name:'',last_name:'',username:'',email:'',password:'',passeord_confirmation:''}
+      @status = {first_name:'',last_name:'',username:'',email:'',password:'',passeord_confirmation:'',tsandcs:''}
+      @ticked = params[:tsandcs]
 
-      if @user.save
-        UserMailer.registration_confirmation(@user).deliver
-        redirect_to '/', :success => "Please confirm your email address to continue"
-      else
-        @user.errors.each do |attr, msg|
-          @status[attr] = 'error'
+      if params[:tsandcs]
+        if @user.save
+          UserMailer.registration_confirmation(@user).deliver
+          redirect_to '/', :success => "Please confirm your email address to continue"
+        else
+          @user.errors.each do |attr, msg|
+            @status[attr] = 'error'
+          end
+          #flash[:danger] = "Oops, something went wrong!"
         end
-        #flash[:danger] = "Oops, something went wrong!"
+
+      else
+        @status[:tsandcs] = 'error'
       end
+      
     end
   end
-
-  #<li class='checkboxText'><%= f.check_box :email_confirmed %> I agree to the <%= link_to "terms and conditions.", "/termsandconditions" %></li>
 
   def send_registration_confirmation
     @user = User.find(params[:user][:id])

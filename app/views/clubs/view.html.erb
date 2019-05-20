@@ -42,11 +42,8 @@
       
       <td>
         <% if current_club %>
-          <%= current_club.id %>
-          <%= club.id %>
-          <%= 'vv' %>
           <% if current_club.id != club.id %>
-            CC
+            <%= render "/clubs/club_select", :club => club %>
           <% else %>
             Current Club
           <% end %>
