@@ -15,8 +15,13 @@ class User < ApplicationRecord
 	has_many :flights
 
 	validates_presence_of :first_name, :last_name, :username, :email, :message => "Can't be blank!" #, :on => :create
-	#validates_format_of :username, :with => /\A([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]{2,})\Z/i
+	validates_format_of :username, :with => /\A([a-z])\Z/i, :message => "Format Error!"
+
+
+	#/\A([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]{2,})\Z/i
+	#validates :email, format: { with: URI::MailTo::EMAIL_REGEXP, message: "Email not valid!" }
 	validates_uniqueness_of :username, :email, :message => "Already in use!"
+	
 
     validates :password, confirmation: {:message => "Doesn't match password!"}
 	validates :password_confirmation, confirmation: true
@@ -35,25 +40,24 @@ class User < ApplicationRecord
 	end
 
 	def generate_isbn
-  		@sum = 0
-  		@number = []
-  		@count = 10
+		begin
+  			@sum = 0
+  			@number = []
+  			@count = 10
 
-  		while @count > 1
-  			@numberTemp = rand(1...10)
-  			@number.push(@numberTemp)
-  			@sum += (@numberTemp * @count)
-  			@count -= 1
-  		end
+  			while @count > 1
+  				@numberTemp = rand(1...10)
+  				@number.push(@numberTemp)
+  				@sum += (@numberTemp * @count)
+  				@count -= 1
+  			end
 
-  		@numberTemp = @sum%11
+  			@numberTemp = @sum%11
+  			if @numberTemp != 0
+  				@numberTemp = 11 - @numberTemp
+  			end
 
-  		if @numberTemp != 0
-  			@numberTemp = 11 - @numberTemp
-  		end
-  		if @numberTemp != 10 
-  			@number.push(0)
-  		end
+  		end while @numberTemp == 10
 
   		@number.push(@numberTemp)
 
