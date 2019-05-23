@@ -13,6 +13,11 @@
         <td>Aerotow Fee 2000ft</td>
         <td>Aerotow Fee /1000ft > 2000ft</td>
         <td>Soaring Fee</td>
+
+        <% if @currentClubUser.utype == 'admin' %>
+          <td colspan="100%">Actions</td>
+        <% end %>
+
         </tr>
       </thead>
     <tbody id="tableBody">
@@ -28,20 +33,20 @@
       <td><p><%= number_to_currency(membership.aerotow_unit_fee,:unit => "£") %></p></td>
       <td><p><%= number_to_currency(membership.soaring_fee,:unit => "£") %></p></td>
 
-      <td>
-      <%= form_for(:membership, url: '/memberships/update', method: :get) do |f| %> 
-      <%= f.hidden_field :id, value: membership.id %>
-      <%= f.submit "Update", class: "btn" %>
-      <% end %>
-      </td>
+      <% if @currentClubUser.utype == 'admin' %>
 
-      <td>
-      <%= form_for(:membership, url: '/memberships/delete') do |f| %> 
-      <%= f.hidden_field :id, value: membership.id %>
-      <%= f.hidden_field :name, value: membership.name %>
-      <%= f.submit "Delete", class: "btn" %>
+        <td>
+          <%= form_for(:membership, url: '/memberships/update', method: :get) do |f| %> 
+            <%= f.hidden_field :id, value: membership.id %>
+            <%= f.submit "Update", class: "btn" %>
+          <% end %>
+        </td>
+
+        <td>
+          <%= link_to 'Delete', memberships_delete_path(:membership => {id: membership.id, name: membership.name}), method: :post, :data => { confirm: 'Are you sure you want to delete the ' + membership.name + ' membership?' }, class: "btn" %> 
+        </td>
+
       <% end %>
-      </td>
       
 	    </tr>
     <% end %>

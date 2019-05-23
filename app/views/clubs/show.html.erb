@@ -11,6 +11,11 @@
         <td>Email</td>
         <td>User Type</td>
         <td>Membership</td>
+
+        <% if @currentClubUser.utype == 'admin' %>
+          <td colspan="100%" class="actions">Actions</td>
+        <% end %>
+
         </tr>
       </thead>
     <tbody id="tableBody">
@@ -25,18 +30,24 @@
       <td><p><%= @clubUser.membership.name %></p></td>
 
       <% if @currentClubUser.utype == 'admin' %>
-      <% if @clubUser.utype != 'admin' %>
-      <td>
-      
-      <%= form_for(:club_user, url: '/clubusers/delete') do |f| %>
-      <%= f.hidden_field :id, value: @clubUser.id %>
-      <%= f.hidden_field :first_name, value: @clubUser.user.first_name %>
-      <%= f.hidden_field :last_name, value: @clubUser.user.last_name %>
-      <%= f.submit "Remove", class: "btn" %>
-      <% end %>
-      
+
+      <td class="actions">
+        <%= form_for(:club_user, url: '/clubusers/adminupdate', method: :get) do |f| %> 
+          <%= f.hidden_field :id, value: @clubUser.id %>
+          <%= f.submit "Update", class: "btn" %>
+        <% end %>
       </td>
+
+      <td class="actions" >
+      <% if @clubUser.utype != 'admin' %>
+      
+        <%= link_to 'Remove', clubusers_delete_path(:club_user => { id: @clubUser.id, first_name: @clubUser.user.first_name, last_name: @clubUser.user.last_name}), method: :post, :data => { confirm: 'Are you sure you want to remove '+@clubUser.user.first_name+' '+@clubUser.user.last_name+' from '+@currentClub.name+'?'}, class: "btn" %> 
+      
+      <% else %>
+        Admin unremovable 
       <% end %>
+      </td>
+
       <% end %>
 
       </tr>

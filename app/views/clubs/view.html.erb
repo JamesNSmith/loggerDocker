@@ -10,6 +10,8 @@
         <td>Intials</td>
         <td>User Type</td>
         <td>Membership</td>
+        <td>Club Selection</td>
+        <td colspan="100%">Actions</td>
         </tr>
       </thead>
     <tbody id="tableBody">
@@ -28,17 +30,6 @@
           'None'
         end 
       %></td>
-
-      <% if @clubUser.utype != 'admin' %>
-      <td>
-        <%= form_for(:club_user, url: '/clubusers/leave') do |f| %> 
-        <%= f.hidden_field :id, value: @clubUser.id %>
-        <%= f.hidden_field :club_id, value: club.id %>
-        <%= f.hidden_field :club, value: club.name %>
-        <%= f.submit "Leave", class: "btn" %>
-        <% end %>
-      </td>
-      <% end %>
       
       <td>
         <% if current_club %>
@@ -52,6 +43,23 @@
         <% end %>
       </td>
 
+      <td class="actions">
+        <%= form_for(:club_user, url: '/clubusers/update', method: :get) do |f| %> 
+          <%= f.hidden_field :id, value:  @clubUser.id %>
+          <%= f.submit "Update", class: "btn" %>
+        <% end %>
+      </td>
+
+      <td class="actions">
+        <% if @clubUser.utype != 'admin' %>
+          <%= link_to 'Leave', clubusers_leave_path(:club_user => { id: @clubUser.id, club_id: club.id, club: club.name}), method: :post, :data => { confirm: 'Are you sure you want to leave '+club.name+'?' }, class: "btn" %> 
+        <% else %>
+          Admin can not leave
+        <% end %>
+      </td>
+
+
+
       </tr> 
     <% end %>
 
@@ -62,8 +70,9 @@
     </tbody>
   </table>
 
+  <%= will_paginate @users %>
+
   <%= link_to "Add Club", '/clubs/add'%>
   
-
   </div>
 </div>

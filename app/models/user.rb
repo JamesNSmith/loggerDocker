@@ -15,7 +15,7 @@ class User < ApplicationRecord
 	has_many :flights
 
 	validates_presence_of :first_name, :last_name, :username, :email, :message => "Can't be blank!" #, :on => :create
-	validates_format_of :username, :with => /\A([a-z])\Z/i, :message => "Format Error!"
+	#validates_format_of :username, :with => /\A([a-z])\Z/i, :message => "Format Error!"
 
 
 	#/\A([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]{2,})\Z/i

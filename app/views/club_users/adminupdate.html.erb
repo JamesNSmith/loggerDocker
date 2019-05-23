@@ -1,0 +1,24 @@
+<div class="clubLink">
+  <div class="plusContainer">
+    <div class="inputForm">
+
+    <h1><%= @user.first_name.capitalize+' '+@user.last_name.capitalize+"'s "%> Membership</h1>
+
+    <%= form_for(:membership,url: '/clubusers/adminupdate') do |f| %>
+    <div class="field"> 
+      <ul>
+        <li><%= f.select :name, options_for_select(@utypes,selected: @clubUser.utype) %></li>
+        <li><%= f.select :id, options_for_select(@membershipList,selected: @clubUser.membership_id) %></li>
+        <%= f.hidden_field :club_user, value: @clubUser.id %>  
+       </ul>
+  	</div> 
+  	<div class="actions"> 
+      <%= f.submit "Update", class: "form-btn" %> 
+  	</div> 
+    <% end %>
+ 
+
+    </div>
+  </div>
+</div>
+<!--&& (@clubUser.utype == 'admin') -->

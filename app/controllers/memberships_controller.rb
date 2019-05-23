@@ -8,6 +8,7 @@ class MembershipsController < ApplicationController
 
   def show
     @club = current_club()
+    @currentClubUser = current_user.club_users.find_by(club: @club)
     @memberships = current_club.memberships.paginate(page: params[:page],per_page: 10)
   end
 
@@ -61,3 +62,32 @@ class MembershipsController < ApplicationController
     params.require(:membership).permit(:id,:name)
   end
 end
+
+#<%= form_for(:membership, url: '/memberships/delete') do |f| %> 
+#      <%= f.hidden_field :id, value: membership.id %>
+#      <%= f.hidden_field :name, value: membership.name %>
+#      <%= f.submit "Delete", class: "btn" %>
+#      <% end %>
+
+#
+#
+#'/memberships/delete'
+#<%= link_to 'Remove', clubusers_delete_path(:club_user => { id: @clubUser.id, first_name: @clubUser.user.first_name, last_name: @clubUser.user.last_name}), method: :post, :data => { confirm: 'Are you sure?' }, class: "btn" %> 
+#<%= form_for(:club_user, url: '/clubusers/delete') do |f| %>
+#      <%= f.hidden_field :id, value: @clubUser.id %>
+#      <%= f.hidden_field :first_name, value: @clubUser.user.first_name %>
+#      <%= f.hidden_field :last_name, value: @clubUser.user.last_name %>
+#      <%= f.submit "Remove", class: "btn" %>
+#      <% end %>
+
+#<%= form_for(:club_user, url: '/clubusers/leave') do |f| %> 
+#        <%= f.hidden_field :id, value: @clubUser.id %>
+#        <%= f.hidden_field :club_id, value: club.id %>
+#        <%= f.hidden_field :club, value: club.name %>
+#        <%= f.submit "Leave", class: "btn" %>
+#        <% end %>
+
+#<%= form_for(:membership, url: '/memberships/update', method: :get) do |f| %> 
+#      <%= f.hidden_field :id, value: membership.id %>
+#      <%= f.submit "Update", class: "btn" %>
+#      <% end %>

@@ -449,7 +449,7 @@ nav{
 /*********************************************************************************/
 .recordPage {
 	position: relative;
-	width:1000px;
+	width:1050px;
 	margin: 100px auto;
 	min-height:400px;
 }
@@ -459,6 +459,10 @@ nav{
 }
 
 .recordTable {
-	margin:40px;
+	margin:40px 20px;
+}
+
+td.actions {
+	width:130px;
 }
 

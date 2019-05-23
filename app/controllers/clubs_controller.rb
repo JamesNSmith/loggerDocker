@@ -16,11 +16,12 @@ class ClubsController < ApplicationController
   end
 
   def view
+    puts(request.method_symbol)
     case request.method_symbol
     when :get
-      @clubs = current_user.clubs
+      @current_uri = request.env['PATH_INFO']
+      @clubs = current_user.clubs.paginate(page: params[:page],per_page: 10)
     when :post
-      puts params
       @club = Club.find_by_id(params[:clubs][:id]) 
       if @club 
         set_club(@club)
@@ -55,7 +56,7 @@ class ClubsController < ApplicationController
 
         set_club(@club)
 
-        redirect_to '/', :success => "Further instructions have been sent to your email address"
+        redirect_to '/', :success => "The join link has been sent to your email address"
 
         #@membership = Membership.find(1)
         #puts @clubMembership
