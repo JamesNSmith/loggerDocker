@@ -99,25 +99,10 @@
 
     <div id="flash" class="containerPageHeader">
       <div class="flash">
-      <% puts(flash) %>
       <% flash.each do |name, msg| %>
-        <% puts(name) %>
-        <% puts(msg) %>
-
-        <% if msg.class == 'Object' %>
-          <% msg.each do |ms| %>
-            <div class="alert alert-<%= name %>">
-                <%= ms  %>
-            </div>
-          <% end %>
-
-        <% else %>
-          <div class="alert alert-<%= name %>">
-              <%= msg  %>
-          </div>
-
-        <% end %>
-
+        <div class="alert alert-<%= name %>">
+            <%= msg  %>
+        </div>
       <% end %>
       </div>
     </div>

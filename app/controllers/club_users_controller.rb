@@ -43,24 +43,19 @@ class ClubUsersController < ApplicationController
       @clubUser = ClubUser.find(update_admin_data_params[:club_user])
       @membership = Membership.find(update_admin_data_params[:id])
       @clubUser.membership = @membership
+
       @utype = update_admin_data_params[:name]
-
       @adminCount = ClubUser.where(club:@clubUser.club, utype:'admin').count
-      puts(@adminCount)
+
       if (@clubUser.utype == 'admin') && (@utype != 'admin') && (@adminCount <= 1)
-
-        if @clubUser.save 
-          redirect_to '/clubs/members', :warning => 'One or more users must be an admin!'
-        else 
-          redirect_to '/clubs/members', :danger => "Ooooppss, something went wrong!"
-        end
-
+        redirect_to '/clubs/members', :warning => 'One or more users must be an admin!'
+        
       else
         @clubUser.utype = @utype
+        @user = @clubUser.user
+
         if @clubUser.save 
-          flash[:info] = ['Membership updated to '+@membership[:name].to_s]
-          flash[:info] << 'User Type updated to '+@utype.capitalize 
-          redirect_to '/clubs/members'
+          redirect_to '/clubs/members', :info => @user.first_name+' '+@user.last_name+"'s membership updated"
         else 
           redirect_to '/clubs/members', :danger => "Ooooppss, something went wrong!"
         end
