@@ -54,7 +54,7 @@
         <% if @clubUser.utype != 'admin' %>
           <%= link_to 'Leave', clubusers_leave_path(:club_user => { id: @clubUser.id, club_id: club.id, club: club.name}), method: :post, :data => { confirm: 'Are you sure you want to leave '+club.name+'?' }, class: "btn" %> 
         <% else %>
-          Admin can not leave
+          Admin
         <% end %>
       </td>
 

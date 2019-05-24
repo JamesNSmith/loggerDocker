@@ -8,9 +8,13 @@
     <div class="field"> 
       <ul>
           <!--<li><%= f.label "Name " %></li>-->
-          <li><%= f.text_field :name, :placeholder => "Name" %></li> 	
+          <li><%= f.text_field :name, :placeholder => "Name", :class => @status[:name], :maxlength => 30 %></li>
+          <li class='errorText'><%= @club.errors[:name][0] %></li>
+
       	  <!--<li><%= f.label "Initials " %></li>-->
-          <li><%= f.text_field :initials, :placeholder => "Initials (max 3)", :maxlength => 3 %></li>
+          <li><%= f.text_field :initials, :placeholder => "Initials (max 5)", :class => @status[:initials], :maxlength => 5 %></li>
+          <li class='errorText'><%= @club.errors[:initials][0] %></li>
+
       	  <!--<li><%= f.label "Country " %></li>-->
           <!--<li><%= f.text_field :country, :placeholder => "Country" %></li>-->
           <%= f.hidden_field :country, value: 'UK' %> 

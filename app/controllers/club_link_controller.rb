@@ -2,10 +2,11 @@ class ClubLinkController < ApplicationController
   before_action :require_user
 
   def new
+    puts('new')
   	puts params[:format]
   	@club = Club.find_by_link_token!(params[:format])
     @membershipList = []
-
+    
     if @club
       @club.memberships.each do |membership|
         @membershipList.append [membership.name,membership.id]

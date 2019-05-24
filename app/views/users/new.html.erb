@@ -10,6 +10,8 @@
           <li><%= f.label "Name " %></li>
           <li><%= f.text_field :first_name, :placeholder => "First Name", :id => "first", :autocomplete => "given-name", :class => @status[:first_name] %></li>
           <li class='errorText'><%= @user.errors[:first_name][0] %></li>
+          <li><%= f.text_field :middle_name, :placeholder => "Middle Name", :id => "last", :autocomplete => "middle-name", :class => @status[:middle_name] %></li>
+          <li class='errorText'><%= @user.errors[:middle_name][0] %></li>
           <li><%= f.text_field :last_name, :placeholder => "Last Name", :id => "last", :autocomplete => "family-name", :class => @status[:last_name] %></li>
           <li class='errorText'><%= @user.errors[:last_name][0] %></li>
 

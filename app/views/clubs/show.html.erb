@@ -27,7 +27,13 @@
       <td><p><%= user.username %></p></td>  
       <td><p><%= user.email %></p></td>  
       <td><p><%= @clubUser.utype.capitalize %></p></td> 
-      <td><p><%= @clubUser.membership.name %></p></td>
+      <td><%= 
+        begin
+          @clubUser.membership.name
+        rescue NoMethodError => e
+          'None'
+        end 
+      %></td>
 
       <% if @currentClubUser.utype == 'admin' %>
 
@@ -44,7 +50,7 @@
         <%= link_to 'Remove', clubusers_delete_path(:club_user => { id: @clubUser.id, first_name: @clubUser.user.first_name, last_name: @clubUser.user.last_name}), method: :post, :data => { confirm: 'Are you sure you want to remove '+@clubUser.user.first_name+' '+@clubUser.user.last_name+' from '+@currentClub.name+'?'}, class: "btn" %> 
       
       <% else %>
-        Admin unremovable 
+        Admin
       <% end %>
       </td>
 

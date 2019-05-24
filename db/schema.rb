@@ -45,7 +45,6 @@ ActiveRecord::Schema.define(version: 20190402172432) do
 
   create_table "memberships", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.string "name"
-    t.boolean "mtype"
     t.decimal "launch_fee", precision: 6, scale: 2
     t.decimal "soaring_fee", precision: 6, scale: 2
     t.decimal "aerotow_standard_fee", precision: 6, scale: 2
@@ -60,6 +59,7 @@ ActiveRecord::Schema.define(version: 20190402172432) do
     t.string "email"
     t.string "password_digest"
     t.string "first_name"
+    t.string "middle_name"
     t.string "last_name"
     t.string "utype"
     t.string "auth_token"

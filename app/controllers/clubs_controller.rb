@@ -43,14 +43,17 @@ class ClubsController < ApplicationController
     case request.method_symbol
     when :get
   	 @club = Club.new
+     @status = {name:'', intials:''}
     when :post
       @user = current_user 
       @club = Club.new(club_params)
+      @status = {name:'', intials:''}
+
       if @club.save
         ClubMailer.confirmation(@user,@club).deliver
 
-        @m1 = Membership.create(name: 'Full', mtype: false, launch_fee:7.00, soaring_fee:0.3,aerotow_standard_fee: 20, aerotow_unit_fee: 5)
-        @m2 = Membership.create(name: 'Junior', mtype: false, launch_fee:4.50, soaring_fee:0.15,aerotow_standard_fee: 20, aerotow_unit_fee: 5)
+        @m1 = Membership.create(name: 'Full', launch_fee:7.00, soaring_fee:0.3,aerotow_standard_fee: 20, aerotow_unit_fee: 5)
+        @m2 = Membership.create(name: 'Junior', launch_fee:4.50, soaring_fee:0.15,aerotow_standard_fee: 20, aerotow_unit_fee: 5)
         @club.memberships << [@m1,@m2]
         @clubUser = ClubUser.create(user:@user,club:@club,membership:@m1,utype:'admin')
 
@@ -71,7 +74,10 @@ class ClubsController < ApplicationController
         #  puts "error clubuser"
         #end
       else
-        redirect_to '/clubs/add', :danger => "Ooooppss, something went wrong!"
+        @club.errors.each do |attr, msg|
+            @status[attr] = 'error'
+          end
+        #redirect_to '/clubs/add', :danger => "Ooooppss, something went wrong!"
       end
     end
   end

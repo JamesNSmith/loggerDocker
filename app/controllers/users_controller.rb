@@ -25,11 +25,11 @@ class UsersController < ApplicationController
     case request.method_symbol
     when :get
       @user = User.new
-      @status = {first_name:'',last_name:'',username:'',email:'',password:'',passeord_confirmation:'',tsandcs:''}
+      @status = {first_name:'',middle_name:'',last_name:'',username:'',email:'',password:'',passeord_confirmation:'',tsandcs:''}
       @ticked = false
     when :post
       @user = User.new(user_params)
-      @status = {first_name:'',last_name:'',username:'',email:'',password:'',passeord_confirmation:'',tsandcs:''}
+      @status = {first_name:'',middle_name:'',last_name:'',username:'',email:'',password:'',passeord_confirmation:'',tsandcs:''}
       @ticked = params[:tsandcs]
 
       if params[:tsandcs]
@@ -62,6 +62,6 @@ class UsersController < ApplicationController
   
   private
   def user_params
-    params.require(:user).permit(:first_name, :last_name, :username, :email, :password,:password_confirmation)
+    params.require(:user).permit(:first_name, :middle_name, :last_name, :username, :email, :password,:password_confirmation)
   end
 end

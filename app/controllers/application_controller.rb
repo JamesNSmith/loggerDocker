@@ -68,7 +68,5 @@ class ApplicationController < ActionController::Base
     session[:club_auth] = nil
     redirect_to '/', :danger => 'RECORD NOT FOUND'
   end
-
-  
-  
+ 
 end

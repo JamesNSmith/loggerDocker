@@ -14,17 +14,17 @@ class Club < ApplicationRecord
 
 	#has_many :flights
 
+  validates_presence_of :name, :initials, :country, :message => "Can't be blank!"
+
+  validates :name, format: {with: /\A[a-z\s]{3,30}\Z/i, message: "Length: 3 to 30 characters Letters only"}
+  validates :initials, format: {with: /\A[a-z]{1,5}\Z/i, message: "Length: 1 to 5 characters Letters only"}
+
   private
 	def generate_token(column)
     begin
       self[column] = SecureRandom.urlsafe_base64
    	end while Club.exists?(column => self[column])
   end
-
-  	#def default_membership
-  	#	@membership = Membership.create(name: 'Default', mtype: true)
-  	#	self.memberships << @membership
-  	#end
 end
 
 

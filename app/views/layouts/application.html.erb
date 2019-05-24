@@ -32,6 +32,8 @@
   </head>
 
   <body>
+
+    <% if ENV["RAILS_ENV"] == 'development' %>
   	<header>
   		<table>
   			<tr>
@@ -84,16 +86,25 @@
 
       </ul>
     </nav>
+    <% end %>
+
+    <%  begin 
+          @userUtype = current_user.utype 
+        rescue NoMethodError => e 
+          @userUtype = ''
+        end %>
   	
+    <% if ENV["RAILS_ENV"] == 'development' || @userUtype == 'webadmin' %>
   	<nav>
       <h3>Admin</h3>
   		<ul>
         <li><%= link_to 'Users', "/users" %></li>
         <li><%= link_to 'Clubs', "/clubs" %></li>
         <li><%= link_to 'Memberships', "/memberships" %></li>
-
   		</ul>
+      <h3><%= ENV["RAILS_ENV"] %></h3>
   	</nav>
+    <% end %>
 
     <%= render 'application/header' %>
 
@@ -113,7 +124,7 @@
 
     <div id="copyright" >
       <div class="containerPage">
-      <p>&copy; FlightLogger. All rights reserved.| Design by <a href="#" rel="nofollow">JNS Enterprises</a>.</p>
+      <p>&copy; FlightLogger. All rights reserved.| Design by <a href="#" rel="nofollow">JNS Enterprises.</a></p>
       </div>
     </div>
 

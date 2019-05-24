@@ -47,7 +47,7 @@ class MembershipsController < ApplicationController
 
   private
   def new_member_params
-    params.require(:membership).permit(:name, :mtype, :launch_fee, :soaring_fee,:aerotow_standard_fee, :aerotow_unit_fee)
+    params.require(:membership).permit(:name, :launch_fee, :soaring_fee,:aerotow_standard_fee, :aerotow_unit_fee)
   end
 
   def update_params
@@ -55,7 +55,7 @@ class MembershipsController < ApplicationController
   end
 
   def update_data_params
-    params.require(:membership).permit(:id, :mtype, :launch_fee, :soaring_fee,:aerotow_standard_fee, :aerotow_unit_fee)
+    params.require(:membership).permit(:id, :launch_fee, :soaring_fee,:aerotow_standard_fee, :aerotow_unit_fee)
   end
 
   def delete_member_params

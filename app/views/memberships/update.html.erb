@@ -8,7 +8,6 @@
     <div class="field"> 
       <ul>
           <%= f.hidden_field :id, value: @membership.id %>	
-          <%= f.hidden_field :mtype, value: false%>
       	  <li><%= f.label "Launch Fee" %></li>
           <li><%= f.text_field :launch_fee, :step => :any, :placeholder => "Launch Fee", :value => @membership[:launch_fee] %></li>
           <li><%= f.label "Aerotow Fee 2000ft" %></li>
