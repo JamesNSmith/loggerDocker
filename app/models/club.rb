@@ -1,7 +1,6 @@
 class Club < ApplicationRecord
 	before_create {generate_token(:auth_token)}
 	before_create {generate_token(:link_token)}
-	#after_create {default_membership}
 
 	has_many :club_users
 	has_many :users, through: :club_users
@@ -16,7 +15,7 @@ class Club < ApplicationRecord
 
   validates_presence_of :name, :initials, :country, :message => "Can't be blank!"
 
-  validates :name, format: {with: /\A[a-z\s]{3,30}\Z/i, message: "Length: 3 to 30 characters Letters only"}
+  validates :name, format: {with: /\A[a-z\s]{3,30}\Z/i, message: "Length: 3 to 30 characters Letters and spaces only"}
   validates :initials, format: {with: /\A[a-z]{1,5}\Z/i, message: "Length: 1 to 5 characters Letters only"}
 
   private

@@ -16,14 +16,18 @@ class MembershipsController < ApplicationController
     case request.method_symbol
     when :get
   	  @membership = Membership.new
+      @status = {name:'',launch_fee:'',aerotow_standard_fee:'',aerotow_unit_fee:'',soaring_fee:''}
     when :post
       @membership = Membership.new(new_member_params)
-      #@membership.club << current_club
+      @status = {name:'',launch_fee:'',aerotow_standard_fee:'',aerotow_unit_fee:'',soaring_fee:''}
+      
       if @membership.save && current_club
       	current_club.memberships << [@membership]
-        redirect_to '/memberships/club'
+        redirect_to '/memberships/club', :info => @membership[:name].to_s + ' Membership Created'
       else
-        redirect_to '/membership/add'
+        @membership.errors.each do |attr, msg|
+          @status[attr] = 'error'
+        end
       end
     end
   end
@@ -32,10 +36,20 @@ class MembershipsController < ApplicationController
     case request.method_symbol
     when :get
       @membership = Membership.find(update_params[:id])
+      @status = {name:'',launch_fee:'',aerotow_standard_fee:'',aerotow_unit_fee:'',soaring_fee:''}
+    
     when :post
       @membership = Membership.find(update_data_params[:id])
-      @membership.update(update_data_params)
-      redirect_to '/memberships/club', :info =>  @membership[:name].to_s + ' Membership Updated'
+      @status = {name:'',launch_fee:'',aerotow_standard_fee:'',aerotow_unit_fee:'',soaring_fee:''}
+      
+      if @membership.update(update_data_params)
+        redirect_to '/memberships/club', :info =>  @membership[:name].to_s + ' Membership Updated'  
+      else
+        @membership.errors.each do |attr, msg|
+          @status[attr] = 'error'
+        end
+        #render '/memberships/update'
+      end
     end
   end
 

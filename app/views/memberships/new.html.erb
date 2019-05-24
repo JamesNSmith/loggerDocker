@@ -8,15 +8,24 @@
     <div class="field"> 
       <ul>
           <li><%= f.label "Name " %></li>
-          <li><%= f.text_field :name, :placeholder => "Name" %></li> 	
-      	  <li><%= f.label "Launch Fee" %></li>
-          <li><%= f.text_field :launch_fee, :step => :any, :placeholder => "Launch Fee" %></li>
+          <li><%= f.text_field :name, :placeholder => "Name", :class => @status[:name] %></li>
+          <li class='errorText'><%= @membership.errors[:name][0] %></li> 
+
+      	  <li><%= f.label "Winch Launch Fee" %></li>
+          <li><%= f.text_field :launch_fee, :step => :any, :placeholder => "Launch Fee", :class => @status[:launch_fee] %></li>
+          <li class='errorText'><%= @membership.errors[:launch_fee][0] %></li>
+
           <li><%= f.label "Aerotow Fee 2000ft" %></li>
-          <li><%= f.text_field :aerotow_standard_fee, :step => :any, :placeholder => "Aerotow Fee 2000ft" %></li>
+          <li><%= f.text_field :aerotow_standard_fee, :step => :any, :placeholder => "Aerotow Fee 2000ft", :class => @status[:aerotow_standard_fee] %></li>
+          <li class='errorText'><%= @membership.errors[:aerotow_standard_fee][0] %></li>
+
           <li><%= f.label "Aerotow Fee /1000ft >2000ft" %></li>
-          <li><%= f.text_field :aerotow_unit_fee, :step => :any, :placeholder => "Aerotow Fee /1000ft >2000ft" %></li>
+          <li><%= f.text_field :aerotow_unit_fee, :step => :any, :placeholder => "Aerotow Fee /1000ft >2000ft", :class => @status[:aerotow_unit_fee] %></li>
+          <li class='errorText'><%= @membership.errors[:aerotow_unit_fee][0] %></li>
+
           <li><%= f.label "Soaring Fee" %></li>
-          <li><%= f.text_field :soaring_fee, :step => :any, :placeholder => "Soaring Fee" %></li>
+          <li><%= f.text_field :soaring_fee, :step => :any, :placeholder => "Soaring Fee", :class => @status[:soaring_fee] %></li>
+          <li class='errorText'><%= @membership.errors[:soaring_fee][0] %></li>
        </ul>
   	</div> 
   	<div class="actions"> 

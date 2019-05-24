@@ -14,7 +14,8 @@ class CreateUsers < ActiveRecord::Migration[5.1]
       t.boolean :email_confirmed, :default => false
       t.string :password_reset_token
       t.datetime :password_reset_sent_at
-      #preferences
+      #preferences https://www.altcademy.com/questions/store-arrays-or-hashes-in-rails-activerecord
+      #language
 
       t.timestamps
     end
