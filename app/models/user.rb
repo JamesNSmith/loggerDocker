@@ -14,16 +14,20 @@ class User < ApplicationRecord
 
 	has_many :flights
 
+  #validates_format_of :username, :with => /\A([a-z])\Z/i, :message => "Format Error!"
+  #/\A([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]{2,})\Z/i
+  #validates :email, format: { with: URI::MailTo::EMAIL_REGEXP, message: "Email not valid!" }
+
 	validates_presence_of :first_name, :last_name, :username, :email, :message => "Can't be blank!" #, :on => :create
-	#validates_format_of :username, :with => /\A([a-z])\Z/i, :message => "Format Error!"
+  validates_uniqueness_of :username, :email, :message => "Already in use!"
 
-
-	#/\A([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]{2,})\Z/i
-	#validates :email, format: { with: URI::MailTo::EMAIL_REGEXP, message: "Email not valid!" }
-	validates_uniqueness_of :username, :email, :message => "Already in use!"
+  validates :first_name, format: {with: /\A[a-z]{2,16}\Z/i, message: "Length: 2 to 16 characters Letters only"}
+  validates :last_name, format: {with: /\A[a-z]{2,16}\Z/i, message: "Length: 2 to 16 characters Letters only"}
+  validates :username, format: {with: /\A[a-z0-9_-]{3,16}\Z/i, message: "Format: a-z, 0-9 Length: 3 to 16 characters"}
+  validates :email, format: {with: /\A([a-z0-9_\.-]+)@([\da-z\.-]+)\.([a-z\.]{2,6})\Z/i, message: "Enter a valid email"}#Not sure
+  validates :password, format: {with: /\A[a-z0-9_-]{6,18}\Z/i, message: "Format: a-z, 0-9 Length: 6 to 18 characters"}
 	
-
-    validates :password, confirmation: {:message => "Doesn't match password!"}
+  validates :password, confirmation: {:message => "Doesn't match password!"}
 	validates :password_confirmation, confirmation: true
 
 	def email_activate
