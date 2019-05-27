@@ -4,7 +4,7 @@
 
     <h1><%= @user.first_name.capitalize+' '+@user.last_name.capitalize+"'s "%> Membership</h1>
 
-    <%= form_for(:membership,url: '/clubusers/adminupdate') do |f| %>
+    <%= form_for(:membership,url: '/clubusers/adminupdate/'+@clubUser.id.to_s) do |f| %>
     <div class="field"> 
       <ul>
         <li><%= f.select :name, options_for_select(@utypes,selected: @clubUser.utype) %></li>

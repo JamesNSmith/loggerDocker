@@ -4,7 +4,7 @@ class ApplicationController < ActionController::Base
 
   add_flash_types :danger, :info, :warning, :success
 
-  helper_method :set_user, :current_user, :end_user, :set_club, :current_club, :end_club  
+  helper_method :set_user, :current_user, :end_user, :set_club, :current_club, :end_club, :check_user_membership, :check_admin_membership   
 
   rescue_from ActiveRecord::RecordNotFound, :with => :record_not_found
 
@@ -61,8 +61,33 @@ class ApplicationController < ActionController::Base
   def end_club
     session[:club_auth] = nil
   end
-  #Misc ---------------------------------------
 
+  #Membership --------------------------------
+  def check_user_membership(club,user)
+    @user = current_user
+    if @user != user 
+      redirect_to '/', :danger => "Access Denied"
+    else
+      begin
+        @utype = @user.club_users.find_by(club: club).utype
+      rescue NoMethodError => e
+        redirect_to '/', :danger => "Access Denied"
+      end
+    end
+  end
+
+  def check_admin_membership(club) 
+    begin
+      @utype = current_user.club_users.find_by(club: club).utype
+      if @utype != 'admin'
+        redirect_to '/', :danger => "Access Denied"
+      end
+    rescue NoMethodError => e
+      redirect_to '/', :danger => "Access Denied"
+    end
+  end
+
+  #Misc ---------------------------------------
   def record_not_found
     session[:user_auth] = nil
     session[:club_auth] = nil

@@ -2,8 +2,10 @@ class ClubUsersController < ApplicationController
   def userupdate
     case request.method_symbol
     when :get
-      @clubUser = ClubUser.find(update_params[:id])
+      @clubUser = ClubUser.find(params[:id])
+      @user = @clubUser.user
       @club = @clubUser.club
+      check_user_membership(@club,@user)
 
       @membershipList = []
       @club.memberships.each do |membership|
@@ -12,13 +14,15 @@ class ClubUsersController < ApplicationController
       
     when :post
       @clubUser = ClubUser.find(update_data_params[:club_user])
+      check_user_membership(@clubUser.club,@clubUser.user)
+
       @membership = Membership.find(update_data_params[:id])
       @clubUser.membership = @membership
 
       if @clubUser.save 
-        redirect_to '/clubs/members', :info => 'Membership updated to ' + @membership[:name].to_s
+        redirect_to '/clubs/user', :info => 'Membership updated to ' + @membership[:name].to_s
       else 
-        redirect_to '/clubs/members', :danger => "Ooooppss, something went wrong!"
+        redirect_to '/clubs/user', :danger => "Ooooppss, something went wrong!"
       end
     end
   end
@@ -26,10 +30,10 @@ class ClubUsersController < ApplicationController
   def adminupdate
     case request.method_symbol
     when :get
-      @clubUser = ClubUser.find(update_params[:id])
-      puts('clubUser')
+      @clubUser = ClubUser.find(params[:id])
       @user = @clubUser.user
       @club = @clubUser.club
+      check_admin_membership(@club)
 
       @membershipList = []
       @club.memberships.each do |membership|
@@ -39,12 +43,13 @@ class ClubUsersController < ApplicationController
       @utypes = [['Admin','admin'],['Regular','regular']]
       
     when :post
-      puts('post')
-      @clubUser = ClubUser.find(update_admin_data_params[:club_user])
-      @membership = Membership.find(update_admin_data_params[:id])
+      @clubUser = ClubUser.find(params[:membership][:club_user])
+      check_admin_membership(@clubUser.club)
+
+      @membership = Membership.find(params[:membership][:id])
       @clubUser.membership = @membership
 
-      @utype = update_admin_data_params[:name]
+      @utype = params[:membership][:name]
       @adminCount = ClubUser.where(club:@clubUser.club, utype:'admin').count
 
       if (@clubUser.utype == 'admin') && (@utype != 'admin') && (@adminCount <= 1)
@@ -82,16 +87,8 @@ class ClubUsersController < ApplicationController
   end
 
   private
-  def update_params
-    params.require(:club_user).permit(:id)
-  end
-
   def update_data_params
     params.require(:membership).permit(:id,:club_user)
-  end
-
-  def update_admin_data_params
-    params.require(:membership).permit(:name,:id,:club_user)
   end
 
   def delete_club_user_params

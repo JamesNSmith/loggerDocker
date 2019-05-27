@@ -24,7 +24,7 @@
       <td><p><%= new_club_link_url(club.link_token) %></p></td> 
       
       <td>
-      <%= form_for(:clubs, url: '/clubs') do |f| %> 
+      <%= form_for(:clubs, url: '/clubs/admin') do |f| %> 
       <%= f.hidden_field :id, value: club.id %>
       <%= f.submit "Select", class: "btn" %>
       <% end %>

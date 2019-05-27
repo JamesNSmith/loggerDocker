@@ -44,10 +44,7 @@
       </td>
 
       <td class="actions">
-        <%= form_for(:club_user, url: '/clubusers/update', method: :get) do |f| %> 
-          <%= f.hidden_field :id, value:  @clubUser.id %>
-          <%= f.submit "Update", class: "btn" %>
-        <% end %>
+        <%= link_to "Update", clubusers_update_path(@clubUser.id.to_s), class: "btn" %>
       </td>
 
       <td class="actions">
@@ -57,8 +54,6 @@
           Admin
         <% end %>
       </td>
-
-
 
       </tr> 
     <% end %>

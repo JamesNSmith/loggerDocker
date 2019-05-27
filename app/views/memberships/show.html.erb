@@ -34,10 +34,7 @@
       <% if @currentClubUser.utype == 'admin' %>
 
         <td>
-          <%= form_for(:membership, url: '/memberships/update', method: :get) do |f| %> 
-            <%= f.hidden_field :id, value: membership.id %>
-            <%= f.submit "Update", class: "btn" %>
-          <% end %>
+          <%= link_to "Update", memberships_update_path(membership.id.to_s), class: "btn" %>
         </td>
 
         <td>
@@ -53,7 +50,9 @@
 
   <%= will_paginate @memberships %>
 
-  <%= link_to 'Add Membership', "/memberships/add" %>
+  <% if @currentClubUser.utype == 'admin' %>
+    <%= link_to 'Add Membership', "/memberships/add" %>
+  <% end %>
 
   </div>
 </div>

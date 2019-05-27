@@ -68,7 +68,7 @@
     <nav>
       <h3>Dev</h3>
       <ul>
-        <li><%= link_to 'All Aircraft', "/aircraft" %></li>
+        <li><%= link_to 'All Aircraft', "/aircraft/admin" %></li>
         <li><%= link_to 'Add Aircraft', "/aircraft/add" %></li>
         <li><%= link_to 'Club Aircraft', "/aircraft/club" %></li>
         <li><%= link_to 'User Aircraft', "/aircraft/user" %></li>
@@ -98,9 +98,9 @@
   	<nav>
       <h3>Admin</h3>
   		<ul>
-        <li><%= link_to 'Users', "/users" %></li>
-        <li><%= link_to 'Clubs', "/clubs" %></li>
-        <li><%= link_to 'Memberships', "/memberships" %></li>
+        <li><%= link_to 'Users', "/users/admin" %></li>
+        <li><%= link_to 'Clubs', "/clubs/admin" %></li>
+        <li><%= link_to 'Memberships', "/memberships/admin" %></li>
   		</ul>
       <h3><%= ENV["RAILS_ENV"] %></h3>
   	</nav>
