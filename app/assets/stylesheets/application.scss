@@ -191,10 +191,20 @@ a:hover
 		color: #FFF;
 	}
 	
-	#menu .current_page_item a
-	{
-		background: #009E2D;
-		color: #FFF;
+	@media (hover: hover) {
+		.menuChild a:hover
+		{
+			background: #009E2D;
+			color: #FFF;
+		}
+	}
+
+	@media (hover: none) {
+		.menuChild a:active
+		{
+			background: #009E2D;
+			color: #FFF;
+		}
 	}
 	
 	#menu .icon
@@ -510,7 +520,7 @@ td.actions {
 
 .mainPage {
   margin: 0 auto;
-  width: 510px;
+  width: 700px;
 }
 
 //.login, .signup, .reset, .club, .memberships

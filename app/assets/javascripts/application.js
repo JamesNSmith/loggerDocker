@@ -49,13 +49,13 @@ $(document).on('turbolinks:load', function() {
     $('.user-menu').addClass('hide');
   });*/
 
-  $('.menuChild').mouseenter(function() {
+  /*$('.menuChild').mouseenter(function() {
     $(this).addClass('current_page_item');
   });   
 
   $('.menuChild').mouseleave(function() {
     $(this).removeClass('current_page_item');
-  }); 
+  }); */
 }); 
 
 

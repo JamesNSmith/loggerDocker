@@ -3,6 +3,7 @@ Rails.application.routes.draw do
 
   root 'pages#index'
   match '/termsandconditions', to: 'pages#tsandcs', via: :get 
+  match '/features', to: 'pages#features', via: :get 
 
   match '/users/admin', to: 'users#index', via: [:get, :post]
   match '/users/signup', to: 'users#new', via: [:get, :post]
