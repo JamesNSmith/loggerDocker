@@ -16,7 +16,7 @@
 
 //main ------------------------------------
 
-
+$minWidth:1050px;
 
 html, body {
   background: #fff;
@@ -26,6 +26,8 @@ html, body {
   padding: 0;
   //text-transform: lowercase;
   height: 100%;
+  width:100%;
+  min-width:$minWidth;
   //font-weight: 300;
   //color: #656565;
 }
@@ -67,12 +69,12 @@ h1{
 	text-align:center
 }
 	
-p, ol, ul
+p, ul
 {
 	margin-top: 0;
 }
 	
-ol, ul
+ul
 {
 	padding: 0;
 	list-style: none;
@@ -101,9 +103,10 @@ a:hover
 .containerPageHeader
 	{
 		//overflow: hidden;
-		margin: 0em auto;
-		width:95%;
+		margin: 0px auto;
+		width:100%;
 		max-width: 1400px;
+		min-width: 1010px;
 	}
 
 /*********************************************************************************/
@@ -113,12 +116,16 @@ a:hover
 	#header-wrapper
 	{
 		background: #333333;
+		width:100%;
+		min-width:$minWidth;
 	}
 
 	#header
 	{
 		position: relative;
 		padding: 3em 0em;
+		min-width:$minWidth;
+		width:100%;
 	}
 
 /*********************************************************************************/
@@ -135,6 +142,8 @@ a:hover
 	#logo h1
 	{
 		color: #FFF;
+		padding:5px;
+		margin-left:10px;
 	}
 	
 	#logo a
@@ -225,11 +234,13 @@ a:hover
   	.club-menu {
   		right:100px;
   		width:120px;
+  		z-index:10;
   	}
 
   	.user-menu {
   		right:0px;
   		width:90px;
+  		z-index:10;
   	}
 
   	.user-menu, .club-menu {
@@ -320,10 +331,14 @@ a:hover
 
 	#copyright
 	{
+		//position:absolute;
+		//bottom:0;
 		overflow: hidden;
 		padding: 5em 0em;
 		border-top: 1px solid rgba(255,255,255,0.08);
 		background: #333333;
+		width:100%;
+		min-width:$minWidth;
 	}
 	
 	#copyright p
@@ -344,6 +359,9 @@ $headColor:rgb(227,225,225);
 $headHeight:35px;
 
 header {
+	width:100%;
+	min-width:1020px;
+
 	border: 1px solid $headColor;
 	height:$headHeight;
 	width:100%;
@@ -392,6 +410,9 @@ header {
 
 //nav------------------
 nav{
+	width:90%;
+	min-width:900px;
+
 	margin-top: 10px;
 
 	border: 1px solid black;
@@ -445,6 +466,19 @@ nav{
 */
 
 /*********************************************************************************/
+/* body                                                                          */
+/*********************************************************************************/
+
+.mainBody {
+	//height:80%;
+	position: relative;  
+	min-height: 100vh;
+	min-height: 1400px;
+	width:100%;
+	min-width:$minWidth;
+}
+
+/*********************************************************************************/
 /* record table                                                                  */
 /*********************************************************************************/
 .recordPage {
@@ -466,3 +500,31 @@ td.actions {
 	width:130px;
 }
 
+/*********************************************************************************/
+/* main                                                                  */
+/*********************************************************************************/
+
+.main {
+  margin: 40px 0;
+}
+
+.mainPage {
+  margin: 0 auto;
+  width: 510px;
+}
+
+//.login, .signup, .reset, .club, .memberships
+
+.mainContainer {
+  width: 510px;
+  margin: 150px auto;
+  margin-bottom:250px
+  //padding:100px;
+}
+
+.plusContainer {
+  width: 600px;
+  margin: 150px auto;
+  margin-bottom:250px
+  //padding:100px;
+}

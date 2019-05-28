@@ -25,7 +25,7 @@ class ClubsController < ApplicationController
       @club = Club.find_by_id(params[:clubs][:id]) 
       if @club 
         set_club(@club)
-        redirect_to '/clubs/user' #not sure
+        redirect_to '/clubs/user'
       end
     end
   end

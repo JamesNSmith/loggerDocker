@@ -179,3 +179,41 @@ ul {
 #signup {
 	margin:10px 45%;
 }
+
+/*********************************************************************************/
+/* terms and conditions                                                          */
+/*********************************************************************************/
+
+.termsContainer {
+  width: 700px;
+  margin: 100px auto;
+  margin-bottom:250px;
+  font-weight:normal;
+  //padding:100px;
+}
+
+.termsContainer p {
+	margin-left:30px;
+	margin-bottom:5px;
+}
+
+.termsContainer ul {
+	list-style: square;
+	padding:5px;
+	margin-left:60px;
+}
+
+.termsContainer h1 {
+	padding:20px;
+	margin-bottom:20px;
+}
+
+.termsContainer h3 {
+	padding:10px;
+	margin-left:0px;
+}
+
+.termsContainer h4 {
+	padding:5px;
+	margin-left:10px;	
+}

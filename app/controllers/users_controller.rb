@@ -1,6 +1,6 @@
 class UsersController < ApplicationController
-  before_action :require_user, only: :profile
-  #before_action :require_admin, only: :index
+  before_action :require_user, only: [:index, :profile]
+  #before_action :require_admin, only: :index if ENV["RAILS_ENV"] != 'development'
 
 	def index
     case request.method_symbol

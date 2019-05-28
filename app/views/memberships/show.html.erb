@@ -6,7 +6,6 @@
     <table class="table table-sm table-striped table-bordered table-hover">
       <thead>
         <tr>
-        <td>#</td>
         <td>Name</td>
         <td>Winch Fee</td>
         <td>Aerotow Fee 2000ft</td>
@@ -23,8 +22,7 @@
 
   	<% @memberships.each do |membership| %> 
 	    <tr>
-
-      <td><p><%= membership.id %></p></td> 
+ 
   	  <td><p><%= membership.name %></p></td> 
   		<td><p><%= number_to_currency(membership.launch_fee,:unit => "£") %></p></td>
       <td><p><%= number_to_currency(membership.aerotow_standard_fee,:unit => "£") %></p></td>
