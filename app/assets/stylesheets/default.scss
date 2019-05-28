@@ -216,12 +216,27 @@
 /*********************************************************************************/
 /* 3-column                                                                      */
 /*********************************************************************************/
-
+	
+	#three-column a{
+		color:#000000
+	}
+	
 	.boxA,
 	.boxB,
 	.boxC
 	{
 		width: 320px;
+		margin-top:15px;
+	}
+
+	@media (hover: hover) {
+		.boxA:hover,
+		.boxB:hover,
+		.boxC:hover
+		{
+			margin-top:10px;
+			margin-bottom:5px;
+		}
 	}
 
 	.boxA,
