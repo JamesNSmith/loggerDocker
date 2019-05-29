@@ -35,6 +35,7 @@ class UsersController < ApplicationController
       if params[:tsandcs]
         if @user.save
           @mailer = UserMailer.registration_confirmation(@user).deliver
+          puts('@mailer')
           puts(@mailer)
           if @mailer
             puts('emailed')
