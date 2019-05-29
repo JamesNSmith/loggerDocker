@@ -28,13 +28,17 @@ class UsersController < ApplicationController
       @status = {first_name:'',middle_name:'',last_name:'',username:'',email:'',password:'',passeord_confirmation:'',tsandcs:''}
       @ticked = false
     when :post
+      puts('post')
       @user = User.new(user_params)
       @status = {first_name:'',middle_name:'',last_name:'',username:'',email:'',password:'',passeord_confirmation:'',tsandcs:''}
       @ticked = params[:tsandcs]
+      puts('post2')
 
       if params[:tsandcs]
+        puts('presave')
         if @user.save
           puts('@mailer')
+          
           @mailer = UserMailer.registration_confirmation(@user).deliver
           puts(@mailer)
           if @mailer
