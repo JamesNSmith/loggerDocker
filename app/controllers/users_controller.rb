@@ -28,23 +28,23 @@ class UsersController < ApplicationController
       @status = {first_name:'',middle_name:'',last_name:'',username:'',email:'',password:'',passeord_confirmation:'',tsandcs:''}
       @ticked = false
     when :post
-      puts('post')
+      logger.debug 'post'
       @user = User.new(user_params)
       @status = {first_name:'',middle_name:'',last_name:'',username:'',email:'',password:'',passeord_confirmation:'',tsandcs:''}
       @ticked = params[:tsandcs]
-      puts('post2')
+      logger.debug 'post2'
 
       if params[:tsandcs]
-        puts('presave')
+        logger.debug 'presave'
         if @user.save
-          puts('@mailer')
-          
+          logger.debug '@mailer'
+
           @mailer = UserMailer.registration_confirmation(@user).deliver
-          puts(@mailer)
+          logger.debug @mailer
           if @mailer
-            puts('emailed')
+            logger.debug 'emailed'
           else
-            puts('not emailed')
+            logger.debug 'not emailed'
           end
           redirect_to '/', :success => "Please confirm your email address to continue"
         else
@@ -52,7 +52,7 @@ class UsersController < ApplicationController
             @status[attr] = 'error'
           end
           #flash[:danger] = "Oops, something went wrong!"
-          puts('errors')
+          logger.debug 'errors'
         end
 
       else
