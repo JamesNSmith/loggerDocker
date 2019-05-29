@@ -5,7 +5,7 @@ class UserAuthenticationController < ApplicationController
       @user.email_activate
       #session[:user_id] = @user.id #not sure
       #redirect_to '/'
-      redirect_to '/login?email=' + @user.email, :success => "Welcome to FlightLogger! Your email has been confirmed.
+      redirect_to '/login?email='+@user.email+'&&url=/clubs/user', :success => "Welcome to FlightLogger! Your email has been confirmed.
       Please log in to continue."
     else
       redirect_to '/', :danger => "Sorry. User does not exist"
