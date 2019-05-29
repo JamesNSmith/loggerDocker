@@ -32,15 +32,24 @@ Rails.application.configure do
   config.action_mailer.raise_delivery_errors = false
   config.action_mailer.perform_caching = false
 
-  config.action_mailer.default_url_options = { :host => "localhost:3000" }
+  config.action_mailer.default_url_options = { :host => "localhost:300" }
 
   config.action_mailer.delivery_method = :smtp
 
+  #ActionMailer::Base.smtp_settings = {
+  #  :address => ENV['MAILER_ADDRESS'],
+  #  :port => 587,
+  #  :user_name => ENV['MAILER_USERNAME'], 
+  #  :password => ENV['MAILER_PASSWORD'], 
+  #  :authentication => :plain,
+  #  :enable_starttls_auto => true
+  #}
+
   ActionMailer::Base.smtp_settings = {
-    :address => ENV['MAILER_ADDRESS'],
+    :address => "smtp.gmail.com",
     :port => 587,
-    :user_name => ENV['MAILER_USERNAME'], 
-    :password => ENV['MAILER_PASSWORD'], 
+    :user_name => 'flightlogger0@gmail.com', #must be hidden !!!!!!!!!!!!!!!!!!!!!!!!!!!
+    :password => '01020102Js@', #must be hidden !!!!!!!!!!!!!!!!!!!!!!!!!!!!
     :authentication => :plain,
     :enable_starttls_auto => true
   }

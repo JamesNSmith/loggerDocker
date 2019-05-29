@@ -34,7 +34,11 @@ class UsersController < ApplicationController
 
       if params[:tsandcs]
         if @user.save
-          UserMailer.registration_confirmation(@user).deliver
+          if UserMailer.registration_confirmation(@user).deliver
+            puts('emailed')
+          else
+            puts('not emailed')
+          end
           redirect_to '/', :success => "Please confirm your email address to continue"
         else
           @user.errors.each do |attr, msg|
