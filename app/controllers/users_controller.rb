@@ -34,7 +34,9 @@ class UsersController < ApplicationController
 
       if params[:tsandcs]
         if @user.save
-          if UserMailer.registration_confirmation(@user).deliver
+          @mailer = UserMailer.registration_confirmation(@user).deliver
+          puts(@mailer)
+          if @mailer
             puts('emailed')
           else
             puts('not emailed')
@@ -45,6 +47,7 @@ class UsersController < ApplicationController
             @status[attr] = 'error'
           end
           #flash[:danger] = "Oops, something went wrong!"
+          puts('errors')
         end
 
       else
