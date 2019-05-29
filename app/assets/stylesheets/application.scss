@@ -287,6 +287,7 @@ a:hover
 
 	div#flash {
 		text-align: center;
+		z-index:5;
 	}
 
 	.flash {
@@ -302,6 +303,7 @@ a:hover
 		//background-color: #333333;
 		margin:0px auto;
 		width:$flashWidth;
+		z-index:6;
 	}
 
 /*********************************************************************************/

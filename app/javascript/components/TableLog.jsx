@@ -78,7 +78,7 @@ class Buttons extends React.Component {
 
 		switch(this.props.status){
 			case 'editTime':
-				//duplicate = true
+				duplicate = true
 				deleteBu = true
 				editAll = true
 				break;
@@ -86,7 +86,7 @@ class Buttons extends React.Component {
 				goLogger = true
 				break;
 			case '':
-				//duplicate = true
+				duplicate = true
 				editTimes = true
 				deleteBu = true
 				editAll = true
@@ -548,9 +548,10 @@ class TableLog extends React.Component {
   		var duplicateData = JSON.parse(JSON.stringify(this.state.tableData[indexNumber]))
   		duplicateData['launchTime'] = {formatted:'',input:'',status:''}
 		duplicateData['landTime'] = {formatted:'',input:'',status:''}
+		duplicateData['date'] = (new Date()).toISOString()
 
 		console.log(duplicateData)
-		this.addDataTable([duplicateData])
+		window.flightController.addFromLogger(duplicateData)
   	}
 
 //Utils -------------------------------------

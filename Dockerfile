@@ -22,8 +22,8 @@ RUN apt-get install -y curl \
 	&& apt-get install -y yarn \
 	&& yarn install --check-files \
 	&& rails webpacker:install\  
-	&& rails webpacker:install:react \ 
-	&& rails generate react:install 
+	&& rails webpacker:install:react 
+#&& rails generate react:install 
 
 #RUN npm install react-bootstrap bootstrap
 
