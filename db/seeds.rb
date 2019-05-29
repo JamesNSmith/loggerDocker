@@ -23,7 +23,7 @@ cd1 = Club.create(name:'Default', initials:'D', country:'UK')
 c1 = Club.create(name:'Logger Club', initials:'LC', country:'UK')
 c2 = Club.create(name:'Test Club', initials:'TC', country:'UK')
 
-md1 = Membership.create(name: 'Default')
+md1 = Membership.create(name: 'Default', launch_fee:7.00, soaring_fee:0.3,aerotow_standard_fee: 20, aerotow_unit_fee: 5)
 m1 = Membership.create(name: 'Full', launch_fee:7.00, soaring_fee:0.3,aerotow_standard_fee: 20, aerotow_unit_fee: 5)
 m2 = Membership.create(name: 'Junior', launch_fee:4.50, soaring_fee:0.15,aerotow_standard_fee: 20, aerotow_unit_fee: 5)
 m3 = Membership.create(name: 'Social', launch_fee:4.50, soaring_fee:0.15,aerotow_standard_fee: 20, aerotow_unit_fee: 5)
