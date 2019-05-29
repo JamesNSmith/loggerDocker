@@ -537,7 +537,7 @@ class TableLog extends React.Component {
 		var docHeight = document.height;
 
   		window.scroll({
-  			top: top + 3*winHeight/3,
+  			top: top + 2*winHeight/3,
   			left: 0,
   			behavior: 'smooth'
 		});
@@ -722,7 +722,7 @@ class TableLog extends React.Component {
 	render(){
 		const rows = [];
 
-		var pageLength = 4
+		var pageLength = 8
 
 		const {returnIndexes,pages} = this.pagination(Object.keys(this.state.tableData),pageLength,this.state.page)
 
