@@ -64,17 +64,17 @@ Rails.application.configure do
 
   # Ignore bad email addresses and do not raise email delivery errors.
   # Set this to true and configure the email server for immediate delivery to raise delivery errors.
-  config.action_mailer.raise_delivery_errors = false
+  config.action_mailer.raise_delivery_errors = true
 
   config.action_mailer.default_url_options = { :host => ENV['MAILER_HOST'] } #ENV['MAILER_HOST'] "localhost:3000"
 
   config.action_mailer.delivery_method = :smtp
 
   ActionMailer::Base.smtp_settings = {
-    :address => ENV['MAILER_ADDRESS'],
+    :address => "smtp.gmail.com",
     :port => 587,
-    :user_name => ENV['MAILER_USERNAME'], 
-    :password => ENV['MAILER_PASSWORD'], 
+    :user_name => 'flightlogger0@gmail.com', #must be hidden !!!!!!!!!!!!!!!!!!!!!!!!!!!
+    :password => '01020102Js@', #must be hidden !!!!!!!!!!!!!!!!!!!!!!!!!!!!
     :authentication => :plain,
     :enable_starttls_auto => true
   }
