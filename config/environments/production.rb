@@ -71,10 +71,10 @@ Rails.application.configure do
   config.action_mailer.delivery_method = :smtp
 
   ActionMailer::Base.smtp_settings = {
-    :address => "smtp.gmail.com",
+    :address => ENV['MAILER_ADDRESS'],
     :port => 587,
-    :user_name => 'flightlogger0@gmail.com', #must be hidden !!!!!!!!!!!!!!!!!!!!!!!!!!!
-    :password => '01020102Js', #must be hidden !!!!!!!!!!!!!!!!!!!!!!!!!!!!
+    :user_name => ENV['MAILER_USERNAME'], 
+    :password => ENV['MAILER_PASSWORD'], 
     :authentication => :plain,
     :enable_starttls_auto => true
   }

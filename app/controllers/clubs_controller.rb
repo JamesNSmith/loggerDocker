@@ -59,7 +59,7 @@ class ClubsController < ApplicationController
 
         set_club(@club)
 
-        redirect_to '/', :success => "The join link has been sent to your email address"
+        redirect_to '/clubs/user', :success => "The join link has been sent to your email address"
 
         #@membership = Membership.find(1)
         #puts @clubMembership
