@@ -74,7 +74,7 @@ Rails.application.configure do
     :address => "smtp.gmail.com",
     :port => 587,
     :user_name => 'flightlogger0@gmail.com', #must be hidden !!!!!!!!!!!!!!!!!!!!!!!!!!!
-    :password => '01020102Js@', #must be hidden !!!!!!!!!!!!!!!!!!!!!!!!!!!!
+    :password => '01020102Js', #must be hidden !!!!!!!!!!!!!!!!!!!!!!!!!!!!
     :authentication => :plain,
     :enable_starttls_auto => true
   }
