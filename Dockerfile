@@ -7,6 +7,7 @@ RUN apt-get update -qq && apt-get install -y mysql-client
 RUN gem install rails -v 5.2.3
 RUN gem install bundler -v 2.0.1
 RUN bundle install
+
 RUN apt-get update -qq \
 	&& apt-get install -y curl \
 	&& curl -sL https://deb.nodesource.com/setup_10.x | bash - \
@@ -22,8 +23,8 @@ RUN apt-get install -y curl \
 	&& apt-get install -y yarn \
 	&& yarn install --check-files \
 	&& rails webpacker:install\  
-	&& rails webpacker:install:react\ 
-	&& rails generate react:install 
+	&& rails webpacker:install:react 
+#&& rails generate react:install 
 
 #RUN npm install react-bootstrap bootstrap
 
