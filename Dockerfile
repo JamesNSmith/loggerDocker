@@ -20,9 +20,9 @@ RUN apt-get update -qq \
 	&& yarn install --check-files \
 	&& bundle \
 	&& bundle exec rails webpacker:install \
-	&& bundle exec rails webpacker:install:react 
-	#&& bundle exec rails assets:precompile
-	#&& bundle exec rails webpacker:compile
+	&& bundle exec rails webpacker:install:react \ 
+	&& bundle exec rails assets:precompile \
+	&& bundle exec rails webpacker:compile
 
 #&& bundle exec rails assets:clobber \
 #&& yarn add core-js@3 \
