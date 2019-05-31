@@ -1,0 +1,3788 @@
+/*.boxListContainer {
+	margin:35px auto;
+	padding:10px;
+	width:85%;
+}
+
+.boxListContainer h1{
+  margin:17px
+}
+
+.boxList {
+  margin: 0 auto;
+  width: 650px;
+}
+
+.boxL{
+	text-align:left;
+	overflow: hidden;
+	width:100%;
+	height:80px;
+	border:1px solid black;
+	display:inline-block;
+	//margin: 0 auto;
+}
+
+.boxL ul {
+	overflow: hidden;
+	list-style-type: none;
+}
+
+
+
+.boxList li {
+	float:left;
+	padding:10px;
+	margin:10px;
+	font-size:20px;
+}
+
+.box-list-btn {
+  //margin-left: 30px;
+  width: 80px;
+  background-color: #fff;
+  transition: background 0.5s, color 0.5s;
+}
+
+.box-list-btn:hover{
+  color: #fff;
+  background-color: #000;
+  text-decoration: none;
+  transition: background 0.5s, color 0.5s;
+}
+*/
+/* line 1, /app/app/assets/stylesheets/default.scss */
+ul.actions {
+  text-align: center;
+}
+
+/* line 10, /app/app/assets/stylesheets/default.scss */
+p {
+  line-height: 180%;
+}
+
+/* line 15, /app/app/assets/stylesheets/default.scss */
+.containerPage {
+  overflow: hidden;
+  margin: 0em auto;
+  width: 1000px;
+}
+
+/*
+.containerPageHeader
+{
+	overflow: hidden;
+	margin: 0em auto;
+	width: 1000px;
+}*/
+/*********************************************************************************/
+/* Image Style                                                                   */
+/*********************************************************************************/
+/* line 34, /app/app/assets/stylesheets/default.scss */
+.image {
+  display: inline-block;
+}
+
+/* line 39, /app/app/assets/stylesheets/default.scss */
+.image img {
+  display: block;
+  width: 100%;
+}
+
+/* line 45, /app/app/assets/stylesheets/default.scss */
+.image-full {
+  display: block;
+  width: 100%;
+  margin: 0 0 2em 0;
+}
+
+/* line 52, /app/app/assets/stylesheets/default.scss */
+.image-left {
+  float: left;
+  margin: 0 2em 2em 0;
+}
+
+/* line 58, /app/app/assets/stylesheets/default.scss */
+.image-centered {
+  display: block;
+  margin: 0 0 2em 0;
+}
+
+/* line 64, /app/app/assets/stylesheets/default.scss */
+.image-centered img {
+  margin: 0 auto;
+  width: auto;
+}
+
+/*********************************************************************************/
+/* List Styles                                                                   */
+/*********************************************************************************/
+/* line 74, /app/app/assets/stylesheets/default.scss */
+ul.staff {
+  margin-bottom: 3em;
+}
+
+/* line 79, /app/app/assets/stylesheets/default.scss */
+ul.staff li {
+  display: inline-block;
+}
+
+/* line 84, /app/app/assets/stylesheets/default.scss */
+ul.staff li img {
+  width: 80%;
+  border-radius: 50%;
+}
+
+/*********************************************************************************/
+/* Social Icon Styles                                                            */
+/*********************************************************************************/
+/* line 95, /app/app/assets/stylesheets/default.scss */
+ul.contact {
+  margin: 0;
+  padding: 2em 0em 0em 0em;
+  list-style: none;
+}
+
+/* line 102, /app/app/assets/stylesheets/default.scss */
+ul.contact li {
+  display: inline-block;
+  padding: 0em 0.30em;
+  font-size: 1em;
+}
+
+/* line 109, /app/app/assets/stylesheets/default.scss */
+ul.contact li span {
+  display: none;
+  margin: 0;
+  padding: 0;
+}
+
+/* line 116, /app/app/assets/stylesheets/default.scss */
+ul.contact li a {
+  color: #FFF;
+}
+
+/* line 121, /app/app/assets/stylesheets/default.scss */
+ul.contact li a:before {
+  display: inline-block;
+  background: #3f3f3f;
+  width: 40px;
+  height: 40px;
+  line-height: 40px;
+  border-radius: 20px;
+  text-align: center;
+  color: #FFFFFF;
+}
+
+/* line 133, /app/app/assets/stylesheets/default.scss */
+ul.contact li a.icon-twitter:before {
+  background: #2DAAE4;
+}
+
+/* line 134, /app/app/assets/stylesheets/default.scss */
+ul.contact li a.icon-facebook:before {
+  background: #39599F;
+}
+
+/* line 135, /app/app/assets/stylesheets/default.scss */
+ul.contact li a.icon-dribbble:before {
+  background: #C4376B;
+}
+
+/* line 136, /app/app/assets/stylesheets/default.scss */
+ul.contact li a.icon-tumblr:before {
+  background: #31516A;
+}
+
+/* line 137, /app/app/assets/stylesheets/default.scss */
+ul.contact li a.icon-rss:before {
+  background: #F2600B;
+}
+
+/*********************************************************************************/
+/* Button Style                                                                  */
+/*********************************************************************************/
+/* line 143, /app/app/assets/stylesheets/default.scss */
+.button {
+  display: inline-block;
+  padding: 0em 3em;
+  background: #009E2D;
+  letter-spacing: 0.20em;
+  line-height: 4em;
+  text-decoration: none;
+  text-transform: uppercase;
+  font-weight: 400;
+  font-size: 1em;
+  color: #FFF;
+}
+
+/* line 157, /app/app/assets/stylesheets/default.scss */
+.button:before {
+  display: inline-block;
+  background: #FFC31F;
+  margin-right: 1em;
+  width: 40px;
+  height: 40px;
+  line-height: 40px;
+  border-radius: 20px;
+  text-align: center;
+  color: #272925;
+}
+
+/*********************************************************************************/
+/* Heading Titles                                                                */
+/*********************************************************************************/
+/* line 174, /app/app/assets/stylesheets/default.scss */
+.title {
+  margin-bottom: 3em;
+}
+
+/* line 179, /app/app/assets/stylesheets/default.scss */
+.title h2 {
+  text-transform: uppercase;
+  font-size: 2.7em;
+}
+
+/* line 185, /app/app/assets/stylesheets/default.scss */
+.title .byline {
+  font-size: 1.7em;
+  color: #6F6F6F;
+}
+
+/*********************************************************************************/
+/* 4-column                                                                      */
+/*********************************************************************************/
+/* line 195, /app/app/assets/stylesheets/default.scss */
+.box1,
+.box2,
+.box3,
+.box4 {
+  width: 235px;
+}
+
+/* line 203, /app/app/assets/stylesheets/default.scss */
+.box1,
+.box2,
+.box3 {
+  float: left;
+  margin-right: 20px;
+}
+
+/* line 211, /app/app/assets/stylesheets/default.scss */
+.box4 {
+  float: right;
+}
+
+/*********************************************************************************/
+/* 3-column                                                                      */
+/*********************************************************************************/
+/* line 220, /app/app/assets/stylesheets/default.scss */
+#three-column a {
+  color: #000000;
+}
+
+/* line 224, /app/app/assets/stylesheets/default.scss */
+.boxA,
+.boxB,
+.boxC {
+  width: 320px;
+  margin-top: 15px;
+}
+
+@media (hover: hover) {
+  /* line 233, /app/app/assets/stylesheets/default.scss */
+  .boxA:hover,
+  .boxB:hover,
+  .boxC:hover {
+    margin-top: 10px;
+    margin-bottom: 5px;
+  }
+}
+/* line 242, /app/app/assets/stylesheets/default.scss */
+.boxA,
+.boxB {
+  float: left;
+  margin-right: 20px;
+}
+
+/* line 249, /app/app/assets/stylesheets/default.scss */
+.boxC {
+  float: right;
+}
+
+/*********************************************************************************/
+/* 2-column                                                                      */
+/*********************************************************************************/
+/* line 258, /app/app/assets/stylesheets/default.scss */
+.tbox1,
+.tbox2 {
+  width: 575px;
+}
+
+/* line 264, /app/app/assets/stylesheets/default.scss */
+.tbox1 {
+  float: left;
+}
+
+/* line 269, /app/app/assets/stylesheets/default.scss */
+.tbox2 {
+  float: right;
+}
+
+/* line 274, /app/app/assets/stylesheets/default.scss */
+#wrapper {
+  background: #FFF;
+}
+
+/*********************************************************************************/
+/* Header                                                                        */
+/*********************************************************************************/
+/*
+	#header-wrapper
+	{
+		background: #333333;
+	}
+
+	#header
+	{
+		position: relative;
+		padding: 3em 0em;
+	}
+*/
+/*********************************************************************************/
+/* Logo                                                                          */
+/*********************************************************************************/
+/*
+	#logo
+	{
+		position: absolute;
+		top: 1em;
+		left: 0;
+	}
+	
+	#logo h1
+	{
+		color: #FFF;
+	}
+	
+	#logo a
+	{
+		text-decoration: none;
+		text-transform: uppercase;
+		color: #FFF;
+	}
+*/
+/*********************************************************************************/
+/* Menu                                                                          */
+/*********************************************************************************/
+/*
+	#menu
+	{
+		position: absolute;
+		top: 2em;
+		right: 0;
+	}
+	
+	#menu ul
+	{
+		display: inline-block;
+	}
+	
+	#menu li
+	{
+		display: block;
+		float: left;
+		text-align: center;
+	}
+	
+	#menu li a, #menu li span
+	{
+		padding: 1em 1.5em;
+		letter-spacing: 1px;
+		text-decoration: none;
+		text-transform: uppercase;
+		font-size: 0.8em;
+		color: #FFF;
+	}
+	
+	#menu li:hover a, #menu li.active a, #menu li.active span
+	{
+		color: #FFF;
+	}
+	
+	#menu .current_page_item a
+	{
+		background: #009E2D;
+		color: #FFF;
+	}
+	
+	#menu .icon
+	{
+	}
+*/
+/*********************************************************************************/
+/* Banner                                                                        */
+/*********************************************************************************/
+/* line 369, /app/app/assets/stylesheets/default.scss */
+#banner {
+  overflow: hidden;
+  padding: 7em 0em 5em 0em;
+  background: #202020;
+  background-size: cover;
+  text-align: center;
+  color: rgba(255, 255, 255, 0.8);
+  z-index: 0;
+}
+
+/* line 380, /app/app/assets/stylesheets/default.scss */
+#banner .title {
+  margin-bottom: 1em;
+  text-transform: uppercase !important;
+}
+
+/* line 386, /app/app/assets/stylesheets/default.scss */
+#banner .title h2 {
+  color: #FFF;
+}
+
+/* line 391, /app/app/assets/stylesheets/default.scss */
+#banner .title .byline {
+  color: rgba(255, 255, 255, 0.6);
+}
+
+/* line 396, /app/app/assets/stylesheets/default.scss */
+#banner .button {
+  margin-top: 3em;
+  background: #009E2D !important;
+}
+
+/*********************************************************************************/
+/* Page                                                                          */
+/*********************************************************************************/
+/* line 406, /app/app/assets/stylesheets/default.scss */
+#page {
+  padding: 5em 0em;
+  text-align: center;
+}
+
+/* line 412, /app/app/assets/stylesheets/default.scss */
+#page .button {
+  margin-top: 2em;
+  display: inline-block;
+  text-align: center;
+}
+
+/*********************************************************************************/
+/* Content                                                                       */
+/*********************************************************************************/
+/*********************************************************************************/
+/* Sidebar                                                                       */
+/*********************************************************************************/
+/*********************************************************************************/
+/* Footer                                                                        */
+/*********************************************************************************/
+/*********************************************************************************/
+/* Copyright                                                                     */
+/*********************************************************************************/
+/*
+	#copyright
+	{
+		overflow: hidden;
+		padding: 5em 0em;
+		border-top: 1px solid rgba(255,255,255,0.08);
+		background: #333333;
+	}
+	
+	#copyright p
+	{
+		text-align: center;
+		font-size: 1em;
+		color: rgba(255,255,255,0.5);
+	}
+	
+	#copyright a
+	{
+		text-decoration: none;
+		color: rgba(255,255,255,0.8);
+	}
+*/
+/*********************************************************************************/
+/* Featured                                                                      */
+/*********************************************************************************/
+/* line 472, /app/app/assets/stylesheets/default.scss */
+#featured {
+  overflow: hidden;
+  padding: 5em 0em;
+  background: #009E2D;
+  color: rgba(255, 255, 255, 0.8);
+  text-align: center;
+}
+
+/* line 481, /app/app/assets/stylesheets/default.scss */
+#featured a {
+  color: white;
+}
+
+/* line 486, /app/app/assets/stylesheets/default.scss */
+#featured .button {
+  background: #FFF;
+  margin-top: 3em;
+  font-size: 1em;
+  color: #009E2D;
+}
+
+/* line 498, /app/app/assets/stylesheets/default.scss */
+#featured .title h2 {
+  color: #FFF;
+}
+
+/* line 503, /app/app/assets/stylesheets/default.scss */
+#featured .title .byline {
+  color: rgba(255, 255, 255, 0.6);
+}
+
+/*********************************************************************************/
+/* Featured                                                                      */
+/*********************************************************************************/
+/* line 512, /app/app/assets/stylesheets/default.scss */
+.box {
+  padding: 3em 2em 2em 2em;
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  border-radius: 8px;
+  text-align: center;
+}
+
+/* line 521, /app/app/assets/stylesheets/default.scss */
+#extra {
+  overflow: hidden;
+  padding: 5em 0em;
+}
+
+/* line 527, /app/app/assets/stylesheets/default.scss */
+#extra .title {
+  text-align: center;
+}
+
+/* line 532, /app/app/assets/stylesheets/default.scss */
+#extra .button {
+  margin-top: 5em;
+}
+
+/* line 537, /app/app/assets/stylesheets/default.scss */
+#extra .fa {
+  display: block;
+  margin-bottom: 0.5em;
+  text-align: center;
+  font-size: 3em;
+}
+@import url("https://maxcdn.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css");
+/* line 9, /app/app/assets/stylesheets/flights.scss */
+input {
+  font: 20px Times New Roman, serif;
+  text-align: center;
+  border: black 0.05px solid;
+  margin: 1px 1%;
+  padding: 1px;
+  vertical-align: text-top;
+  align: center;
+}
+
+/* line 18, /app/app/assets/stylesheets/flights.scss */
+input.alert {
+  border: red 0.05px solid;
+}
+
+/* line 21, /app/app/assets/stylesheets/flights.scss */
+input.alert:focus {
+  outline: red 0.05px dotted;
+}
+
+/* line 24, /app/app/assets/stylesheets/flights.scss */
+input.disabled {
+  pointer-events: none;
+}
+
+/* line 27, /app/app/assets/stylesheets/flights.scss */
+input.disabledBold {
+  background: #CCC;
+  color: #333;
+  border: 1px solid #666;
+  pointer-events: none;
+}
+
+/* line 33, /app/app/assets/stylesheets/flights.scss */
+p.br {
+  font-size: 7px;
+}
+
+/* line 37, /app/app/assets/stylesheets/flights.scss */
+button {
+  margin: "10px";
+  padding: "20px";
+}
+
+/* line 42, /app/app/assets/stylesheets/flights.scss */
+th {
+  align: center;
+  border: black 0.05px solid;
+}
+
+/* line 47, /app/app/assets/stylesheets/flights.scss */
+td {
+  margin: "10px";
+  padding: "20px" "20px";
+  vertical-align: text-top;
+  align: center;
+}
+
+/* line 56, /app/app/assets/stylesheets/flights.scss */
+table {
+  margin: auto;
+  padding: "20px";
+  align: center;
+  width: 200px;
+}
+
+/* line 70, /app/app/assets/stylesheets/flights.scss */
+div.form {
+  width: 90%;
+  margin: 10px 5%;
+  align: center;
+}
+
+/* line 79, /app/app/assets/stylesheets/flights.scss */
+.demoLogger {
+  margin: 45px auto;
+  width: 100%;
+  min-height: 1000px;
+}
+
+/* line 85, /app/app/assets/stylesheets/flights.scss */
+.logger {
+  margin: 30px auto;
+}
+
+/* line 89, /app/app/assets/stylesheets/flights.scss */
+.showTug {
+  transition-delay: 500ms;
+  transition: all 2s linear;
+}
+
+/* line 95, /app/app/assets/stylesheets/flights.scss */
+.hideTugVisual {
+  opacity: 0;
+}
+
+/* line 99, /app/app/assets/stylesheets/flights.scss */
+.hideTug {
+  display: none;
+}
+
+/* line 103, /app/app/assets/stylesheets/flights.scss */
+.showElement {
+  transition-delay: 500ms;
+  transition: all 2s linear;
+}
+
+/* line 109, /app/app/assets/stylesheets/flights.scss */
+.hideElement {
+  display: none;
+}
+
+/* line 113, /app/app/assets/stylesheets/flights.scss */
+.formform {
+  align: center;
+  width: 900px;
+  margin: 10px auto;
+}
+
+/* line 123, /app/app/assets/stylesheets/flights.scss */
+.row {
+  align: center;
+  width: 95%;
+  height: 100px;
+  margin: 10px auto;
+  background-color: rgba(0, 0, 0, 0.05);
+    /*.feeDiv {
+        display:inline;
+        height:40px;
+        width:350px;
+
+    }*/
+}
+
+/* line 139, /app/app/assets/stylesheets/flights.scss */
+.row:nth-child(6) {
+  height: 130px;
+}
+
+/* line 143, /app/app/assets/stylesheets/flights.scss */
+.row-expand {
+  height: 230px !important;
+}
+
+/* line 147, /app/app/assets/stylesheets/flights.scss */
+.form-label {
+  margin: 10px;
+}
+
+/* line 151, /app/app/assets/stylesheets/flights.scss */
+.form-heading {
+  margin: auto 10px;
+  width: 135px;
+  height: 40px;
+}
+
+/* line 157, /app/app/assets/stylesheets/flights.scss */
+.group {
+  align: center;
+  margin: auto 10px;
+}
+
+/* line 165, /app/app/assets/stylesheets/flights.scss */
+.columnOne {
+  width: 50px;
+}
+
+/* line 169, /app/app/assets/stylesheets/flights.scss */
+.columnTwo {
+  width: 400px;
+}
+
+/* line 173, /app/app/assets/stylesheets/flights.scss */
+.columnThree {
+  width: 160px;
+}
+
+/* line 177, /app/app/assets/stylesheets/flights.scss */
+.dropdown-menu {
+  left: -190px !important;
+  margin: auto;
+  width: 370px;
+}
+
+/* line 184, /app/app/assets/stylesheets/flights.scss */
+.dropdown-item {
+  width: 180px;
+    /*div{
+        width:100px;
+
+    }*/
+}
+
+/* line 197, /app/app/assets/stylesheets/flights.scss */
+.dpTable {
+  border: none !important;
+}
+
+/* line 201, /app/app/assets/stylesheets/flights.scss */
+.dpTd {
+  border: none !important;
+  margin: 15px;
+  width: 150px;
+}
+
+/* line 207, /app/app/assets/stylesheets/flights.scss */
+.feeOne {
+  width: 150px;
+  height: 80px;
+  margin: 10px;
+}
+
+/* line 213, /app/app/assets/stylesheets/flights.scss */
+.feeTwo {
+  width: 210px;
+  height: 80px;
+  margin: 5px 10px;
+  margin-left: 10px;
+}
+
+/* line 221, /app/app/assets/stylesheets/flights.scss */
+.feeThree {
+  width: 200px;
+  height: 80px;
+  margin: 5px 10px;
+  margin-left: 30px;
+  margin-right: auto;
+}
+
+/* line 229, /app/app/assets/stylesheets/flights.scss */
+.table {
+  width: 95%;
+  margin: 10px auto;
+}
+
+/* line 234, /app/app/assets/stylesheets/flights.scss */
+.td {
+  list-style: none;
+  align: left;
+  margin: 0;
+  padding: 0;
+}
+
+/* line 241, /app/app/assets/stylesheets/flights.scss */
+#name {
+  width: 400px;
+  height: 40px;
+}
+
+/* line 246, /app/app/assets/stylesheets/flights.scss */
+#name ul {
+  display: inline-block;
+}
+
+/* line 250, /app/app/assets/stylesheets/flights.scss */
+#name li {
+  width: 190px;
+  display: block;
+  float: left;
+  padding: 5px;
+}
+
+/* line 257, /app/app/assets/stylesheets/flights.scss */
+.loggerButtons {
+  width: 180px;
+  margin: 10px auto;
+}
+/* line 261, /app/app/assets/stylesheets/flights.scss */
+.loggerButtons button {
+  width: 80px;
+  margin: 10px 5px;
+}
+
+/*.tableRow {
+    min-height:150px;
+}*/
+@font-face {
+  font-family: 'FontAwesome';
+  src: url("font/fontawesome-webfont.eot?v=4.0.1");
+  src: url("font/fontawesome-webfont.eot?#iefix&v=4.0.1") format("embedded-opentype"), url("font/fontawesome-webfont.woff?v=4.0.1") format("woff"), url("font/fontawesome-webfont.ttf?v=4.0.1") format("truetype"), url("font/fontawesome-webfont.svg?v=4.0.1#fontawesomeregular") format("svg");
+  font-weight: normal;
+  font-style: normal;
+}
+/*********************************************************************************/
+/* Icons                                                                         */
+/* Powered by Font Awesome by Dave Gandy | http://fontawesome.io                 */
+/* Licensed under the SIL OFL 1.1 (font), MIT (CSS)                              */
+/*********************************************************************************/
+/* line 11, /app/app/assets/stylesheets/fonts.scss */
+.fa {
+  text-decoration: none;
+}
+
+/* line 16, /app/app/assets/stylesheets/fonts.scss */
+.fa:before {
+  display: inline-block;
+  font-family: FontAwesome;
+  font-size: 1.25em;
+  text-decoration: none;
+  font-style: normal;
+  font-weight: normal;
+  line-height: 1;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* line 29, /app/app/assets/stylesheets/fonts.scss */
+.fa-lg {
+  font-size: 1.3333333333333333em;
+  line-height: .75em;
+  vertical-align: -15%;
+}
+
+/* line 30, /app/app/assets/stylesheets/fonts.scss */
+.fa-2x {
+  font-size: 2em;
+}
+
+/* line 31, /app/app/assets/stylesheets/fonts.scss */
+.fa-3x {
+  font-size: 3em;
+}
+
+/* line 32, /app/app/assets/stylesheets/fonts.scss */
+.fa-4x {
+  font-size: 4em;
+}
+
+/* line 33, /app/app/assets/stylesheets/fonts.scss */
+.fa-5x {
+  font-size: 5em;
+}
+
+/* line 34, /app/app/assets/stylesheets/fonts.scss */
+.fa-fw {
+  width: 1.2857142857142858em;
+  text-align: center;
+}
+
+/* line 35, /app/app/assets/stylesheets/fonts.scss */
+.fa-ul {
+  padding-left: 0;
+  margin-left: 2.142857142857143em;
+  list-style-type: none;
+}
+
+/* line 35, /app/app/assets/stylesheets/fonts.scss */
+.fa-ul > li {
+  position: relative;
+}
+
+/* line 36, /app/app/assets/stylesheets/fonts.scss */
+.fa-li {
+  position: absolute;
+  left: -2.142857142857143em;
+  width: 2.142857142857143em;
+  top: .14285714285714285em;
+  text-align: center;
+}
+
+/* line 36, /app/app/assets/stylesheets/fonts.scss */
+.fa-li.fa-lg {
+  left: -1.8571428571428572em;
+}
+
+/* line 37, /app/app/assets/stylesheets/fonts.scss */
+.fa-border {
+  padding: .2em .25em .15em;
+  border: solid .08em #eee;
+  border-radius: .1em;
+}
+
+/* line 38, /app/app/assets/stylesheets/fonts.scss */
+.pull-right {
+  float: right;
+}
+
+/* line 39, /app/app/assets/stylesheets/fonts.scss */
+.pull-left {
+  float: left;
+}
+
+/* line 40, /app/app/assets/stylesheets/fonts.scss */
+.fa.pull-left {
+  margin-right: .3em;
+}
+
+/* line 41, /app/app/assets/stylesheets/fonts.scss */
+.fa.pull-right {
+  margin-left: .3em;
+}
+
+/* line 42, /app/app/assets/stylesheets/fonts.scss */
+.fa-spin {
+  -webkit-animation: spin 2s infinite linear;
+  -moz-animation: spin 2s infinite linear;
+  -o-animation: spin 2s infinite linear;
+  animation: spin 2s infinite linear;
+}
+
+@-moz-keyframes spin {
+  0% {
+    -moz-transform: rotate(0deg);
+  }
+  100% {
+    -moz-transform: rotate(359deg);
+  }
+}
+@-webkit-keyframes spin {
+  0% {
+    -webkit-transform: rotate(0deg);
+  }
+  100% {
+    -webkit-transform: rotate(359deg);
+  }
+}
+@-o-keyframes spin {
+  0% {
+    -o-transform: rotate(0deg);
+  }
+  100% {
+    -o-transform: rotate(359deg);
+  }
+}
+@-ms-keyframes spin {
+  0% {
+    -ms-transform: rotate(0deg);
+  }
+  100% {
+    -ms-transform: rotate(359deg);
+  }
+}
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(359deg);
+  }
+}
+/* line 43, /app/app/assets/stylesheets/fonts.scss */
+.fa-rotate-90 {
+  filter: progid:DXImageTransform.Microsoft.BasicImage(rotation=1);
+  -webkit-transform: rotate(90deg);
+  -moz-transform: rotate(90deg);
+  -ms-transform: rotate(90deg);
+  -o-transform: rotate(90deg);
+  transform: rotate(90deg);
+}
+
+/* line 44, /app/app/assets/stylesheets/fonts.scss */
+.fa-rotate-180 {
+  filter: progid:DXImageTransform.Microsoft.BasicImage(rotation=2);
+  -webkit-transform: rotate(180deg);
+  -moz-transform: rotate(180deg);
+  -ms-transform: rotate(180deg);
+  -o-transform: rotate(180deg);
+  transform: rotate(180deg);
+}
+
+/* line 45, /app/app/assets/stylesheets/fonts.scss */
+.fa-rotate-270 {
+  filter: progid:DXImageTransform.Microsoft.BasicImage(rotation=3);
+  -webkit-transform: rotate(270deg);
+  -moz-transform: rotate(270deg);
+  -ms-transform: rotate(270deg);
+  -o-transform: rotate(270deg);
+  transform: rotate(270deg);
+}
+
+/* line 46, /app/app/assets/stylesheets/fonts.scss */
+.fa-flip-horizontal {
+  filter: progid:DXImageTransform.Microsoft.BasicImage(rotation=0, mirror=1);
+  -webkit-transform: scale(-1, 1);
+  -moz-transform: scale(-1, 1);
+  -ms-transform: scale(-1, 1);
+  -o-transform: scale(-1, 1);
+  transform: scale(-1, 1);
+}
+
+/* line 47, /app/app/assets/stylesheets/fonts.scss */
+.fa-flip-vertical {
+  filter: progid:DXImageTransform.Microsoft.BasicImage(rotation=2, mirror=1);
+  -webkit-transform: scale(1, -1);
+  -moz-transform: scale(1, -1);
+  -ms-transform: scale(1, -1);
+  -o-transform: scale(1, -1);
+  transform: scale(1, -1);
+}
+
+/* line 48, /app/app/assets/stylesheets/fonts.scss */
+.fa-stack {
+  position: relative;
+  display: inline-block;
+  width: 2em;
+  height: 2em;
+  line-height: 2em;
+  vertical-align: middle;
+}
+
+/* line 49, /app/app/assets/stylesheets/fonts.scss */
+.fa-stack-1x, .fa-stack-2x {
+  position: absolute;
+  left: 0;
+  width: 100%;
+  text-align: center;
+}
+
+/* line 50, /app/app/assets/stylesheets/fonts.scss */
+.fa-stack-1x {
+  line-height: inherit;
+}
+
+/* line 51, /app/app/assets/stylesheets/fonts.scss */
+.fa-stack-2x {
+  font-size: 2em;
+}
+
+/* line 52, /app/app/assets/stylesheets/fonts.scss */
+.fa-inverse {
+  color: #fff;
+}
+
+/* line 53, /app/app/assets/stylesheets/fonts.scss */
+.fa-glass:before {
+  content: "\f000";
+}
+
+/* line 54, /app/app/assets/stylesheets/fonts.scss */
+.fa-music:before {
+  content: "\f001";
+}
+
+/* line 55, /app/app/assets/stylesheets/fonts.scss */
+.fa-search:before {
+  content: "\f002";
+}
+
+/* line 56, /app/app/assets/stylesheets/fonts.scss */
+.fa-envelope-o:before {
+  content: "\f003";
+}
+
+/* line 57, /app/app/assets/stylesheets/fonts.scss */
+.fa-heart:before {
+  content: "\f004";
+}
+
+/* line 58, /app/app/assets/stylesheets/fonts.scss */
+.fa-star:before {
+  content: "\f005";
+}
+
+/* line 59, /app/app/assets/stylesheets/fonts.scss */
+.fa-star-o:before {
+  content: "\f006";
+}
+
+/* line 60, /app/app/assets/stylesheets/fonts.scss */
+.fa-user:before {
+  content: "\f007";
+}
+
+/* line 61, /app/app/assets/stylesheets/fonts.scss */
+.fa-film:before {
+  content: "\f008";
+}
+
+/* line 62, /app/app/assets/stylesheets/fonts.scss */
+.fa-th-large:before {
+  content: "\f009";
+}
+
+/* line 63, /app/app/assets/stylesheets/fonts.scss */
+.fa-th:before {
+  content: "\f00a";
+}
+
+/* line 64, /app/app/assets/stylesheets/fonts.scss */
+.fa-th-list:before {
+  content: "\f00b";
+}
+
+/* line 65, /app/app/assets/stylesheets/fonts.scss */
+.fa-check:before {
+  content: "\f00c";
+}
+
+/* line 66, /app/app/assets/stylesheets/fonts.scss */
+.fa-times:before {
+  content: "\f00d";
+}
+
+/* line 67, /app/app/assets/stylesheets/fonts.scss */
+.fa-search-plus:before {
+  content: "\f00e";
+}
+
+/* line 68, /app/app/assets/stylesheets/fonts.scss */
+.fa-search-minus:before {
+  content: "\f010";
+}
+
+/* line 69, /app/app/assets/stylesheets/fonts.scss */
+.fa-power-off:before {
+  content: "\f011";
+}
+
+/* line 70, /app/app/assets/stylesheets/fonts.scss */
+.fa-signal:before {
+  content: "\f012";
+}
+
+/* line 71, /app/app/assets/stylesheets/fonts.scss */
+.fa-gear:before, .fa-cog:before {
+  content: "\f013";
+}
+
+/* line 72, /app/app/assets/stylesheets/fonts.scss */
+.fa-trash-o:before {
+  content: "\f014";
+}
+
+/* line 73, /app/app/assets/stylesheets/fonts.scss */
+.fa-home:before {
+  content: "\f015";
+}
+
+/* line 74, /app/app/assets/stylesheets/fonts.scss */
+.fa-file-o:before {
+  content: "\f016";
+}
+
+/* line 75, /app/app/assets/stylesheets/fonts.scss */
+.fa-clock-o:before {
+  content: "\f017";
+}
+
+/* line 76, /app/app/assets/stylesheets/fonts.scss */
+.fa-road:before {
+  content: "\f018";
+}
+
+/* line 77, /app/app/assets/stylesheets/fonts.scss */
+.fa-download:before {
+  content: "\f019";
+}
+
+/* line 78, /app/app/assets/stylesheets/fonts.scss */
+.fa-arrow-circle-o-down:before {
+  content: "\f01a";
+}
+
+/* line 79, /app/app/assets/stylesheets/fonts.scss */
+.fa-arrow-circle-o-up:before {
+  content: "\f01b";
+}
+
+/* line 80, /app/app/assets/stylesheets/fonts.scss */
+.fa-inbox:before {
+  content: "\f01c";
+}
+
+/* line 81, /app/app/assets/stylesheets/fonts.scss */
+.fa-play-circle-o:before {
+  content: "\f01d";
+}
+
+/* line 82, /app/app/assets/stylesheets/fonts.scss */
+.fa-rotate-right:before, .fa-repeat:before {
+  content: "\f01e";
+}
+
+/* line 83, /app/app/assets/stylesheets/fonts.scss */
+.fa-refresh:before {
+  content: "\f021";
+}
+
+/* line 84, /app/app/assets/stylesheets/fonts.scss */
+.fa-list-alt:before {
+  content: "\f022";
+}
+
+/* line 85, /app/app/assets/stylesheets/fonts.scss */
+.fa-lock:before {
+  content: "\f023";
+}
+
+/* line 86, /app/app/assets/stylesheets/fonts.scss */
+.fa-flag:before {
+  content: "\f024";
+}
+
+/* line 87, /app/app/assets/stylesheets/fonts.scss */
+.fa-headphones:before {
+  content: "\f025";
+}
+
+/* line 88, /app/app/assets/stylesheets/fonts.scss */
+.fa-volume-off:before {
+  content: "\f026";
+}
+
+/* line 89, /app/app/assets/stylesheets/fonts.scss */
+.fa-volume-down:before {
+  content: "\f027";
+}
+
+/* line 90, /app/app/assets/stylesheets/fonts.scss */
+.fa-volume-up:before {
+  content: "\f028";
+}
+
+/* line 91, /app/app/assets/stylesheets/fonts.scss */
+.fa-qrcode:before {
+  content: "\f029";
+}
+
+/* line 92, /app/app/assets/stylesheets/fonts.scss */
+.fa-barcode:before {
+  content: "\f02a";
+}
+
+/* line 93, /app/app/assets/stylesheets/fonts.scss */
+.fa-tag:before {
+  content: "\f02b";
+}
+
+/* line 94, /app/app/assets/stylesheets/fonts.scss */
+.fa-tags:before {
+  content: "\f02c";
+}
+
+/* line 95, /app/app/assets/stylesheets/fonts.scss */
+.fa-book:before {
+  content: "\f02d";
+}
+
+/* line 96, /app/app/assets/stylesheets/fonts.scss */
+.fa-bookmark:before {
+  content: "\f02e";
+}
+
+/* line 97, /app/app/assets/stylesheets/fonts.scss */
+.fa-print:before {
+  content: "\f02f";
+}
+
+/* line 98, /app/app/assets/stylesheets/fonts.scss */
+.fa-camera:before {
+  content: "\f030";
+}
+
+/* line 99, /app/app/assets/stylesheets/fonts.scss */
+.fa-font:before {
+  content: "\f031";
+}
+
+/* line 100, /app/app/assets/stylesheets/fonts.scss */
+.fa-bold:before {
+  content: "\f032";
+}
+
+/* line 101, /app/app/assets/stylesheets/fonts.scss */
+.fa-italic:before {
+  content: "\f033";
+}
+
+/* line 102, /app/app/assets/stylesheets/fonts.scss */
+.fa-text-height:before {
+  content: "\f034";
+}
+
+/* line 103, /app/app/assets/stylesheets/fonts.scss */
+.fa-text-width:before {
+  content: "\f035";
+}
+
+/* line 104, /app/app/assets/stylesheets/fonts.scss */
+.fa-align-left:before {
+  content: "\f036";
+}
+
+/* line 105, /app/app/assets/stylesheets/fonts.scss */
+.fa-align-center:before {
+  content: "\f037";
+}
+
+/* line 106, /app/app/assets/stylesheets/fonts.scss */
+.fa-align-right:before {
+  content: "\f038";
+}
+
+/* line 107, /app/app/assets/stylesheets/fonts.scss */
+.fa-align-justify:before {
+  content: "\f039";
+}
+
+/* line 108, /app/app/assets/stylesheets/fonts.scss */
+.fa-list:before {
+  content: "\f03a";
+}
+
+/* line 109, /app/app/assets/stylesheets/fonts.scss */
+.fa-dedent:before, .fa-outdent:before {
+  content: "\f03b";
+}
+
+/* line 110, /app/app/assets/stylesheets/fonts.scss */
+.fa-indent:before {
+  content: "\f03c";
+}
+
+/* line 111, /app/app/assets/stylesheets/fonts.scss */
+.fa-video-camera:before {
+  content: "\f03d";
+}
+
+/* line 112, /app/app/assets/stylesheets/fonts.scss */
+.fa-picture-o:before {
+  content: "\f03e";
+}
+
+/* line 113, /app/app/assets/stylesheets/fonts.scss */
+.fa-pencil:before {
+  content: "\f040";
+}
+
+/* line 114, /app/app/assets/stylesheets/fonts.scss */
+.fa-map-marker:before {
+  content: "\f041";
+}
+
+/* line 115, /app/app/assets/stylesheets/fonts.scss */
+.fa-adjust:before {
+  content: "\f042";
+}
+
+/* line 116, /app/app/assets/stylesheets/fonts.scss */
+.fa-tint:before {
+  content: "\f043";
+}
+
+/* line 117, /app/app/assets/stylesheets/fonts.scss */
+.fa-edit:before, .fa-pencil-square-o:before {
+  content: "\f044";
+}
+
+/* line 118, /app/app/assets/stylesheets/fonts.scss */
+.fa-share-square-o:before {
+  content: "\f045";
+}
+
+/* line 119, /app/app/assets/stylesheets/fonts.scss */
+.fa-check-square-o:before {
+  content: "\f046";
+}
+
+/* line 120, /app/app/assets/stylesheets/fonts.scss */
+.fa-move:before {
+  content: "\f047";
+}
+
+/* line 121, /app/app/assets/stylesheets/fonts.scss */
+.fa-step-backward:before {
+  content: "\f048";
+}
+
+/* line 122, /app/app/assets/stylesheets/fonts.scss */
+.fa-fast-backward:before {
+  content: "\f049";
+}
+
+/* line 123, /app/app/assets/stylesheets/fonts.scss */
+.fa-backward:before {
+  content: "\f04a";
+}
+
+/* line 124, /app/app/assets/stylesheets/fonts.scss */
+.fa-play:before {
+  content: "\f04b";
+}
+
+/* line 125, /app/app/assets/stylesheets/fonts.scss */
+.fa-pause:before {
+  content: "\f04c";
+}
+
+/* line 126, /app/app/assets/stylesheets/fonts.scss */
+.fa-stop:before {
+  content: "\f04d";
+}
+
+/* line 127, /app/app/assets/stylesheets/fonts.scss */
+.fa-forward:before {
+  content: "\f04e";
+}
+
+/* line 128, /app/app/assets/stylesheets/fonts.scss */
+.fa-fast-forward:before {
+  content: "\f050";
+}
+
+/* line 129, /app/app/assets/stylesheets/fonts.scss */
+.fa-step-forward:before {
+  content: "\f051";
+}
+
+/* line 130, /app/app/assets/stylesheets/fonts.scss */
+.fa-eject:before {
+  content: "\f052";
+}
+
+/* line 131, /app/app/assets/stylesheets/fonts.scss */
+.fa-chevron-left:before {
+  content: "\f053";
+}
+
+/* line 132, /app/app/assets/stylesheets/fonts.scss */
+.fa-chevron-right:before {
+  content: "\f054";
+}
+
+/* line 133, /app/app/assets/stylesheets/fonts.scss */
+.fa-plus-circle:before {
+  content: "\f055";
+}
+
+/* line 134, /app/app/assets/stylesheets/fonts.scss */
+.fa-minus-circle:before {
+  content: "\f056";
+}
+
+/* line 135, /app/app/assets/stylesheets/fonts.scss */
+.fa-times-circle:before {
+  content: "\f057";
+}
+
+/* line 136, /app/app/assets/stylesheets/fonts.scss */
+.fa-check-circle:before {
+  content: "\f058";
+}
+
+/* line 137, /app/app/assets/stylesheets/fonts.scss */
+.fa-question-circle:before {
+  content: "\f059";
+}
+
+/* line 138, /app/app/assets/stylesheets/fonts.scss */
+.fa-info-circle:before {
+  content: "\f05a";
+}
+
+/* line 139, /app/app/assets/stylesheets/fonts.scss */
+.fa-crosshairs:before {
+  content: "\f05b";
+}
+
+/* line 140, /app/app/assets/stylesheets/fonts.scss */
+.fa-times-circle-o:before {
+  content: "\f05c";
+}
+
+/* line 141, /app/app/assets/stylesheets/fonts.scss */
+.fa-check-circle-o:before {
+  content: "\f05d";
+}
+
+/* line 142, /app/app/assets/stylesheets/fonts.scss */
+.fa-ban:before {
+  content: "\f05e";
+}
+
+/* line 143, /app/app/assets/stylesheets/fonts.scss */
+.fa-arrow-left:before {
+  content: "\f060";
+}
+
+/* line 144, /app/app/assets/stylesheets/fonts.scss */
+.fa-arrow-right:before {
+  content: "\f061";
+}
+
+/* line 145, /app/app/assets/stylesheets/fonts.scss */
+.fa-arrow-up:before {
+  content: "\f062";
+}
+
+/* line 146, /app/app/assets/stylesheets/fonts.scss */
+.fa-arrow-down:before {
+  content: "\f063";
+}
+
+/* line 147, /app/app/assets/stylesheets/fonts.scss */
+.fa-mail-forward:before, .fa-share:before {
+  content: "\f064";
+}
+
+/* line 148, /app/app/assets/stylesheets/fonts.scss */
+.fa-resize-full:before {
+  content: "\f065";
+}
+
+/* line 149, /app/app/assets/stylesheets/fonts.scss */
+.fa-resize-small:before {
+  content: "\f066";
+}
+
+/* line 150, /app/app/assets/stylesheets/fonts.scss */
+.fa-plus:before {
+  content: "\f067";
+}
+
+/* line 151, /app/app/assets/stylesheets/fonts.scss */
+.fa-minus:before {
+  content: "\f068";
+}
+
+/* line 152, /app/app/assets/stylesheets/fonts.scss */
+.fa-asterisk:before {
+  content: "\f069";
+}
+
+/* line 153, /app/app/assets/stylesheets/fonts.scss */
+.fa-exclamation-circle:before {
+  content: "\f06a";
+}
+
+/* line 154, /app/app/assets/stylesheets/fonts.scss */
+.fa-gift:before {
+  content: "\f06b";
+}
+
+/* line 155, /app/app/assets/stylesheets/fonts.scss */
+.fa-leaf:before {
+  content: "\f06c";
+}
+
+/* line 156, /app/app/assets/stylesheets/fonts.scss */
+.fa-fire:before {
+  content: "\f06d";
+}
+
+/* line 157, /app/app/assets/stylesheets/fonts.scss */
+.fa-eye:before {
+  content: "\f06e";
+}
+
+/* line 158, /app/app/assets/stylesheets/fonts.scss */
+.fa-eye-slash:before {
+  content: "\f070";
+}
+
+/* line 159, /app/app/assets/stylesheets/fonts.scss */
+.fa-warning:before, .fa-exclamation-triangle:before {
+  content: "\f071";
+}
+
+/* line 160, /app/app/assets/stylesheets/fonts.scss */
+.fa-plane:before {
+  content: "\f072";
+}
+
+/* line 161, /app/app/assets/stylesheets/fonts.scss */
+.fa-calendar:before {
+  content: "\f073";
+}
+
+/* line 162, /app/app/assets/stylesheets/fonts.scss */
+.fa-random:before {
+  content: "\f074";
+}
+
+/* line 163, /app/app/assets/stylesheets/fonts.scss */
+.fa-comment:before {
+  content: "\f075";
+}
+
+/* line 164, /app/app/assets/stylesheets/fonts.scss */
+.fa-magnet:before {
+  content: "\f076";
+}
+
+/* line 165, /app/app/assets/stylesheets/fonts.scss */
+.fa-chevron-up:before {
+  content: "\f077";
+}
+
+/* line 166, /app/app/assets/stylesheets/fonts.scss */
+.fa-chevron-down:before {
+  content: "\f078";
+}
+
+/* line 167, /app/app/assets/stylesheets/fonts.scss */
+.fa-retweet:before {
+  content: "\f079";
+}
+
+/* line 168, /app/app/assets/stylesheets/fonts.scss */
+.fa-shopping-cart:before {
+  content: "\f07a";
+}
+
+/* line 169, /app/app/assets/stylesheets/fonts.scss */
+.fa-folder:before {
+  content: "\f07b";
+}
+
+/* line 170, /app/app/assets/stylesheets/fonts.scss */
+.fa-folder-open:before {
+  content: "\f07c";
+}
+
+/* line 171, /app/app/assets/stylesheets/fonts.scss */
+.fa-resize-vertical:before {
+  content: "\f07d";
+}
+
+/* line 172, /app/app/assets/stylesheets/fonts.scss */
+.fa-resize-horizontal:before {
+  content: "\f07e";
+}
+
+/* line 173, /app/app/assets/stylesheets/fonts.scss */
+.fa-bar-chart-o:before {
+  content: "\f080";
+}
+
+/* line 174, /app/app/assets/stylesheets/fonts.scss */
+.fa-twitter-square:before {
+  content: "\f081";
+}
+
+/* line 175, /app/app/assets/stylesheets/fonts.scss */
+.fa-facebook-square:before {
+  content: "\f082";
+}
+
+/* line 176, /app/app/assets/stylesheets/fonts.scss */
+.fa-camera-retro:before {
+  content: "\f083";
+}
+
+/* line 177, /app/app/assets/stylesheets/fonts.scss */
+.fa-key:before {
+  content: "\f084";
+}
+
+/* line 178, /app/app/assets/stylesheets/fonts.scss */
+.fa-gears:before, .fa-cogs:before {
+  content: "\f085";
+}
+
+/* line 179, /app/app/assets/stylesheets/fonts.scss */
+.fa-comments:before {
+  content: "\f086";
+}
+
+/* line 180, /app/app/assets/stylesheets/fonts.scss */
+.fa-thumbs-o-up:before {
+  content: "\f087";
+}
+
+/* line 181, /app/app/assets/stylesheets/fonts.scss */
+.fa-thumbs-o-down:before {
+  content: "\f088";
+}
+
+/* line 182, /app/app/assets/stylesheets/fonts.scss */
+.fa-star-half:before {
+  content: "\f089";
+}
+
+/* line 183, /app/app/assets/stylesheets/fonts.scss */
+.fa-heart-o:before {
+  content: "\f08a";
+}
+
+/* line 184, /app/app/assets/stylesheets/fonts.scss */
+.fa-sign-out:before {
+  content: "\f08b";
+}
+
+/* line 185, /app/app/assets/stylesheets/fonts.scss */
+.fa-linkedin-square:before {
+  content: "\f08c";
+}
+
+/* line 186, /app/app/assets/stylesheets/fonts.scss */
+.fa-thumb-tack:before {
+  content: "\f08d";
+}
+
+/* line 187, /app/app/assets/stylesheets/fonts.scss */
+.fa-external-link:before {
+  content: "\f08e";
+}
+
+/* line 188, /app/app/assets/stylesheets/fonts.scss */
+.fa-sign-in:before {
+  content: "\f090";
+}
+
+/* line 189, /app/app/assets/stylesheets/fonts.scss */
+.fa-trophy:before {
+  content: "\f091";
+}
+
+/* line 190, /app/app/assets/stylesheets/fonts.scss */
+.fa-github-square:before {
+  content: "\f092";
+}
+
+/* line 191, /app/app/assets/stylesheets/fonts.scss */
+.fa-upload:before {
+  content: "\f093";
+}
+
+/* line 192, /app/app/assets/stylesheets/fonts.scss */
+.fa-lemon-o:before {
+  content: "\f094";
+}
+
+/* line 193, /app/app/assets/stylesheets/fonts.scss */
+.fa-phone:before {
+  content: "\f095";
+}
+
+/* line 194, /app/app/assets/stylesheets/fonts.scss */
+.fa-square-o:before {
+  content: "\f096";
+}
+
+/* line 195, /app/app/assets/stylesheets/fonts.scss */
+.fa-bookmark-o:before {
+  content: "\f097";
+}
+
+/* line 196, /app/app/assets/stylesheets/fonts.scss */
+.fa-phone-square:before {
+  content: "\f098";
+}
+
+/* line 197, /app/app/assets/stylesheets/fonts.scss */
+.fa-twitter:before {
+  content: "\f099";
+}
+
+/* line 198, /app/app/assets/stylesheets/fonts.scss */
+.fa-facebook:before {
+  content: "\f09a";
+}
+
+/* line 199, /app/app/assets/stylesheets/fonts.scss */
+.fa-github:before {
+  content: "\f09b";
+}
+
+/* line 200, /app/app/assets/stylesheets/fonts.scss */
+.fa-unlock:before {
+  content: "\f09c";
+}
+
+/* line 201, /app/app/assets/stylesheets/fonts.scss */
+.fa-credit-card:before {
+  content: "\f09d";
+}
+
+/* line 202, /app/app/assets/stylesheets/fonts.scss */
+.fa-rss:before {
+  content: "\f09e";
+}
+
+/* line 203, /app/app/assets/stylesheets/fonts.scss */
+.fa-hdd-o:before {
+  content: "\f0a0";
+}
+
+/* line 204, /app/app/assets/stylesheets/fonts.scss */
+.fa-bullhorn:before {
+  content: "\f0a1";
+}
+
+/* line 205, /app/app/assets/stylesheets/fonts.scss */
+.fa-bell:before {
+  content: "\f0f3";
+}
+
+/* line 206, /app/app/assets/stylesheets/fonts.scss */
+.fa-certificate:before {
+  content: "\f0a3";
+}
+
+/* line 207, /app/app/assets/stylesheets/fonts.scss */
+.fa-hand-o-right:before {
+  content: "\f0a4";
+}
+
+/* line 208, /app/app/assets/stylesheets/fonts.scss */
+.fa-hand-o-left:before {
+  content: "\f0a5";
+}
+
+/* line 209, /app/app/assets/stylesheets/fonts.scss */
+.fa-hand-o-up:before {
+  content: "\f0a6";
+}
+
+/* line 210, /app/app/assets/stylesheets/fonts.scss */
+.fa-hand-o-down:before {
+  content: "\f0a7";
+}
+
+/* line 211, /app/app/assets/stylesheets/fonts.scss */
+.fa-arrow-circle-left:before {
+  content: "\f0a8";
+}
+
+/* line 212, /app/app/assets/stylesheets/fonts.scss */
+.fa-arrow-circle-right:before {
+  content: "\f0a9";
+}
+
+/* line 213, /app/app/assets/stylesheets/fonts.scss */
+.fa-arrow-circle-up:before {
+  content: "\f0aa";
+}
+
+/* line 214, /app/app/assets/stylesheets/fonts.scss */
+.fa-arrow-circle-down:before {
+  content: "\f0ab";
+}
+
+/* line 215, /app/app/assets/stylesheets/fonts.scss */
+.fa-globe:before {
+  content: "\f0ac";
+}
+
+/* line 216, /app/app/assets/stylesheets/fonts.scss */
+.fa-wrench:before {
+  content: "\f0ad";
+}
+
+/* line 217, /app/app/assets/stylesheets/fonts.scss */
+.fa-tasks:before {
+  content: "\f0ae";
+}
+
+/* line 218, /app/app/assets/stylesheets/fonts.scss */
+.fa-filter:before {
+  content: "\f0b0";
+}
+
+/* line 219, /app/app/assets/stylesheets/fonts.scss */
+.fa-briefcase:before {
+  content: "\f0b1";
+}
+
+/* line 220, /app/app/assets/stylesheets/fonts.scss */
+.fa-fullscreen:before {
+  content: "\f0b2";
+}
+
+/* line 221, /app/app/assets/stylesheets/fonts.scss */
+.fa-group:before {
+  content: "\f0c0";
+}
+
+/* line 222, /app/app/assets/stylesheets/fonts.scss */
+.fa-chain:before, .fa-link:before {
+  content: "\f0c1";
+}
+
+/* line 223, /app/app/assets/stylesheets/fonts.scss */
+.fa-cloud:before {
+  content: "\f0c2";
+}
+
+/* line 224, /app/app/assets/stylesheets/fonts.scss */
+.fa-flask:before {
+  content: "\f0c3";
+}
+
+/* line 225, /app/app/assets/stylesheets/fonts.scss */
+.fa-cut:before, .fa-scissors:before {
+  content: "\f0c4";
+}
+
+/* line 226, /app/app/assets/stylesheets/fonts.scss */
+.fa-copy:before, .fa-files-o:before {
+  content: "\f0c5";
+}
+
+/* line 227, /app/app/assets/stylesheets/fonts.scss */
+.fa-paperclip:before {
+  content: "\f0c6";
+}
+
+/* line 228, /app/app/assets/stylesheets/fonts.scss */
+.fa-save:before, .fa-floppy-o:before {
+  content: "\f0c7";
+}
+
+/* line 229, /app/app/assets/stylesheets/fonts.scss */
+.fa-square:before {
+  content: "\f0c8";
+}
+
+/* line 230, /app/app/assets/stylesheets/fonts.scss */
+.fa-reorder:before {
+  content: "\f0c9";
+}
+
+/* line 231, /app/app/assets/stylesheets/fonts.scss */
+.fa-list-ul:before {
+  content: "\f0ca";
+}
+
+/* line 232, /app/app/assets/stylesheets/fonts.scss */
+.fa-list-ol:before {
+  content: "\f0cb";
+}
+
+/* line 233, /app/app/assets/stylesheets/fonts.scss */
+.fa-strikethrough:before {
+  content: "\f0cc";
+}
+
+/* line 234, /app/app/assets/stylesheets/fonts.scss */
+.fa-underline:before {
+  content: "\f0cd";
+}
+
+/* line 235, /app/app/assets/stylesheets/fonts.scss */
+.fa-table:before {
+  content: "\f0ce";
+}
+
+/* line 236, /app/app/assets/stylesheets/fonts.scss */
+.fa-magic:before {
+  content: "\f0d0";
+}
+
+/* line 237, /app/app/assets/stylesheets/fonts.scss */
+.fa-truck:before {
+  content: "\f0d1";
+}
+
+/* line 238, /app/app/assets/stylesheets/fonts.scss */
+.fa-pinterest:before {
+  content: "\f0d2";
+}
+
+/* line 239, /app/app/assets/stylesheets/fonts.scss */
+.fa-pinterest-square:before {
+  content: "\f0d3";
+}
+
+/* line 240, /app/app/assets/stylesheets/fonts.scss */
+.fa-google-plus-square:before {
+  content: "\f0d4";
+}
+
+/* line 241, /app/app/assets/stylesheets/fonts.scss */
+.fa-google-plus:before {
+  content: "\f0d5";
+}
+
+/* line 242, /app/app/assets/stylesheets/fonts.scss */
+.fa-money:before {
+  content: "\f0d6";
+}
+
+/* line 243, /app/app/assets/stylesheets/fonts.scss */
+.fa-caret-down:before {
+  content: "\f0d7";
+}
+
+/* line 244, /app/app/assets/stylesheets/fonts.scss */
+.fa-caret-up:before {
+  content: "\f0d8";
+}
+
+/* line 245, /app/app/assets/stylesheets/fonts.scss */
+.fa-caret-left:before {
+  content: "\f0d9";
+}
+
+/* line 246, /app/app/assets/stylesheets/fonts.scss */
+.fa-caret-right:before {
+  content: "\f0da";
+}
+
+/* line 247, /app/app/assets/stylesheets/fonts.scss */
+.fa-columns:before {
+  content: "\f0db";
+}
+
+/* line 248, /app/app/assets/stylesheets/fonts.scss */
+.fa-unsorted:before, .fa-sort:before {
+  content: "\f0dc";
+}
+
+/* line 249, /app/app/assets/stylesheets/fonts.scss */
+.fa-sort-down:before, .fa-sort-asc:before {
+  content: "\f0dd";
+}
+
+/* line 250, /app/app/assets/stylesheets/fonts.scss */
+.fa-sort-up:before, .fa-sort-desc:before {
+  content: "\f0de";
+}
+
+/* line 251, /app/app/assets/stylesheets/fonts.scss */
+.fa-envelope:before {
+  content: "\f0e0";
+}
+
+/* line 252, /app/app/assets/stylesheets/fonts.scss */
+.fa-linkedin:before {
+  content: "\f0e1";
+}
+
+/* line 253, /app/app/assets/stylesheets/fonts.scss */
+.fa-rotate-left:before, .fa-undo:before {
+  content: "\f0e2";
+}
+
+/* line 254, /app/app/assets/stylesheets/fonts.scss */
+.fa-legal:before, .fa-gavel:before {
+  content: "\f0e3";
+}
+
+/* line 255, /app/app/assets/stylesheets/fonts.scss */
+.fa-dashboard:before, .fa-tachometer:before {
+  content: "\f0e4";
+}
+
+/* line 256, /app/app/assets/stylesheets/fonts.scss */
+.fa-comment-o:before {
+  content: "\f0e5";
+}
+
+/* line 257, /app/app/assets/stylesheets/fonts.scss */
+.fa-comments-o:before {
+  content: "\f0e6";
+}
+
+/* line 258, /app/app/assets/stylesheets/fonts.scss */
+.fa-flash:before, .fa-bolt:before {
+  content: "\f0e7";
+}
+
+/* line 259, /app/app/assets/stylesheets/fonts.scss */
+.fa-sitemap:before {
+  content: "\f0e8";
+}
+
+/* line 260, /app/app/assets/stylesheets/fonts.scss */
+.fa-umbrella:before {
+  content: "\f0e9";
+}
+
+/* line 261, /app/app/assets/stylesheets/fonts.scss */
+.fa-paste:before, .fa-clipboard:before {
+  content: "\f0ea";
+}
+
+/* line 262, /app/app/assets/stylesheets/fonts.scss */
+.fa-lightbulb-o:before {
+  content: "\f0eb";
+}
+
+/* line 263, /app/app/assets/stylesheets/fonts.scss */
+.fa-exchange:before {
+  content: "\f0ec";
+}
+
+/* line 264, /app/app/assets/stylesheets/fonts.scss */
+.fa-cloud-download:before {
+  content: "\f0ed";
+}
+
+/* line 265, /app/app/assets/stylesheets/fonts.scss */
+.fa-cloud-upload:before {
+  content: "\f0ee";
+}
+
+/* line 266, /app/app/assets/stylesheets/fonts.scss */
+.fa-user-md:before {
+  content: "\f0f0";
+}
+
+/* line 267, /app/app/assets/stylesheets/fonts.scss */
+.fa-stethoscope:before {
+  content: "\f0f1";
+}
+
+/* line 268, /app/app/assets/stylesheets/fonts.scss */
+.fa-suitcase:before {
+  content: "\f0f2";
+}
+
+/* line 269, /app/app/assets/stylesheets/fonts.scss */
+.fa-bell-o:before {
+  content: "\f0a2";
+}
+
+/* line 270, /app/app/assets/stylesheets/fonts.scss */
+.fa-coffee:before {
+  content: "\f0f4";
+}
+
+/* line 271, /app/app/assets/stylesheets/fonts.scss */
+.fa-cutlery:before {
+  content: "\f0f5";
+}
+
+/* line 272, /app/app/assets/stylesheets/fonts.scss */
+.fa-file-text-o:before {
+  content: "\f0f6";
+}
+
+/* line 273, /app/app/assets/stylesheets/fonts.scss */
+.fa-building:before {
+  content: "\f0f7";
+}
+
+/* line 274, /app/app/assets/stylesheets/fonts.scss */
+.fa-hospital:before {
+  content: "\f0f8";
+}
+
+/* line 275, /app/app/assets/stylesheets/fonts.scss */
+.fa-ambulance:before {
+  content: "\f0f9";
+}
+
+/* line 276, /app/app/assets/stylesheets/fonts.scss */
+.fa-medkit:before {
+  content: "\f0fa";
+}
+
+/* line 277, /app/app/assets/stylesheets/fonts.scss */
+.fa-fighter-jet:before {
+  content: "\f0fb";
+}
+
+/* line 278, /app/app/assets/stylesheets/fonts.scss */
+.fa-beer:before {
+  content: "\f0fc";
+}
+
+/* line 279, /app/app/assets/stylesheets/fonts.scss */
+.fa-h-square:before {
+  content: "\f0fd";
+}
+
+/* line 280, /app/app/assets/stylesheets/fonts.scss */
+.fa-plus-square:before {
+  content: "\f0fe";
+}
+
+/* line 281, /app/app/assets/stylesheets/fonts.scss */
+.fa-angle-double-left:before {
+  content: "\f100";
+}
+
+/* line 282, /app/app/assets/stylesheets/fonts.scss */
+.fa-angle-double-right:before {
+  content: "\f101";
+}
+
+/* line 283, /app/app/assets/stylesheets/fonts.scss */
+.fa-angle-double-up:before {
+  content: "\f102";
+}
+
+/* line 284, /app/app/assets/stylesheets/fonts.scss */
+.fa-angle-double-down:before {
+  content: "\f103";
+}
+
+/* line 285, /app/app/assets/stylesheets/fonts.scss */
+.fa-angle-left:before {
+  content: "\f104";
+}
+
+/* line 286, /app/app/assets/stylesheets/fonts.scss */
+.fa-angle-right:before {
+  content: "\f105";
+}
+
+/* line 287, /app/app/assets/stylesheets/fonts.scss */
+.fa-angle-up:before {
+  content: "\f106";
+}
+
+/* line 288, /app/app/assets/stylesheets/fonts.scss */
+.fa-angle-down:before {
+  content: "\f107";
+}
+
+/* line 289, /app/app/assets/stylesheets/fonts.scss */
+.fa-desktop:before {
+  content: "\f108";
+}
+
+/* line 290, /app/app/assets/stylesheets/fonts.scss */
+.fa-laptop:before {
+  content: "\f109";
+}
+
+/* line 291, /app/app/assets/stylesheets/fonts.scss */
+.fa-tablet:before {
+  content: "\f10a";
+}
+
+/* line 292, /app/app/assets/stylesheets/fonts.scss */
+.fa-mobile-phone:before, .fa-mobile:before {
+  content: "\f10b";
+}
+
+/* line 293, /app/app/assets/stylesheets/fonts.scss */
+.fa-circle-o:before {
+  content: "\f10c";
+}
+
+/* line 294, /app/app/assets/stylesheets/fonts.scss */
+.fa-quote-left:before {
+  content: "\f10d";
+}
+
+/* line 295, /app/app/assets/stylesheets/fonts.scss */
+.fa-quote-right:before {
+  content: "\f10e";
+}
+
+/* line 296, /app/app/assets/stylesheets/fonts.scss */
+.fa-spinner:before {
+  content: "\f110";
+}
+
+/* line 297, /app/app/assets/stylesheets/fonts.scss */
+.fa-circle:before {
+  content: "\f111";
+}
+
+/* line 298, /app/app/assets/stylesheets/fonts.scss */
+.fa-mail-reply:before, .fa-reply:before {
+  content: "\f112";
+}
+
+/* line 299, /app/app/assets/stylesheets/fonts.scss */
+.fa-github-alt:before {
+  content: "\f113";
+}
+
+/* line 300, /app/app/assets/stylesheets/fonts.scss */
+.fa-folder-o:before {
+  content: "\f114";
+}
+
+/* line 301, /app/app/assets/stylesheets/fonts.scss */
+.fa-folder-open-o:before {
+  content: "\f115";
+}
+
+/* line 302, /app/app/assets/stylesheets/fonts.scss */
+.fa-expand-o:before {
+  content: "\f116";
+}
+
+/* line 303, /app/app/assets/stylesheets/fonts.scss */
+.fa-collapse-o:before {
+  content: "\f117";
+}
+
+/* line 304, /app/app/assets/stylesheets/fonts.scss */
+.fa-smile-o:before {
+  content: "\f118";
+}
+
+/* line 305, /app/app/assets/stylesheets/fonts.scss */
+.fa-frown-o:before {
+  content: "\f119";
+}
+
+/* line 306, /app/app/assets/stylesheets/fonts.scss */
+.fa-meh-o:before {
+  content: "\f11a";
+}
+
+/* line 307, /app/app/assets/stylesheets/fonts.scss */
+.fa-gamepad:before {
+  content: "\f11b";
+}
+
+/* line 308, /app/app/assets/stylesheets/fonts.scss */
+.fa-keyboard-o:before {
+  content: "\f11c";
+}
+
+/* line 309, /app/app/assets/stylesheets/fonts.scss */
+.fa-flag-o:before {
+  content: "\f11d";
+}
+
+/* line 310, /app/app/assets/stylesheets/fonts.scss */
+.fa-flag-checkered:before {
+  content: "\f11e";
+}
+
+/* line 311, /app/app/assets/stylesheets/fonts.scss */
+.fa-terminal:before {
+  content: "\f120";
+}
+
+/* line 312, /app/app/assets/stylesheets/fonts.scss */
+.fa-code:before {
+  content: "\f121";
+}
+
+/* line 313, /app/app/assets/stylesheets/fonts.scss */
+.fa-reply-all:before {
+  content: "\f122";
+}
+
+/* line 314, /app/app/assets/stylesheets/fonts.scss */
+.fa-mail-reply-all:before {
+  content: "\f122";
+}
+
+/* line 315, /app/app/assets/stylesheets/fonts.scss */
+.fa-star-half-empty:before, .fa-star-half-full:before, .fa-star-half-o:before {
+  content: "\f123";
+}
+
+/* line 316, /app/app/assets/stylesheets/fonts.scss */
+.fa-location-arrow:before {
+  content: "\f124";
+}
+
+/* line 317, /app/app/assets/stylesheets/fonts.scss */
+.fa-crop:before {
+  content: "\f125";
+}
+
+/* line 318, /app/app/assets/stylesheets/fonts.scss */
+.fa-code-fork:before {
+  content: "\f126";
+}
+
+/* line 319, /app/app/assets/stylesheets/fonts.scss */
+.fa-unlink:before, .fa-chain-broken:before {
+  content: "\f127";
+}
+
+/* line 320, /app/app/assets/stylesheets/fonts.scss */
+.fa-question:before {
+  content: "\f128";
+}
+
+/* line 321, /app/app/assets/stylesheets/fonts.scss */
+.fa-info:before {
+  content: "\f129";
+}
+
+/* line 322, /app/app/assets/stylesheets/fonts.scss */
+.fa-exclamation:before {
+  content: "\f12a";
+}
+
+/* line 323, /app/app/assets/stylesheets/fonts.scss */
+.fa-superscript:before {
+  content: "\f12b";
+}
+
+/* line 324, /app/app/assets/stylesheets/fonts.scss */
+.fa-subscript:before {
+  content: "\f12c";
+}
+
+/* line 325, /app/app/assets/stylesheets/fonts.scss */
+.fa-eraser:before {
+  content: "\f12d";
+}
+
+/* line 326, /app/app/assets/stylesheets/fonts.scss */
+.fa-puzzle-piece:before {
+  content: "\f12e";
+}
+
+/* line 327, /app/app/assets/stylesheets/fonts.scss */
+.fa-microphone:before {
+  content: "\f130";
+}
+
+/* line 328, /app/app/assets/stylesheets/fonts.scss */
+.fa-microphone-slash:before {
+  content: "\f131";
+}
+
+/* line 329, /app/app/assets/stylesheets/fonts.scss */
+.fa-shield:before {
+  content: "\f132";
+}
+
+/* line 330, /app/app/assets/stylesheets/fonts.scss */
+.fa-calendar-o:before {
+  content: "\f133";
+}
+
+/* line 331, /app/app/assets/stylesheets/fonts.scss */
+.fa-fire-extinguisher:before {
+  content: "\f134";
+}
+
+/* line 332, /app/app/assets/stylesheets/fonts.scss */
+.fa-rocket:before {
+  content: "\f135";
+}
+
+/* line 333, /app/app/assets/stylesheets/fonts.scss */
+.fa-maxcdn:before {
+  content: "\f136";
+}
+
+/* line 334, /app/app/assets/stylesheets/fonts.scss */
+.fa-chevron-circle-left:before {
+  content: "\f137";
+}
+
+/* line 335, /app/app/assets/stylesheets/fonts.scss */
+.fa-chevron-circle-right:before {
+  content: "\f138";
+}
+
+/* line 336, /app/app/assets/stylesheets/fonts.scss */
+.fa-chevron-circle-up:before {
+  content: "\f139";
+}
+
+/* line 337, /app/app/assets/stylesheets/fonts.scss */
+.fa-chevron-circle-down:before {
+  content: "\f13a";
+}
+
+/* line 338, /app/app/assets/stylesheets/fonts.scss */
+.fa-html5:before {
+  content: "\f13b";
+}
+
+/* line 339, /app/app/assets/stylesheets/fonts.scss */
+.fa-css3:before {
+  content: "\f13c";
+}
+
+/* line 340, /app/app/assets/stylesheets/fonts.scss */
+.fa-anchor:before {
+  content: "\f13d";
+}
+
+/* line 341, /app/app/assets/stylesheets/fonts.scss */
+.fa-unlock-o:before {
+  content: "\f13e";
+}
+
+/* line 342, /app/app/assets/stylesheets/fonts.scss */
+.fa-bullseye:before {
+  content: "\f140";
+}
+
+/* line 343, /app/app/assets/stylesheets/fonts.scss */
+.fa-ellipsis-horizontal:before {
+  content: "\f141";
+}
+
+/* line 344, /app/app/assets/stylesheets/fonts.scss */
+.fa-ellipsis-vertical:before {
+  content: "\f142";
+}
+
+/* line 345, /app/app/assets/stylesheets/fonts.scss */
+.fa-rss-square:before {
+  content: "\f143";
+}
+
+/* line 346, /app/app/assets/stylesheets/fonts.scss */
+.fa-play-circle:before {
+  content: "\f144";
+}
+
+/* line 347, /app/app/assets/stylesheets/fonts.scss */
+.fa-ticket:before {
+  content: "\f145";
+}
+
+/* line 348, /app/app/assets/stylesheets/fonts.scss */
+.fa-minus-square:before {
+  content: "\f146";
+}
+
+/* line 349, /app/app/assets/stylesheets/fonts.scss */
+.fa-minus-square-o:before {
+  content: "\f147";
+}
+
+/* line 350, /app/app/assets/stylesheets/fonts.scss */
+.fa-level-up:before {
+  content: "\f148";
+}
+
+/* line 351, /app/app/assets/stylesheets/fonts.scss */
+.fa-level-down:before {
+  content: "\f149";
+}
+
+/* line 352, /app/app/assets/stylesheets/fonts.scss */
+.fa-check-square:before {
+  content: "\f14a";
+}
+
+/* line 353, /app/app/assets/stylesheets/fonts.scss */
+.fa-pencil-square:before {
+  content: "\f14b";
+}
+
+/* line 354, /app/app/assets/stylesheets/fonts.scss */
+.fa-external-link-square:before {
+  content: "\f14c";
+}
+
+/* line 355, /app/app/assets/stylesheets/fonts.scss */
+.fa-share-square:before {
+  content: "\f14d";
+}
+
+/* line 356, /app/app/assets/stylesheets/fonts.scss */
+.fa-compass:before {
+  content: "\f14e";
+}
+
+/* line 357, /app/app/assets/stylesheets/fonts.scss */
+.fa-toggle-down:before, .fa-caret-square-o-down:before {
+  content: "\f150";
+}
+
+/* line 358, /app/app/assets/stylesheets/fonts.scss */
+.fa-toggle-up:before, .fa-caret-square-o-up:before {
+  content: "\f151";
+}
+
+/* line 359, /app/app/assets/stylesheets/fonts.scss */
+.fa-toggle-right:before, .fa-caret-square-o-right:before {
+  content: "\f152";
+}
+
+/* line 360, /app/app/assets/stylesheets/fonts.scss */
+.fa-euro:before, .fa-eur:before {
+  content: "\f153";
+}
+
+/* line 361, /app/app/assets/stylesheets/fonts.scss */
+.fa-gbp:before {
+  content: "\f154";
+}
+
+/* line 362, /app/app/assets/stylesheets/fonts.scss */
+.fa-dollar:before, .fa-usd:before {
+  content: "\f155";
+}
+
+/* line 363, /app/app/assets/stylesheets/fonts.scss */
+.fa-rupee:before, .fa-inr:before {
+  content: "\f156";
+}
+
+/* line 364, /app/app/assets/stylesheets/fonts.scss */
+.fa-cny:before, .fa-rmb:before, .fa-yen:before, .fa-jpy:before {
+  content: "\f157";
+}
+
+/* line 365, /app/app/assets/stylesheets/fonts.scss */
+.fa-ruble:before, .fa-rouble:before, .fa-rub:before {
+  content: "\f158";
+}
+
+/* line 366, /app/app/assets/stylesheets/fonts.scss */
+.fa-won:before, .fa-krw:before {
+  content: "\f159";
+}
+
+/* line 367, /app/app/assets/stylesheets/fonts.scss */
+.fa-bitcoin:before, .fa-btc:before {
+  content: "\f15a";
+}
+
+/* line 368, /app/app/assets/stylesheets/fonts.scss */
+.fa-file:before {
+  content: "\f15b";
+}
+
+/* line 369, /app/app/assets/stylesheets/fonts.scss */
+.fa-file-text:before {
+  content: "\f15c";
+}
+
+/* line 370, /app/app/assets/stylesheets/fonts.scss */
+.fa-sort-alpha-asc:before {
+  content: "\f15d";
+}
+
+/* line 371, /app/app/assets/stylesheets/fonts.scss */
+.fa-sort-alpha-desc:before {
+  content: "\f15e";
+}
+
+/* line 372, /app/app/assets/stylesheets/fonts.scss */
+.fa-sort-amount-asc:before {
+  content: "\f160";
+}
+
+/* line 373, /app/app/assets/stylesheets/fonts.scss */
+.fa-sort-amount-desc:before {
+  content: "\f161";
+}
+
+/* line 374, /app/app/assets/stylesheets/fonts.scss */
+.fa-sort-numeric-asc:before {
+  content: "\f162";
+}
+
+/* line 375, /app/app/assets/stylesheets/fonts.scss */
+.fa-sort-numeric-desc:before {
+  content: "\f163";
+}
+
+/* line 376, /app/app/assets/stylesheets/fonts.scss */
+.fa-thumbs-up:before {
+  content: "\f164";
+}
+
+/* line 377, /app/app/assets/stylesheets/fonts.scss */
+.fa-thumbs-down:before {
+  content: "\f165";
+}
+
+/* line 378, /app/app/assets/stylesheets/fonts.scss */
+.fa-youtube-square:before {
+  content: "\f166";
+}
+
+/* line 379, /app/app/assets/stylesheets/fonts.scss */
+.fa-youtube:before {
+  content: "\f167";
+}
+
+/* line 380, /app/app/assets/stylesheets/fonts.scss */
+.fa-xing:before {
+  content: "\f168";
+}
+
+/* line 381, /app/app/assets/stylesheets/fonts.scss */
+.fa-xing-square:before {
+  content: "\f169";
+}
+
+/* line 382, /app/app/assets/stylesheets/fonts.scss */
+.fa-youtube-play:before {
+  content: "\f16a";
+}
+
+/* line 383, /app/app/assets/stylesheets/fonts.scss */
+.fa-dropbox:before {
+  content: "\f16b";
+}
+
+/* line 384, /app/app/assets/stylesheets/fonts.scss */
+.fa-stack-overflow:before {
+  content: "\f16c";
+}
+
+/* line 385, /app/app/assets/stylesheets/fonts.scss */
+.fa-instagram:before {
+  content: "\f16d";
+}
+
+/* line 386, /app/app/assets/stylesheets/fonts.scss */
+.fa-flickr:before {
+  content: "\f16e";
+}
+
+/* line 387, /app/app/assets/stylesheets/fonts.scss */
+.fa-adn:before {
+  content: "\f170";
+}
+
+/* line 388, /app/app/assets/stylesheets/fonts.scss */
+.fa-bitbucket:before {
+  content: "\f171";
+}
+
+/* line 389, /app/app/assets/stylesheets/fonts.scss */
+.fa-bitbucket-square:before {
+  content: "\f172";
+}
+
+/* line 390, /app/app/assets/stylesheets/fonts.scss */
+.fa-tumblr:before {
+  content: "\f173";
+}
+
+/* line 391, /app/app/assets/stylesheets/fonts.scss */
+.fa-tumblr-square:before {
+  content: "\f174";
+}
+
+/* line 392, /app/app/assets/stylesheets/fonts.scss */
+.fa-long-arrow-down:before {
+  content: "\f175";
+}
+
+/* line 393, /app/app/assets/stylesheets/fonts.scss */
+.fa-long-arrow-up:before {
+  content: "\f176";
+}
+
+/* line 394, /app/app/assets/stylesheets/fonts.scss */
+.fa-long-arrow-left:before {
+  content: "\f177";
+}
+
+/* line 395, /app/app/assets/stylesheets/fonts.scss */
+.fa-long-arrow-right:before {
+  content: "\f178";
+}
+
+/* line 396, /app/app/assets/stylesheets/fonts.scss */
+.fa-apple:before {
+  content: "\f179";
+}
+
+/* line 397, /app/app/assets/stylesheets/fonts.scss */
+.fa-windows:before {
+  content: "\f17a";
+}
+
+/* line 398, /app/app/assets/stylesheets/fonts.scss */
+.fa-android:before {
+  content: "\f17b";
+}
+
+/* line 399, /app/app/assets/stylesheets/fonts.scss */
+.fa-linux:before {
+  content: "\f17c";
+}
+
+/* line 400, /app/app/assets/stylesheets/fonts.scss */
+.fa-dribbble:before {
+  content: "\f17d";
+}
+
+/* line 401, /app/app/assets/stylesheets/fonts.scss */
+.fa-skype:before {
+  content: "\f17e";
+}
+
+/* line 402, /app/app/assets/stylesheets/fonts.scss */
+.fa-foursquare:before {
+  content: "\f180";
+}
+
+/* line 403, /app/app/assets/stylesheets/fonts.scss */
+.fa-trello:before {
+  content: "\f181";
+}
+
+/* line 404, /app/app/assets/stylesheets/fonts.scss */
+.fa-female:before {
+  content: "\f182";
+}
+
+/* line 405, /app/app/assets/stylesheets/fonts.scss */
+.fa-male:before {
+  content: "\f183";
+}
+
+/* line 406, /app/app/assets/stylesheets/fonts.scss */
+.fa-gittip:before {
+  content: "\f184";
+}
+
+/* line 407, /app/app/assets/stylesheets/fonts.scss */
+.fa-sun-o:before {
+  content: "\f185";
+}
+
+/* line 408, /app/app/assets/stylesheets/fonts.scss */
+.fa-moon-o:before {
+  content: "\f186";
+}
+
+/* line 409, /app/app/assets/stylesheets/fonts.scss */
+.fa-archive:before {
+  content: "\f187";
+}
+
+/* line 410, /app/app/assets/stylesheets/fonts.scss */
+.fa-bug:before {
+  content: "\f188";
+}
+
+/* line 411, /app/app/assets/stylesheets/fonts.scss */
+.fa-vk:before {
+  content: "\f189";
+}
+
+/* line 412, /app/app/assets/stylesheets/fonts.scss */
+.fa-weibo:before {
+  content: "\f18a";
+}
+
+/* line 413, /app/app/assets/stylesheets/fonts.scss */
+.fa-renren:before {
+  content: "\f18b";
+}
+
+/* line 414, /app/app/assets/stylesheets/fonts.scss */
+.fa-pagelines:before {
+  content: "\f18c";
+}
+
+/* line 415, /app/app/assets/stylesheets/fonts.scss */
+.fa-stack-exchange:before {
+  content: "\f18d";
+}
+
+/* line 416, /app/app/assets/stylesheets/fonts.scss */
+.fa-arrow-circle-o-right:before {
+  content: "\f18e";
+}
+
+/* line 417, /app/app/assets/stylesheets/fonts.scss */
+.fa-arrow-circle-o-left:before {
+  content: "\f190";
+}
+
+/* line 418, /app/app/assets/stylesheets/fonts.scss */
+.fa-toggle-left:before, .fa-caret-square-o-left:before {
+  content: "\f191";
+}
+
+/* line 419, /app/app/assets/stylesheets/fonts.scss */
+.fa-dot-circle-o:before {
+  content: "\f192";
+}
+
+/* line 420, /app/app/assets/stylesheets/fonts.scss */
+.fa-wheelchair:before {
+  content: "\f193";
+}
+
+/* line 421, /app/app/assets/stylesheets/fonts.scss */
+.fa-vimeo-square:before {
+  content: "\f194";
+}
+
+/* line 422, /app/app/assets/stylesheets/fonts.scss */
+.fa-turkish-lira:before, .fa-try:before {
+  content: "\f195";
+}
+
+/* line 423, /app/app/assets/stylesheets/fonts.scss */
+.fa-google-drive {
+  content: "\f3aa";
+}
+/* line 39, /app/app/assets/stylesheets/pages.scss */
+ul {
+  list-style-type: none;
+}
+
+/* line 48, /app/app/assets/stylesheets/pages.scss */
+.pageHeader {
+  margin: 35px auto;
+  padding: 10px;
+  width: 85%;
+  background: #f85032;
+  background: -moz-linear-gradient(left, #f85032 0%, #f16f5c 9%, #f6290c 51%, #f02f17 71%, #e73827 100%);
+  background: -webkit-gradient(left top, right top, color-stop(0%, #f85032), color-stop(9%, #f16f5c), color-stop(51%, #f6290c), color-stop(71%, #f02f17), color-stop(100%, #e73827));
+  background: -webkit-linear-gradient(left, #f85032 0%, #f16f5c 9%, #f6290c 51%, #f02f17 71%, #e73827 100%);
+  background: -o-linear-gradient(left, #f85032 0%, #f16f5c 9%, #f6290c 51%, #f02f17 71%, #e73827 100%);
+  background: -ms-linear-gradient(left, #f85032 0%, #f16f5c 9%, #f6290c 51%, #f02f17 71%, #e73827 100%);
+  background: linear-gradient(to right, #f85032 0%, #f16f5c 9%, #f6290c 51%, #f02f17 71%, #e73827 100%);
+  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#f85032', endColorstr='#e73827', GradientType=1 );
+}
+
+/* line 55, /app/app/assets/stylesheets/pages.scss */
+.main {
+  width: 100%;
+}
+/* line 61, /app/app/assets/stylesheets/pages.scss */
+.main .contentContainer:nth-child(1) {
+  background-color: #D1600A;
+}
+/* line 65, /app/app/assets/stylesheets/pages.scss */
+.main .contentContainer:nth-child(1) {
+  background-color: #DB830B;
+}
+/* line 69, /app/app/assets/stylesheets/pages.scss */
+.main .contentContainer:nth-child(2) {
+  background-color: #f8f8f8;
+}
+/* line 73, /app/app/assets/stylesheets/pages.scss */
+.main .contentContainer:nth-child(3) {
+  background-color: #DB830B;
+}
+/* line 77, /app/app/assets/stylesheets/pages.scss */
+.main .contentContainer:nth-child(4) {
+  background-color: #f8f8f8;
+}
+/* line 80, /app/app/assets/stylesheets/pages.scss */
+.main .contentContainer:nth-child(5) {
+  background-color: #C48600;
+}
+/* line 83, /app/app/assets/stylesheets/pages.scss */
+.main .contentContainer:nth-child(6) {
+  background-color: #f8f8f8;
+}
+/* line 86, /app/app/assets/stylesheets/pages.scss */
+.main .contentContainer:nth-child(7) {
+  background-color: #DBAE0B;
+}
+
+/* line 91, /app/app/assets/stylesheets/pages.scss */
+.contentContainer {
+  margin: 30px auto;
+  padding: 10px;
+  width: 100%;
+  background-color: #af1641;
+}
+
+/* line 100, /app/app/assets/stylesheets/pages.scss */
+.content {
+  margin: 35px auto;
+  padding: 10px;
+  width: 80%;
+  background-color: #f8f8f8;
+  background: -moz-linear-gradient(top, #1e5799 0%, #2989d8 50%, #207cca 51%, #7db9e8 100%);
+}
+
+/* line 110, /app/app/assets/stylesheets/pages.scss */
+.a_demo_two {
+  background-color: #3bb3e0;
+  padding: 10px;
+  position: relative;
+  font-family: 'Open Sans', sans-serif;
+  font-size: 12px;
+  text-decoration: none;
+  color: #fff;
+  background-image: linear-gradient(bottom, #2ca0ca 0%, #3eb8e5 100%);
+  background-image: -o-linear-gradient(bottom, #2ca0ca 0%, #3eb8e5 100%);
+  background-image: -moz-linear-gradient(bottom, #2ca0ca 0%, #3eb8e5 100%);
+  background-image: -webkit-linear-gradient(bottom, #2ca0ca 0%, #3eb8e5 100%);
+  background-image: -ms-linear-gradient(bottom, #2ca0ca 0%, #3eb8e5 100%);
+  background-image: -webkit-gradient(linear, left bottom, left top, color-stop(0, #2ca0ca), color-stop(1, #3eb8e5));
+  -webkit-box-shadow: inset 0px 1px 0px #7fd2f1, 0px 6px 0px #156785;
+  -moz-box-shadow: inset 0px 1px 0px #7fd2f1, 0px 6px 0px #156785;
+  -o-box-shadow: inset 0px 1px 0px #7fd2f1, 0px 6px 0px #156785;
+  box-shadow: inset 0px 1px 0px #7fd2f1, 0px 6px 0px #156785;
+  -webkit-border-radius: 5px;
+  -moz-border-radius: 5px;
+  -o-border-radius: 5px;
+  border-radius: 5px;
+}
+
+/* line 140, /app/app/assets/stylesheets/pages.scss */
+.a_demo_two::before {
+  background-color: #072239;
+  content: "";
+  display: block;
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  padding-left: 2px;
+  padding-right: 2px;
+  padding-bottom: 4px;
+  left: -2px;
+  top: 5px;
+  z-index: -1;
+  -webkit-border-radius: 6px;
+  -moz-border-radius: 6px;
+  -o-border-radius: 6px;
+  border-radius: 6px;
+  -webkit-box-shadow: 0px 1px 0px #fff;
+  -moz-box-shadow: 0px 1px 0px #fff;
+  -o-box-shadow: 0px 1px 0px #fff;
+  box-shadow: 0px 1px 0px #fff;
+}
+
+/* line 163, /app/app/assets/stylesheets/pages.scss */
+.a_demo_two:active {
+  color: #156785;
+  text-shadow: 0px 1px 1px rgba(255, 255, 255, 0.3);
+  background: #2ca0ca;
+  -webkit-box-shadow: inset 0px 1px 0px #7fd2f1, inset 0px -1px 0px #156785;
+  -moz-box-shadow: inset 0px 1px 0px #7fd2f1, inset 0px -1px 0px #156785;
+  -o-box-shadow: inset 0px 1px 0px #7fd2f1, inset 0px -1px 0px #156785;
+  box-shadow: inset 0px 1px 0px #7fd2f1, inset 0px -1px 0px #156785;
+  top: 7px;
+}
+
+/* line 174, /app/app/assets/stylesheets/pages.scss */
+.a_demo_two:active::before {
+  top: -2px;
+}
+
+/* line 179, /app/app/assets/stylesheets/pages.scss */
+#signup {
+  margin: 10px 45%;
+}
+
+/*********************************************************************************/
+/* index			                                                             */
+/*********************************************************************************/
+/*********************************************************************************/
+/* features			                                                             */
+/*********************************************************************************/
+/* line 194, /app/app/assets/stylesheets/pages.scss */
+#featurePage {
+  margin-bottom: 10px;
+}
+
+/* line 198, /app/app/assets/stylesheets/pages.scss */
+#featureBut {
+  margin-top: 50px;
+}
+
+/*********************************************************************************/
+/* terms and conditions                                                          */
+/*********************************************************************************/
+/* line 206, /app/app/assets/stylesheets/pages.scss */
+.termsContainer {
+  width: 700px;
+  margin: 100px auto;
+  margin-bottom: 250px;
+  font-weight: normal;
+}
+
+/* line 214, /app/app/assets/stylesheets/pages.scss */
+.termsContainer p {
+  margin-left: 30px;
+  margin-bottom: 5px;
+}
+
+/* line 219, /app/app/assets/stylesheets/pages.scss */
+.termsContainer ul {
+  list-style: square;
+  padding: 5px;
+  margin-left: 60px;
+}
+
+/* line 225, /app/app/assets/stylesheets/pages.scss */
+.termsContainer h1 {
+  padding: 20px;
+  margin-bottom: 20px;
+}
+
+/* line 230, /app/app/assets/stylesheets/pages.scss */
+.termsContainer h3 {
+  padding: 10px;
+  margin-left: 0px;
+}
+
+/* line 235, /app/app/assets/stylesheets/pages.scss */
+.termsContainer h4 {
+  padding: 5px;
+  margin-left: 10px;
+}
+/* line 4, /app/app/assets/stylesheets/users.scss */
+.userContainer {
+  width: 480px;
+  margin: 150px auto;
+  margin-bottom: 250px;
+}
+
+/* line 13, /app/app/assets/stylesheets/users.scss */
+.users, .create {
+  margin: 40px 0;
+}
+
+/*
+.users a,
+.create .actions input {
+  background-color: #f2580b;
+  border: none;
+  color: #fff;
+  cursor: pointer;
+  font-size: 14px;
+  margin-top: 10px;
+  padding: 12px 24px;
+  transition: background-color 0.5s;
+  text-decoration: none;
+  display: inline-block;
+}
+
+.user {
+  background-color: #fff;
+  font-weight: 300;
+  padding: 16px;
+  margin-bottom: 10px;
+}
+*/
+/* line 39, /app/app/assets/stylesheets/users.scss */
+.inputForm h1 {
+  margin: 17px;
+}
+
+/* line 43, /app/app/assets/stylesheets/users.scss */
+.login, .signup, .reset, .club, .memberships {
+  margin: 0 auto;
+  width: 480px;
+}
+
+/* line 48, /app/app/assets/stylesheets/users.scss */
+.clubLink {
+  margin: 0 auto;
+  width: 600px;
+}
+
+/* line 61, /app/app/assets/stylesheets/users.scss */
+.inputForm {
+  text-align: center;
+}
+
+/* line 65, /app/app/assets/stylesheets/users.scss */
+.inputForm form input {
+  width: 290px;
+  height: 40px;
+  padding: 5px;
+  margin: 5px auto;
+}
+
+/* line 73, /app/app/assets/stylesheets/users.scss */
+.inputForm form input[type='checkbox'] {
+  width: 20px;
+  height: 20px;
+  vertical-align: middle;
+}
+
+/* line 80, /app/app/assets/stylesheets/users.scss */
+li.checkboxText {
+  margin: 5px;
+  font-size: 12px;
+}
+
+/* line 87, /app/app/assets/stylesheets/users.scss */
+.inputForm form select {
+  width: 290px;
+  height: 40px;
+  padding: 5px;
+  margin: 5px auto;
+}
+
+/* line 95, /app/app/assets/stylesheets/users.scss */
+.inputForm form label {
+  width: 280px;
+  margin: auto;
+  text-align: left;
+}
+
+/*.signup input#first, .signup input#last {
+  width: 140px;
+}*/
+/* line 106, /app/app/assets/stylesheets/users.scss */
+.inputForm form input.form-btn {
+  width: 200px;
+  transition: background 0.5s, color 0.5s;
+}
+
+/* line 113, /app/app/assets/stylesheets/users.scss */
+.inputForm form input.form-btn:hover {
+  color: #fff;
+  background-color: #000;
+  text-decoration: none;
+  transition: background 0.5s, color 0.5s;
+}
+
+/* line 120, /app/app/assets/stylesheets/users.scss */
+.form-btn {
+  background-color: #fff;
+}
+
+/* line 124, /app/app/assets/stylesheets/users.scss */
+.errorText {
+  color: #ff0000;
+  font-size: 11px;
+}
+/*
+ * This is a manifest file that'll be compiled into application.css, which will include all the files
+ * listed below.
+ *
+ * Any CSS and SCSS file within this directory, lib/assets/stylesheets, or any plugin's
+ * vendor/assets/stylesheets directory can be referenced here using a relative path.
+ *
+ * You're free to add application-wide styles to this file and they'll appear at the bottom of the
+ * compiled file so the styles you add here take precedence over styles defined in any other CSS/SCSS
+ * files in this directory. Styles in this file should be added after the last require_* statement.
+ * It is generally better to create a new file per style scope.
+ *
+
+
+ */
+/* line 21, /app/app/assets/stylesheets/application.scss */
+html, body {
+  background: #fff;
+  font-family: Arial, sans-serif;
+  font-weight: bold;
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  width: 100%;
+  min-width: 1050px;
+}
+
+/* line 35, /app/app/assets/stylesheets/application.scss */
+body {
+  margin: 0;
+  width: 100%;
+  background-color: #fff;
+}
+
+/* line 44, /app/app/assets/stylesheets/application.scss */
+div.temp {
+  min-height: 500px;
+}
+
+/*body
+{
+	margin: 0px;
+	padding: 0px;
+	background: #333333;
+	font-family: 'Varela', sans-serif;
+	font-size: 11pt;
+	font-weight: 300;
+	color: #656565;
+}*/
+/* line 60, /app/app/assets/stylesheets/application.scss */
+h1, h2, h3 {
+  margin: 0;
+  padding: 0;
+  font-weight: 700;
+  color: #2B3F48;
+}
+
+/* line 68, /app/app/assets/stylesheets/application.scss */
+h1 {
+  text-align: center;
+}
+
+/* line 72, /app/app/assets/stylesheets/application.scss */
+p, ul {
+  margin-top: 0;
+}
+
+/* line 77, /app/app/assets/stylesheets/application.scss */
+ul {
+  padding: 0;
+  list-style: none;
+}
+
+/* line 87, /app/app/assets/stylesheets/application.scss */
+a {
+  color: #0000FF;
+}
+
+/* line 92, /app/app/assets/stylesheets/application.scss */
+a:hover {
+  text-decoration: none;
+}
+
+/* line 97, /app/app/assets/stylesheets/application.scss */
+.error {
+  border: 1px solid red;
+}
+
+/* line 103, /app/app/assets/stylesheets/application.scss */
+.containerPageHeader {
+  margin: 0px auto;
+  width: 100%;
+  max-width: 1400px;
+  min-width: 1010px;
+}
+
+/*********************************************************************************/
+/* Header                                                                        */
+/*********************************************************************************/
+/* line 116, /app/app/assets/stylesheets/application.scss */
+#header-wrapper {
+  background: #333333;
+  width: 100%;
+  min-width: 1050px;
+}
+
+/* line 123, /app/app/assets/stylesheets/application.scss */
+#header {
+  position: relative;
+  padding: 3em 0em;
+  min-width: 1050px;
+  width: 100%;
+}
+
+/*********************************************************************************/
+/* Logo                                                                          */
+/*********************************************************************************/
+/* line 135, /app/app/assets/stylesheets/application.scss */
+#logo {
+  position: absolute;
+  top: 1em;
+  left: 0;
+}
+
+/* line 142, /app/app/assets/stylesheets/application.scss */
+#logo h1 {
+  color: #FFF;
+  padding: 5px;
+  margin-left: 10px;
+}
+
+/* line 149, /app/app/assets/stylesheets/application.scss */
+#logo a {
+  text-decoration: none;
+  text-transform: uppercase;
+  color: #FFF;
+}
+
+/*********************************************************************************/
+/* Menu                                                                          */
+/*********************************************************************************/
+/* line 160, /app/app/assets/stylesheets/application.scss */
+#menu {
+  position: absolute;
+  top: 2em;
+  right: 0em;
+}
+
+/* line 167, /app/app/assets/stylesheets/application.scss */
+#menu ul {
+  display: inline-block;
+}
+
+/* line 172, /app/app/assets/stylesheets/application.scss */
+#menu li {
+  display: block;
+  float: left;
+  text-align: center;
+}
+
+/* line 179, /app/app/assets/stylesheets/application.scss */
+#menu li a, #menu li span {
+  padding: 1em 1.5em;
+  letter-spacing: 1px;
+  text-decoration: none;
+  text-transform: uppercase;
+  font-size: 0.8em;
+  color: #FFF;
+}
+
+/* line 189, /app/app/assets/stylesheets/application.scss */
+#menu li:hover a, #menu li.active a, #menu li.active span {
+  color: #FFF;
+}
+
+@media (hover: hover) {
+  /* line 195, /app/app/assets/stylesheets/application.scss */
+  .menuChild a:hover {
+    background: #009E2D;
+    color: #FFF;
+  }
+}
+@media (hover: none) {
+  /* line 203, /app/app/assets/stylesheets/application.scss */
+  .menuChild a:active {
+    background: #009E2D;
+    color: #FFF;
+  }
+}
+/* line 214, /app/app/assets/stylesheets/application.scss */
+.containerUser {
+  max-width: 450px;
+  margin: 0 auto;
+}
+
+/* line 219, /app/app/assets/stylesheets/application.scss */
+.hide {
+  display: none;
+}
+
+/* drop downs buttons*/
+/* line 225, /app/app/assets/stylesheets/application.scss */
+#navClub, #navUser {
+  text-align: center;
+}
+
+/* line 230, /app/app/assets/stylesheets/application.scss */
+#navClub ul, #navUser ul {
+  text-align: center;
+}
+
+/* line 234, /app/app/assets/stylesheets/application.scss */
+#navClub li, #navUser li {
+  text-align: center;
+}
+
+/* drop downs menus*/
+/* line 244, /app/app/assets/stylesheets/application.scss */
+.club-menu {
+  right: 100px;
+  width: 120px;
+  z-index: 10;
+}
+
+/* line 250, /app/app/assets/stylesheets/application.scss */
+.user-menu {
+  right: 0px;
+  width: 90px;
+  z-index: 10;
+}
+
+/* line 256, /app/app/assets/stylesheets/application.scss */
+.user-menu, .club-menu {
+  top: 100px;
+  background-color: #535353;
+  color: #EFEFEF;
+  position: absolute;
+}
+
+/* line 264, /app/app/assets/stylesheets/application.scss */
+.user-menu .containerUser, .club-menu .containerUser {
+  padding: 10px;
+  display: flex;
+}
+
+/* line 268, /app/app/assets/stylesheets/application.scss */
+.user-menu .containerUser ul, .club-menu .containerUser ul {
+  list-style: none;
+}
+
+/* line 271, /app/app/assets/stylesheets/application.scss */
+.user-menu .containerUser ul li, .club-menu .containerUser ul li {
+  padding: 1px 1px;
+}
+
+/* line 274, /app/app/assets/stylesheets/application.scss */
+.user-menu .containerUser ul li a, .club-menu .containerUser ul li a {
+  color: #fff;
+}
+
+/*.user-menu .containerUser ul li:first-child, .club-menu .containerUser ul li:first-child {
+    text-transform: uppercase;
+    color: #C3FF00;
+    letter-spacing: 0px; 
+}*/
+/*********************************************************************************/
+/* Flash                                                                          */
+/*********************************************************************************/
+/* line 288, /app/app/assets/stylesheets/application.scss */
+div#flash {
+  text-align: center;
+  z-index: 5;
+}
+
+/* line 293, /app/app/assets/stylesheets/application.scss */
+.flash {
+  text-align: center;
+  margin: 0px auto;
+  width: 700px;
+  height: 0px;
+}
+
+/* line 300, /app/app/assets/stylesheets/application.scss */
+.alert {
+  position: absolute;
+  text-align: center;
+  margin: 0px auto;
+  width: 700px;
+  z-index: 6;
+}
+
+/*********************************************************************************/
+/* User                                                                          */
+/*********************************************************************************/
+/*
+#user
+{
+	position: absolute;
+	top: 1em;
+	right: 0;
+}
+
+#user ul
+{
+	display: inline-block;
+}
+
+#user li
+{
+	display: block;
+	float: left;
+	text-align: center;
+
+	padding: 1em 1.5em;
+	letter-spacing: 1px;
+	text-decoration: none;
+	text-transform: uppercase;
+	font-size: 0.8em;
+	color: #FFF;
+}
+*/
+/*********************************************************************************/
+/* Copyright                                                                     */
+/*********************************************************************************/
+/* line 344, /app/app/assets/stylesheets/application.scss */
+#copyright {
+  overflow: hidden;
+  padding: 5em 0em;
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+  background: #333333;
+  width: 100%;
+  min-width: 1050px;
+}
+
+/* line 356, /app/app/assets/stylesheets/application.scss */
+#copyright p {
+  text-align: center;
+  font-size: 1em;
+  color: rgba(255, 255, 255, 0.5);
+}
+
+/* line 363, /app/app/assets/stylesheets/application.scss */
+#copyright a {
+  text-decoration: none;
+  color: rgba(255, 255, 255, 0.8);
+}
+
+/* line 373, /app/app/assets/stylesheets/application.scss */
+header {
+  width: 100%;
+  min-width: 1020px;
+  border: 1px solid #e3e1e1;
+  height: 35px;
+  width: 100%;
+  background-color: #e3e1e1;
+}
+/* line 382, /app/app/assets/stylesheets/application.scss */
+header h3 {
+  text-align: center;
+  height: 25px;
+  margin: 0;
+}
+/* line 388, /app/app/assets/stylesheets/application.scss */
+header table {
+  height: 35px;
+  width: 100%;
+}
+/* line 393, /app/app/assets/stylesheets/application.scss */
+header tr {
+  height: 100%;
+}
+/* line 397, /app/app/assets/stylesheets/application.scss */
+header td {
+  border: 1px solid black;
+  margin: 1%;
+}
+/* line 402, /app/app/assets/stylesheets/application.scss */
+header td:first-child {
+  width: 20%;
+}
+/* line 406, /app/app/assets/stylesheets/application.scss */
+header td:nth-child(2) {
+  width: 57%;
+}
+/* line 410, /app/app/assets/stylesheets/application.scss */
+header td:nth-last-child(2) {
+  width: 3%;
+}
+/* line 414, /app/app/assets/stylesheets/application.scss */
+header td:nth-last-child(2) {
+  width: 3%;
+}
+/* line 418, /app/app/assets/stylesheets/application.scss */
+header td:last-child {
+  width: 17%;
+}
+
+/* line 424, /app/app/assets/stylesheets/application.scss */
+nav {
+  width: 90%;
+  min-width: 900px;
+  margin-top: 10px;
+  border: 1px solid black;
+  margin: 12px 5%;
+  align: center;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  height: 60px;
+}
+/* line 440, /app/app/assets/stylesheets/application.scss */
+nav ul {
+  margin: 1%;
+  width: 98%;
+  border: 1px solid black;
+}
+/* line 446, /app/app/assets/stylesheets/application.scss */
+nav li {
+  display: inline-block;
+  border: 1px solid black;
+  height: 100%;
+  padding: 12px;
+  align-items: center;
+}
+
+/*.main {
+	margin:35px auto;
+	padding:10px;
+	width:85%;
+}
+*/
+/*.login, .signup {
+  margin: 0 auto;
+  width: 400px;
+}
+
+.login form input, .signup form input {
+  width: 280px;
+}
+
+.login form input.form-btn, .signup form input.form-btn {
+  margin-left: 30px;
+  width: 340px;
+  transition: background 0.5s, color 0.5s;
+}
+*/
+/*********************************************************************************/
+/* body                                                                          */
+/*********************************************************************************/
+/* line 484, /app/app/assets/stylesheets/application.scss */
+.mainBody {
+  position: relative;
+  min-height: 100vh;
+  min-height: 1400px;
+  width: 100%;
+  min-width: 1050px;
+}
+
+/*********************************************************************************/
+/* record table                                                                  */
+/*********************************************************************************/
+/* line 496, /app/app/assets/stylesheets/application.scss */
+.recordPage {
+  position: relative;
+  width: 1050px;
+  margin: 100px auto;
+  min-height: 400px;
+}
+
+/* line 503, /app/app/assets/stylesheets/application.scss */
+.recordPage h1 {
+  margin: 17px;
+}
+
+/* line 507, /app/app/assets/stylesheets/application.scss */
+.recordTable {
+  margin: 40px 20px;
+}
+
+/* line 511, /app/app/assets/stylesheets/application.scss */
+td.actions {
+  width: 130px;
+}
+
+/*********************************************************************************/
+/* main                                                                  */
+/*********************************************************************************/
+/* line 519, /app/app/assets/stylesheets/application.scss */
+.main {
+  margin: 40px 0;
+}
+
+/* line 523, /app/app/assets/stylesheets/application.scss */
+.mainPage {
+  margin: 0 auto;
+  width: 700px;
+}
+
+/* line 530, /app/app/assets/stylesheets/application.scss */
+.mainContainer {
+  width: 510px;
+  margin: 150px auto;
+  margin-bottom: 250px;
+}
+
+/* line 537, /app/app/assets/stylesheets/application.scss */
+.plusContainer {
+  width: 600px;
+  margin: 150px auto;
+  margin-bottom: 250px;
+}
